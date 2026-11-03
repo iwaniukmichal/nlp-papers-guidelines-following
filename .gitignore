@@ -1,0 +1,22 @@
+# LaTeX build artifacts in proposal/ (keep sources, bibliography, styles and PDFs).
+/proposal/*.aux
+/proposal/*.bbl
+/proposal/*.bcf
+/proposal/*.blg
+/proposal/*.dvi
+/proposal/*.fdb_latexmk
+/proposal/*.fls
+/proposal/*.lof
+/proposal/*.log
+/proposal/*.lot
+/proposal/*.nav
+/proposal/*.out
+/proposal/*.run.xml
+/proposal/*.snm
+/proposal/*.synctex.gz
+/proposal/*.synctex(busy)
+/proposal/*.toc
+/proposal/*.vrb
+/proposal/*.xdv
+
+*.DS_STORE*

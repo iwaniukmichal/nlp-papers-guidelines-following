@@ -1,0 +1,172 @@
+% NLP course project proposal, Warsaw University of Technology.
+% Template prepared by Anna Wroblewska, adapted from ACL 2015.
+% Working draft: instructor confirmed a five-page main-text limit.
+% Outstanding author details and decisions: ../proposal-todo.md.
+\documentclass[11pt]{article}
+\usepackage{acl2015}
+\usepackage{times}
+\usepackage[hyphens]{url}
+\usepackage{latexsym}
+\usepackage{xcolor}
+\usepackage{booktabs}
+\usepackage{tabularx}
+\usepackage[hidelinks]{hyperref}
+% Allow two rows of authors and a separate supervisor row.
+\setlength\titlebox{8cm}
+% hyperref restores bibliography labels; ACL's bibliography is unlabelled.
+\makeatletter
+\renewcommand{\@biblabel}[1]{}
+\makeatother
+\newcommand{\todo}[1]{\textcolor{red}{[TODO: #1]}}
+\title{From guidelines to practice: Do NLP papers follow reporting requirements?\\
+Project Proposal for NLP Course, Winter 2026/27}
+% Keep the final author order unchanged across semester submissions.
+% Four team members, arranged in two rows.
+\author{\todo{Author 1, submitted by} \\
+  \todo{Student number} \\
+  \todo{Email} \\\And
+  \todo{Author 2} \\
+  \todo{Student number} \\
+  \todo{Email} \\ \AND
+  \todo{Author 3} \\
+  \todo{Student number} \\
+  \todo{Email} \\\And
+  \todo{Author 4} \\
+  \todo{Student number} \\
+  \todo{Email} \\ \AND
+  supervisor: Filip Kucia\\
+  Warsaw University of Technology \\
+  {\tt filip.kucia.dokt@pw.edu.pl}}
+\date{}
+\begin{document}
+\maketitle
+
+\begin{abstract}
+We will assess reporting in all eligible EMNLP Main Conference and Findings papers from 2020--2026. A historical policy register and versioned rubric will distinguish applicable obligations from recommended practices, and section presence from substantive content. Rules and one large language model will evaluate papers and ordinary appendices; two annotators will independently validate a stratified sample. We will estimate annual compliance and adoption, compare selected policy transitions and describe differences between publication periods around ChatGPT's release. The contribution is an auditable link between historical requirements and published evidence, with uncertainty estimates.
+\end{abstract}
+
+\section{Scientific Goal}
+\label{sec:goal}
+We study reporting requirements in natural language processing (NLP) papers at the Conference on Empirical Methods in Natural Language Processing (EMNLP), part of the Association for Computational Linguistics (ACL) conference family. Its seven 2020--2026 editions offer identifiable policy transitions and Main/Findings tracks. The unit is a paper--item pair; \emph{compliance} means satisfying an applicable obligation using permitted evidence, not verifying the underlying research.
+
+We address three research questions:
+\begin{enumerate}
+\item \textbf{RQ1:} How does compliance vary by year and reporting item?
+\item \textbf{RQ2:} How does adoption change after requirements are introduced or strengthened?
+\item \textbf{RQ3:} How does reporting in 2023--2026 differ from 2020--2022, and do differences coincide with policy changes?
+\end{enumerate}
+
+\textbf{H1:} Adoption of a fixed reporting indicator increases after an explicit mandate. Structural and substantive criteria will be compared descriptively on the same eligible papers; nested criteria do not form an independent hypothesis. RQ3 is exploratory; null and unidentifiable associations remain valid outcomes.
+
+\section{Significance and State of the Art}
+\label{sec:sota}
+\newcite{dodge2019show} show that model comparisons depend on validation performance and computational budgets. \newcite{magnusson2023reproducibility} analyse 10,405 reproducibility-checklist responses and find evidence of increased reporting after its introduction. Their distinction between mandatory answers and optional reporting practices is essential to our rubric.
+
+\newcite{benotti2022ethics} classify ACL 2021 ethics sections by benefits, harms, and vulnerable groups; EthiCon extends ethical-concern analysis \cite{karamolegkou2025ethical}. \newcite{jinnath2026checklist} audit 73,922 EMNLP 2025 checklist responses and justifications; their preprint reports contradictions and inadequate explanations.
+
+\newcite{thaeprasit2026limits} combine human coding with a large language model (LLM) to analyse temporal trends, paper attributes and disclosure patterns in ACL/EMNLP Limitations sections. Their audit separates missing sections, limitations elsewhere and extraction failures. We adopt this distinction and use fixed longitudinal indicators. \newcite{xiao2023supporting} support codebook-guided deductive evaluation.
+
+The proposed extension is a multi-family audit against versioned historical obligations, with independent human evidence and explicit applicability. The policy register, rubric, labels, evaluation diagnostics, and reproducible analysis could help organisers identify measurable requirements and reporting gaps.
+
+\section{Concept and Work Plan}
+\label{sec:plan}
+\begin{table}[t]
+\centering\small
+\begin{tabularx}{\columnwidth}{@{}p{0.20\columnwidth}X@{}}
+\toprule
+Period & Work plan \\
+\midrule
+Oct.--4 Nov. & Review literature and policies; define corpus and methodology. \\
+5--18 Nov. & Extract sample papers; pilot rubric and baseline evaluator. \\
+19 Nov.--2 Dec. & Collect corpus; freeze rubric; develop evaluation pipeline. \\
+3 Dec.--13 Jan. & Complete annotation and validation; analyse trends and errors; prepare final materials. \\
+\bottomrule
+\end{tabularx}
+\caption{Work plan, October 2026--January 2027.}
+\label{tab:timeline}
+\end{table}
+
+Initial policy checks confirm mandatory Limitations at EMNLP 2022 \cite{emnlp2022cfp} and incorporation of ACL Rolling Review (ARR) requirements in later calls \cite{emnlp2025cfp,emnlp2026cfp}. Table~\ref{tab:timeline} schedules the study. Missing historical policies will remain unresolved; extraction and evaluator errors require human audits. If costs exceed the pilot budget, we will reduce items before replacing the full corpus with a documented year--track probability sample.
+
+\section{Approach and Research Methodology}
+\label{sec:methods}
+\subsection{Corpus and Inclusion Criteria}
+We will collect PDFs and metadata exclusively from the ACL Anthology for all available EMNLP Main long/short research papers and associated Findings papers from 2020--2026 in a November 2026 snapshot. Workshops, demonstrations, industry tracks, tutorials, front matter and journal presentations are excluded; theme papers enter only under the same reporting rules. One published version per Anthology identifier will be retained, with corrections recorded. Counts of eligible, retrieved, parsed and excluded papers will be reported by year and track, including incomplete 2026 coverage.
+
+All PDFs will use one versioned parser, initially Docling, preserving sections and page references. Manual PDF audits will assess omissions and extraction quality by year. Evidence is restricted to papers and ordinary appendices. Checklists are excluded to avoid changes in availability from EMNLP 2025 \cite{arrpublic2025}. Obligations assessable only through excluded or inaccessible material remain unassessable.
+
+\subsection{Historical Policies and Reporting Items}
+Official calls, author/camera-ready instructions, reproducibility criteria, checklists and incorporated ACL/ARR policies will establish dated obligations, including pre-2020 origins. We will archive source URLs, retrieval dates, PDF checksums, policy wording/snapshots, effective periods, tracks and submission/publication stage. Current pages cannot establish historical rules. Table~\ref{tab:rubric} proposes six reporting checks, with versioned coding instructions and examples. Data/model cards are encouraged \cite{arrchecklist}; justified No checklist answers can be valid \cite{arrresponsible}. Recommendations and practices without mandates are excluded from compliance denominators.
+
+\begin{table*}[t]
+\centering\small
+\begin{tabularx}{\textwidth}{@{}p{0.19\textwidth}p{0.40\textwidth}X@{}}
+\toprule
+Reporting item & Evidence to record & Applicability and policy basis \\
+\midrule
+Limitations section & Heading ``Limitations'' and its location. & All papers; dedicated section required at EMNLP 2022 \cite{emnlp2022cfp}. \\
+Specific limitation & A concrete assumption, scope restriction or failure and its consequence; generic disclaimers alone do not qualify. & All papers; assess content separately from section presence. EMNLP 2022 requires clear discussion \cite{emnlp2022cfp}. \\
+Ethical risks & An ethical issue related to the work and its implications; a heading alone does not qualify. & Conditional on relevant ethical concerns; EMNLP 2022 explicitly requires discussion for sensitive data/tasks \cite{emnlp2022cfp}. \\
+Computational budget & Total compute used, e.g. GPU-hours, with units; estimates are accepted. & Computational studies; reporting practice covered by checklist C1 \cite{arrresponsible}. \\
+Asset licensing & Licences/terms of reused datasets, models or code; distinguish named terms from explicitly unknown terms. & Papers reusing assets; reporting practice covered by checklist B2 \cite{arrresponsible}. \\
+AI assistance & Tool used and scope of assistance. & Descriptive disclosure rates only; missing disclosure does not establish use or a policy violation \cite{acl2023ai}. \\
+\bottomrule
+\end{tabularx}
+\caption{Proposed reporting checks. Presence is recorded separately from compliance, which requires a verified, applicable obligation and assessable evidence. Policy versions, permitted locations and exceptions will be checked for each edition; checklist questions alone do not establish mandatory content.}
+\label{tab:rubric}
+\end{table*}
+
+\subsection{Rubric and Annotation Protocol}
+Records will separate policy applicability, practice applicability, and practice presence (present/absent/uncertain). Derived compliance labels are \emph{Compliant}, \emph{Non-compliant}, \emph{Not applicable}, or \emph{Uncertain}; non-compliance requires an assessable obligation. Policy ambiguity, unknown applicability, inaccessible evidence and parse failures remain distinguishable. Fixed presence indicators measure adoption before and after mandates; changed definitions require a common indicator or separate series.
+
+Two annotators will independently label every sampled paper: 14 pilot (2/year), 70 development (10/year) and 140 held-out (20/year). After pilot revisions, disjoint random development/test samples will be allocated proportionally across tracks with both represented; inclusion probabilities and seed will be recorded. Labels require evidence spans/page references and are blind to evaluator predictions. Pre-adjudication agreement uses per-item Cohen's kappa, raw agreement, label frequencies and uncertainty rates; kappa alone is unreliable under extreme imbalance. Adjudication supplies reference labels. Only pilot/development cases may tune the rubric or evaluator; later revisions require fresh testing or an exploratory designation.
+
+Twenty test papers/year cannot establish reliable year--track error rates or rare-failure sensitivity. A separate diagnostic audit will inspect post-mandate heading omissions, targeted semantic failures and random predicted compliant cases. These cases require sampling weights to enter prevalence estimates. Pilot timing will set the audit budget before testing; unsupported items remain human-only or inconclusive.
+
+\subsection{Automatic Evaluation and Validation}
+Rules will detect headings and locations; one LLM will assess content using the frozen rubric, retrieved sections and, when necessary, wider context. Outputs include label, evidence, location, justification and abstention. Quoted spans must match extracted text; retrieval failures are audited separately and cannot alone establish non-compliance. The model will be selected during development; its version, prompt and settings will be frozen before human-reference testing.
+
+Per-item validation will report class precision/recall/F1, macro-F1, confusion matrices, abstention coverage, applicability errors and failure-class recall, with support counts and confidence intervals from resampling whole papers within year--track strata; sparse-class intervals may be uninformative. Abstentions remain visible in full-sample error accounting. Macro-F1 $\geq0.80$ is a feasibility target, not evidence that trend bias is negligible. Year/track diagnostics will be qualified by sample size.
+
+A laptop, Python, an annotation interface, statistical software and an affordable LLM API suffice; no training/GPU is planned. The pilot sets workload and cost. Parser/model versions, prompts, settings, context selection, seeds and commands will be archived.
+
+\subsection{Longitudinal and Statistical Analysis}
+For item $r$ and year $t$, resolved-case compliance is
+\[
+\widehat{p}_{rt}=\frac{C_{rt}}{C_{rt}+N_{rt}},
+\]
+where $C,N$ are compliant/non-compliant totals under an applicable obligation (inverse-inclusion-weighted for human estimates). Denominators, inapplicable/uncertain counts and technical failures accompany every rate; no overall score pools changing obligations.
+
+Primary estimates use held-out human labels and stratified finite-population 95\% intervals for rates and before/after differences. Sparse cells use conservative bounds instead of Wald tests. Unresolved cases receive best-/worst-case assignments, separating policy, applicability, accessibility and technical missingness. Automatic rates describe evaluator outputs; we will report weighted discrepancies from human estimates and sensitivity to classification/applicability errors. Annual rates will be shown overall and separately for Main/Findings; policy comparisons within each track will limit distortion from changing track proportions.
+
+Prespecified transitions will use fixed adoption indicators and percentage-point differences. H1 tests concern differences between published cohorts, with uncertainty from human sampling; they do not test causal policy effects. Holm adjustment will cover the prespecified item-level family. Sparse or unresolved cells yield bounds/descriptive results. AI-assistance disclosure rates remain descriptive and outside compliance tests.
+
+The exploratory era comparison uses conference years 2020--2022 versus 2023--2026 alongside the policy timeline. Year groups do not establish individual papers' exposure to ChatGPT. Overlapping policy and era changes cannot be separated by this design. Results describe publication-period associations, not causal effects; accepted-paper trends also reflect selection during review.
+
+\section{Data Statement}
+Sources are ACL Anthology papers/metadata and official policies. ACL materials from 2016 use CC BY 4.0 \cite{anthologycopyright}; policy documents retain source-specific terms. Author names/emails will be removed from evaluator inputs where feasible. Results are aggregate: no author profiling, scientific-quality ranking or AI-authorship detection. Releases will contain identifiers, labels, permitted evidence excerpts, policy provenance and code, preserving attribution and licences.
+
+\section{Contribution Table}
+\todo{\textbf{contribution table} -- each team member, what they did, workload in hours. \textbf{Required in this and every later phase report; a report submitted without it is not accepted for grading, not just marked down};}
+\begin{table}[h]
+\centering\small
+\begin{tabularx}{\columnwidth}{@{}p{0.20\columnwidth}Xp{0.16\columnwidth}@{}}
+\toprule
+Member & Completed contribution & Hours \\
+\midrule
+\todo{Name 1} & \todo{Actual proposal tasks} & \todo{Hours} \\
+\todo{Name 2} & \todo{Actual proposal tasks} & \todo{Hours} \\
+\todo{Name 3} & \todo{Actual proposal tasks} & \todo{Hours} \\
+\todo{Name 4} & \todo{Actual proposal tasks} & \todo{Hours} \\
+\bottomrule
+\end{tabularx}
+
+\label{tab:contributions}
+\end{table}
+
+\section{Declaration of LLM Use}
+\todo{\textbf{declaration of LLM use} -- which tools, for what. \textbf{A report without this is not accepted for grading}}
+
+\bibliographystyle{acl}
+\bibliography{project-proposal}
+\end{document}
