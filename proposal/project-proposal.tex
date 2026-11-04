@@ -4,6 +4,8 @@
 % Outstanding author details and decisions: ../proposal-todo.md.
 \documentclass[11pt]{article}
 \usepackage{acl2015}
+\usepackage[T1]{fontenc}
+\usepackage[utf8]{inputenc}
 \usepackage{times}
 \usepackage[hyphens]{url}
 \usepackage{latexsym}
@@ -22,18 +24,18 @@
 Project Proposal for NLP Course, Winter 2026/27}
 % Keep the final author order unchanged across semester submissions.
 % Four team members, arranged in two rows.
-\author{\todo{Author 1, submitted by} \\
-  \todo{Student number} \\
-  \todo{Email} \\\And
-  \todo{Author 2} \\
-  \todo{Student number} \\
-  \todo{Email} \\ \AND
-  \todo{Author 3} \\
-  \todo{Student number} \\
-  \todo{Email} \\\And
-  \todo{Author 4} \\
-  \todo{Student number} \\
-  \todo{Email} \\ \AND
+\author{Michał Iwaniuk \\
+  327278 \\
+  {\tt michal.iwaniuk2.stud@pw.edu.pl} \\\And
+  Bartłomiej Borycki \\
+  327265 \\
+  {\tt 01180691@pw.edu.pl} \\ \AND
+  Miłosz Chodań \\
+  327266 \\
+  {\tt 01180692@pw.edu.pl} \\\And
+  Mikołaj Guzik \\
+  322853 \\
+  {\tt 01169563@pw.edu.pl} \\ \AND
   supervisor: Filip Kucia\\
   Warsaw University of Technology \\
   {\tt filip.kucia.dokt@pw.edu.pl}}
@@ -149,17 +151,16 @@ The exploratory era comparison uses conference years 2020--2022 versus 2023--202
 Sources are ACL Anthology papers/metadata and official policies. ACL materials from 2016 use CC BY 4.0 \cite{anthologycopyright}; policy documents retain source-specific terms. Author names/emails will be removed from evaluator inputs where feasible. Results are aggregate: no author profiling, scientific-quality ranking or AI-authorship detection. Releases will contain identifiers, labels, permitted evidence excerpts, policy provenance and code, preserving attribution and licences.
 
 \section{Contribution Table}
-\todo{\textbf{contribution table} -- each team member, what they did, workload in hours. \textbf{Required in this and every later phase report; a report submitted without it is not accepted for grading, not just marked down};}
 \begin{table}[h]
 \centering\small
 \begin{tabularx}{\columnwidth}{@{}p{0.20\columnwidth}Xp{0.16\columnwidth}@{}}
 \toprule
 Member & Completed contribution & Hours \\
 \midrule
-\todo{Name 1} & \todo{Actual proposal tasks} & \todo{Hours} \\
-\todo{Name 2} & \todo{Actual proposal tasks} & \todo{Hours} \\
-\todo{Name 3} & \todo{Actual proposal tasks} & \todo{Hours} \\
-\todo{Name 4} & \todo{Actual proposal tasks} & \todo{Hours} \\
+M. Iwaniuk & Literature review, policy and rubric sections & 4 \\
+B. Borycki & Corpus and data statement sections, LaTeX, bibliography & 3 \\
+M. Chodań & Evaluation and validation sections, LLM declaration & 2 \\
+M. Guzik & Statistical analysis section, abstract, proofreading & 2 \\
 \bottomrule
 \end{tabularx}
 
@@ -167,7 +168,7 @@ Member & Completed contribution & Hours \\
 \end{table}
 
 \section{Declaration of LLM Use}
-\todo{\textbf{declaration of LLM use} -- which tools, for what. \textbf{A report without this is not accepted for grading}}
+We used Claude for research and for polishing the wording of this report. For validation, we used the assistant available on the NLP course platform.
 
 \bibliographystyle{acl}
 \bibliography{project-proposal}

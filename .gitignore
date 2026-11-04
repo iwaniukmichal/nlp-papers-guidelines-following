@@ -20,3 +20,4 @@
 /proposal/*.xdv
 
 *.DS_STORE*
+priv
