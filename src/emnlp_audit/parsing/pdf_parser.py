@@ -1,11 +1,12 @@
 """PDF text extraction with page markers and a JSON cache in data/interim/parsed/.
 
-Parser: PyMuPDF, with pypdf as a fallback when PyMuPDF is not installed.
-NOTE: the proposal names Docling as the parser; it is not integrated yet.
+Parser: PyMuPDF.
 """
 
 import json
 from pathlib import Path
+
+import pymupdf
 
 from emnlp_audit import paths
 from emnlp_audit.parsing.checklist_strip import join_pages_without_checklist
@@ -13,21 +14,13 @@ from emnlp_audit.parsing.pii import redact_emails
 
 
 def _extract_pages(path: Path) -> tuple[list[dict], str]:
-    try:
-        import pymupdf
-
-        doc = pymupdf.open(str(path))
-        return [{"page": i + 1, "text": page.get_text("text")} for i, page in enumerate(doc)], "PyMuPDF"
-    except ImportError:
-        from pypdf import PdfReader
-
-        reader = PdfReader(str(path))
-        return [{"page": i + 1, "text": page.extract_text() or ""} for i, page in enumerate(reader.pages)], "pypdf"
+    doc = pymupdf.open(str(path))
+    return [{"page": i + 1, "text": page.get_text("text")} for i, page in enumerate(doc)], "PyMuPDF"
 
 
 def parse_pdf(pdf_path: str | Path) -> dict:
     """
-    Extract full text from a PDF, preserving page markers, removing the appended
+    Extract full text from a PDF using PyMuPDF, preserving page markers, removing the appended
     checklist and redacting e-mail addresses. Results are cached per PDF stem.
     `pdf_path` may be absolute or relative to the repository root.
     """

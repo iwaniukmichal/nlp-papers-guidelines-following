@@ -5,15 +5,15 @@ Stan (15.11): źródła polityk zebrane (`data/policy_sources/`), inwentarz wymo
 Terminy: 18.11 nagranie na półmetek (SOTA + PoC) i termin pilotażowej anotacji; 2.12 raport z fazy 2 i zamrożenie rubricu.
 
 ## 1. Inwentarz wymogów (etap 2)
-- [ ] Weryfikacja przez ludzi: w `inventory.csv` wpisać `verified_by` i `verification` (`verified` albo `disputed` + powód w `notes`). Minimum to wiersze przełomów:
+- [x] Weryfikacja przez ludzi: w `inventory.csv` wpisać `verified_by` i `verification` (`verified` albo `disputed` + powód w `notes`). Minimum to wiersze przełomów:
   - Limitations 2021–2022;
   - etyka 2020;
   - status checklisty ARR 2022–2024;
   - AI 2023–2026;
   - `COMPUTE_*` 2020–2024;
   - `ARTIFACT_LICENSE`.
-- [ ] (Opcjonalnie) niezależna kontrola innym modelem, np. Gemini: [prompt](docs/methodology/inventory-verification-prompt.md).
-- [ ] Po każdej zmianie: `uv run python scripts/00_validate_inventory.py` (0 błędów).
+- [x] (Opcjonalnie) niezależna kontrola innym modelem, np. Gemini: [prompt](docs/methodology/inventory-verification-prompt.md).
+- [x] Po każdej zmianie: `uv run python scripts/00_validate_inventory.py` (0 błędów).
 
 ## 2. Wybór itemów (etap 3)
 - [ ] `config/rubric/item_selection.md`: wszystkie 34 wymogi z oceną według 6 kryteriów i decyzją. Punkt wyjścia: I1–I6, I3 jako „ryzyka i etyka”, I4 jako „czas + sprzęt” oraz link do kodu jako wskaźnik automatyczny (zob. OPEN_QUESTIONS).
@@ -34,9 +34,9 @@ Terminy: 18.11 nagranie na półmetek (SOTA + PoC) i termin pilotażowej anotacj
 - [ ] Losowanie próbek dev (70) i test (140) z proporcjonalnym podziałem na tracki (`corpus/sampling.py`, TODO).
 
 ## 6. Znane problemy w kodzie
-- [ ] Weryfikacja cytatów LLM sprawdza tylko początek cytatu (`evaluators/llm.py`).
-- [ ] Obcinanie tekstu do 120 tys. znaków: logować i oznaczać `Uncertain`.
-- [ ] Parser: proposal mówi Docling, a kod używa PyMuPDF. Ujednolicić kod albo proposal.
+- [x] Weryfikacja cytatów LLM sprawdza tylko początek cytatu (`evaluators/llm.py`).
+- [x] Obcinanie tekstu do 120 tys. znaków: logować i oznaczać `Uncertain`.
+- [x] Parser: proposal mówi Docling, a kod używa PyMuPDF. Ujednolicić kod albo proposal.
 
 ## 7. Raport z fazy 2 (2.12)
 - [ ] Deklaracja LLM: zebranie źródeł, szkic inwentarza i self-audyt (Claude), refactor kodu, ewaluator (Gemini).

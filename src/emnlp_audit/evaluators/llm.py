@@ -94,28 +94,88 @@ def call_gemini_api(prompt: str, api_key: str, model: str = DEFAULT_MODEL) -> tu
     raise RuntimeError(f"Gemini API call failed across endpoints. Last error: {last_err}")
 
 
-def verify_quote_in_text(quote: str, full_text: str) -> bool:
-    """Verify that the quoted evidence span matches extracted text (normalising whitespace/hyphens).
+_LIGATURES = str.maketrans({
+    "ﬁ": "fi",
+    "ﬂ": "fl",
+    "ﬀ": "ff",
+    "ﬃ": "ffi",
+    "ﬄ": "ffl",
+    "’": "'",
+    "‘": "'",
+    "“": '"',
+    "”": '"',
+    "–": "-",
+    "—": "-",
+    "−": "-",
+})
 
-    NOTE: only the first/last 40 characters (or first 35 alphanumerics) are checked,
-    so this is a lenient check that can overstate verification rates.
+
+def _strip_page_markers(text: str) -> str:
+    # Remove inserted page markers and adjacent running page numbers across page breaks
+    return re.sub(r"(?:\b\d{1,5}\s+)?---\s*\[PAGE\s+\d+\]\s*---(?:\s+\d{1,5}\b)?", " ", text)
+
+
+def _normalize_text(text: str) -> str:
+    text = _strip_page_markers(text).translate(_LIGATURES)
+    # Join words split across PDF line breaks with a hyphen
+    text = re.sub(r"([A-Za-z])-\s+([A-Za-z])", r"\1\2", text)
+    return re.sub(r"\s+", " ", text).strip().lower()
+
+
+def _normalize_alnum(text: str) -> str:
+    return re.sub(r"[^a-z0-9]", "", _strip_page_markers(text).translate(_LIGATURES).lower())
+
+
+def verify_quote_in_text(quote: str, full_text: str) -> bool:
+    """Verify that the entire quoted evidence span matches extracted text.
+
+    Normalises ligatures, whitespace, and PDF line-break hyphenation. If the quote
+    contains explicit ellipses ('...' or '…') joining non-adjacent excerpts, every
+    segment must appear in full and in order in `full_text`.
     """
-    if not quote:
+    if not quote or not quote.strip():
         return True
-    norm_quote = re.sub(r"\s+", " ", quote).strip().lower()
-    norm_text = re.sub(r"\s+", " ", full_text).lower()
-    if norm_quote[:40] in norm_text or norm_quote[-40:] in norm_text:
-        return True
-    # Also check alphanumeric-only match to tolerate PDF line-break hyphenation
-    alpha_quote = re.sub(r"[^a-z0-9]", "", norm_quote)
-    alpha_text = re.sub(r"[^a-z0-9]", "", norm_text)
-    return len(alpha_quote) >= 15 and alpha_quote[:35] in alpha_text
+    if not full_text:
+        return False
+
+    segments = [s.strip() for s in re.split(r"(?:\.\.\.|…)+", quote) if s.strip()]
+    if not segments:
+        return False
+
+    norm_text = _normalize_text(full_text)
+    alpha_text = _normalize_alnum(full_text)
+
+    norm_pos = 0
+    alpha_pos = 0
+    for seg in segments:
+        norm_seg = _normalize_text(seg)
+        alpha_seg = _normalize_alnum(seg)
+        if not alpha_seg:
+            continue
+
+        found_norm = norm_text.find(norm_seg, norm_pos) if norm_seg else -1
+        if found_norm != -1:
+            norm_pos = found_norm + len(norm_seg)
+            found_alpha = alpha_text.find(alpha_seg, alpha_pos)
+            if found_alpha != -1:
+                alpha_pos = found_alpha + len(alpha_seg)
+            continue
+
+        found_alpha = alpha_text.find(alpha_seg, alpha_pos)
+        if found_alpha != -1:
+            alpha_pos = found_alpha + len(alpha_seg)
+        else:
+            return False
+
+    return True
 
 
 def to_records(paper: dict, response: dict, full_text: str, rubric: dict, model: str) -> list[dict]:
     """Turn the raw LLM JSON response into one evaluation record per rubric item."""
     year = int(paper["year"])
     eval_items = {e["item_id"]: e for e in response.get("evaluations", []) if "item_id" in e}
+    truncated = len(full_text) > MAX_PAPER_CHARS
+    evaluated_text = full_text[:MAX_PAPER_CHARS]
 
     records = []
     for item in rubric["items"]:
@@ -128,6 +188,21 @@ def to_records(paper: dict, response: dict, full_text: str, rubric: dict, model:
         loc = (e.get("location") or "").strip()
         just = (e.get("justification") or "").strip().replace("\n", " ")
 
+        if ev_status in ("adequately_reported", "explicitly_reported_inadequate"):
+            quote_ok = bool(quote) and verify_quote_in_text(quote, evaluated_text)
+            if not quote_ok:
+                ev_status = "uncertain"
+                just = f"{just} [Quote verification failed or missing quote -> uncertain]".strip()
+        else:
+            quote_ok = verify_quote_in_text(quote, evaluated_text)
+
+        if truncated and ev_status == "not_reported":
+            ev_status = "uncertain"
+            just = (
+                f"{just} [Paper text truncated at {MAX_PAPER_CHARS} chars; "
+                f"absence in truncated tail cannot be ruled out -> uncertain]"
+            ).strip()
+
         records.append({
             "anthology_id": paper["anthology_id"],
             "year": year,
@@ -138,7 +213,8 @@ def to_records(paper: dict, response: dict, full_text: str, rubric: dict, model:
             "evidence_status": ev_status,
             "derived_compliance": derive_compliance(pol_applies, prac_applies, ev_status),
             "evidence_quote": quote,
-            "quote_verified_in_text": verify_quote_in_text(quote, full_text),
+            "quote_verified_in_text": quote_ok,
+            "text_truncated": truncated,
             "location": loc,
             "justification": just,
             "evaluator": model,

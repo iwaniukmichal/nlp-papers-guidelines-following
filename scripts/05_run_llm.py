@@ -43,10 +43,17 @@ def main():
             continue
         parsers_used.add(parsed.get("parser"))
 
+        truncated = len(full_text) > llm.MAX_PAPER_CHARS
+        if truncated:
+            print(
+                f"  [WARN] {aid}: extracted text ({len(full_text)} chars) exceeds "
+                f"MAX_PAPER_CHARS ({llm.MAX_PAPER_CHARS}); truncating and marking 'not_reported' as 'uncertain'."
+            )
         print(f"[{idx}/{len(papers)}] Evaluating {aid} ({paper['track']} {paper['year']}) with {args.model}...")
         response, usage = llm.call_gemini_api(llm.build_prompt(template, paper, full_text, rubric), api_key, args.model)
         usage["anthology_id"] = aid
-        usage["text_truncated"] = len(full_text) > llm.MAX_PAPER_CHARS
+        usage["full_text_chars"] = len(full_text)
+        usage["text_truncated"] = truncated
         usage_logs.append(usage)
         all_evals.extend(llm.to_records(paper, response, full_text, rubric, args.model))
 
