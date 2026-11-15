@@ -1,6 +1,6 @@
 # Przed oddaniem project proposal
 
-Dokument: [overleaf/project-proposal.tex](overleaf/project-proposal.tex).
+Dokument: [proposal/project-proposal.tex](proposal/project-proposal.tex).
 
 - [ ] Uzupełnić dane czterech autorów: imiona i nazwiska, numery albumów, e-maile; ustalić kolejność i osobę składającą raport.
 - [ ] Wpisać rzeczywisty wkład każdej osoby w przygotowanie proposal oraz faktyczną liczbę godzin.

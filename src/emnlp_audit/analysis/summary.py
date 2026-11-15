@@ -1,28 +1,18 @@
-"""
-Summarize PoC Pilot Results (14 papers x 6 rubric items = 84 evaluations):
-1. Class balance / label distribution for Evidence Status (4 classes) and Derived Compliance (4 classes)
-2. Pre-mandate (2020-2021) vs. Post-mandate (2022-2026) adoption & compliance rates
-3. Rule Baseline vs. Gemini-2.5-Flash comparison (agreement & qualitative differences)
-4. Token usage, latency, and full-corpus cost projection (for N = 16,618 eligible EMNLP papers)
-"""
+"""Pilot summary: label distributions, pre/post-2022 comparison, rule-vs-LLM agreement,
+token usage and full-corpus cost projection."""
 
-import json
 from collections import Counter, defaultdict
-from pathlib import Path
 
-BASE_DIR = Path(__file__).resolve().parent
-DATA_DIR = BASE_DIR / "data"
+# Gemini 2.5 Flash pricing estimate ($0.15 / 1M input, $0.60 / 1M output; half in Batch API)
+PRICE_INPUT_PER_M = 0.15
+PRICE_OUTPUT_PER_M = 0.60
+BATCH_DISCOUNT = 0.5
 
 
-def main():
-    llm_evals = json.loads((DATA_DIR / "poc_llm_evaluations.json").read_text(encoding="utf-8"))
-    rule_evals = json.loads((DATA_DIR / "poc_baseline_evaluations.json").read_text(encoding="utf-8"))
-    usage_stats = json.loads((DATA_DIR / "poc_llm_usage_stats.json").read_text(encoding="utf-8"))
-    corpus_counts = json.loads((DATA_DIR / "corpus_counts_by_year_track.json").read_text(encoding="utf-8"))
-
+def summarize(llm_evals: list[dict], rule_evals: list[dict], usage_stats: list[dict], corpus_counts: dict) -> dict:
     total_corpus_papers = sum(v["Total"] for v in corpus_counts.values())
 
-    # 1. Per-item distribution (LLM Evaluator)
+    # 1. Per-item distribution (LLM evaluator)
     by_item_status = defaultdict(Counter)
     by_item_compliance = defaultdict(Counter)
     by_era_item = defaultdict(lambda: defaultdict(Counter))
@@ -43,8 +33,7 @@ def main():
     disagreements = []
 
     for l in llm_evals:
-        key = (l["anthology_id"], l["item_id"])
-        r = rule_map.get(key)
+        r = rule_map.get((l["anthology_id"], l["item_id"]))
         if not r:
             continue
         if r["evidence_status"] == l["evidence_status"]:
@@ -70,16 +59,12 @@ def main():
     total_all_tok = sum(u.get("totalTokenCount", 0) for u in usage_stats)
     total_latency = sum(u.get("latency_sec", 0.0) for u in usage_stats)
 
-    mean_prompt = total_prompt_tok / n_papers
-    mean_output = (total_cand_tok + total_thought_tok) / n_papers
-    mean_latency = total_latency / n_papers
+    est_cost_pilot_usd = (total_prompt_tok / 1e6) * PRICE_INPUT_PER_M + (
+        (total_cand_tok + total_thought_tok) / 1e6
+    ) * PRICE_OUTPUT_PER_M
+    est_cost_full_standard = est_cost_pilot_usd * (total_corpus_papers / n_papers)
 
-    # Gemini 2.5 Flash standard/batch pricing estimate ($0.15 / 1M input, $0.60-$3.50 / 1M output; half in Batch API)
-    est_cost_pilot_usd = (total_prompt_tok / 1e6) * 0.15 + ((total_cand_tok + total_thought_tok) / 1e6) * 0.60
-    est_cost_full_corpus_standard_usd = est_cost_pilot_usd * (total_corpus_papers / n_papers)
-    est_cost_full_corpus_batch_usd = est_cost_full_corpus_standard_usd * 0.5
-
-    summary = {
+    return {
         "pilot_papers_count": n_papers,
         "total_evaluations": len(llm_evals),
         "verbatim_quote_verification_rate": round(quote_verified_count / len(llm_evals), 4),
@@ -94,23 +79,14 @@ def main():
             "total_pilot_prompt_tokens": total_prompt_tok,
             "total_pilot_output_and_thought_tokens": total_cand_tok + total_thought_tok,
             "total_pilot_tokens": total_all_tok,
-            "mean_prompt_tokens_per_paper": round(mean_prompt, 1),
-            "mean_output_tokens_per_paper": round(mean_output, 1),
+            "mean_prompt_tokens_per_paper": round(total_prompt_tok / n_papers, 1),
+            "mean_output_tokens_per_paper": round((total_cand_tok + total_thought_tok) / n_papers, 1),
             "total_pilot_latency_sec": round(total_latency, 2),
-            "mean_latency_sec_per_paper": round(mean_latency, 2),
+            "mean_latency_sec_per_paper": round(total_latency / n_papers, 2),
             "estimated_pilot_cost_usd": round(est_cost_pilot_usd, 4),
             "total_eligible_corpus_papers_2020_2026": total_corpus_papers,
-            "projected_full_corpus_cost_standard_usd": round(est_cost_full_corpus_standard_usd, 2),
-            "projected_full_corpus_cost_batch_api_usd": round(est_cost_full_corpus_batch_usd, 2),
+            "projected_full_corpus_cost_standard_usd": round(est_cost_full_standard, 2),
+            "projected_full_corpus_cost_batch_api_usd": round(est_cost_full_standard * BATCH_DISCOUNT, 2),
         },
         "notable_rule_vs_llm_disagreements": disagreements[:15],
     }
-
-    out_path = DATA_DIR / "poc_summary_report.json"
-    out_path.write_text(json.dumps(summary, indent=2, ensure_ascii=False), encoding="utf-8")
-    print(json.dumps(summary, indent=2, ensure_ascii=False))
-
-
-if __name__ == "__main__":
-    main()
-

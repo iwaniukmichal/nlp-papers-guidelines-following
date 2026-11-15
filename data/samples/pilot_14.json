@@ -11,7 +11,7 @@
     "sample_split": "pilot_14",
     "random_seed": 42,
     "inclusion_probability": 0.001332,
-    "local_pdf_path": "C:\\Users\\milos\\PycharmProjects\\nlp-papers-guidelines-following\\poc\\data\\pdfs\\2020.emnlp-main.656.pdf"
+    "local_pdf_path": "data/raw/pdfs/2020.emnlp-main.656.pdf"
   },
   {
     "anthology_id": "2020.findings-emnlp.58",
@@ -25,7 +25,7 @@
     "sample_split": "pilot_14",
     "random_seed": 42,
     "inclusion_probability": 0.002237,
-    "local_pdf_path": "C:\\Users\\milos\\PycharmProjects\\nlp-papers-guidelines-following\\poc\\data\\pdfs\\2020.findings-emnlp.58.pdf"
+    "local_pdf_path": "data/raw/pdfs/2020.findings-emnlp.58.pdf"
   },
   {
     "anthology_id": "2021.emnlp-main.26",
@@ -39,7 +39,7 @@
     "sample_split": "pilot_14",
     "random_seed": 42,
     "inclusion_probability": 0.001181,
-    "local_pdf_path": "C:\\Users\\milos\\PycharmProjects\\nlp-papers-guidelines-following\\poc\\data\\pdfs\\2021.emnlp-main.26.pdf"
+    "local_pdf_path": "data/raw/pdfs/2021.emnlp-main.26.pdf"
   },
   {
     "anthology_id": "2021.findings-emnlp.380",
@@ -53,7 +53,7 @@
     "sample_split": "pilot_14",
     "random_seed": 42,
     "inclusion_probability": 0.002358,
-    "local_pdf_path": "C:\\Users\\milos\\PycharmProjects\\nlp-papers-guidelines-following\\poc\\data\\pdfs\\2021.findings-emnlp.380.pdf"
+    "local_pdf_path": "data/raw/pdfs/2021.findings-emnlp.380.pdf"
   },
   {
     "anthology_id": "2022.emnlp-main.282",
@@ -67,7 +67,7 @@
     "sample_split": "pilot_14",
     "random_seed": 42,
     "inclusion_probability": 0.001208,
-    "local_pdf_path": "C:\\Users\\milos\\PycharmProjects\\nlp-papers-guidelines-following\\poc\\data\\pdfs\\2022.emnlp-main.282.pdf"
+    "local_pdf_path": "data/raw/pdfs/2022.emnlp-main.282.pdf"
   },
   {
     "anthology_id": "2022.findings-emnlp.251",
@@ -81,7 +81,7 @@
     "sample_split": "pilot_14",
     "random_seed": 42,
     "inclusion_probability": 0.001825,
-    "local_pdf_path": "C:\\Users\\milos\\PycharmProjects\\nlp-papers-guidelines-following\\poc\\data\\pdfs\\2022.findings-emnlp.251.pdf"
+    "local_pdf_path": "data/raw/pdfs/2022.findings-emnlp.251.pdf"
   },
   {
     "anthology_id": "2023.emnlp-main.458",
@@ -95,7 +95,7 @@
     "sample_split": "pilot_14",
     "random_seed": 42,
     "inclusion_probability": 0.000955,
-    "local_pdf_path": "C:\\Users\\milos\\PycharmProjects\\nlp-papers-guidelines-following\\poc\\data\\pdfs\\2023.emnlp-main.458.pdf"
+    "local_pdf_path": "data/raw/pdfs/2023.emnlp-main.458.pdf"
   },
   {
     "anthology_id": "2023.findings-emnlp.287",
@@ -109,7 +109,7 @@
     "sample_split": "pilot_14",
     "random_seed": 42,
     "inclusion_probability": 0.000944,
-    "local_pdf_path": "C:\\Users\\milos\\PycharmProjects\\nlp-papers-guidelines-following\\poc\\data\\pdfs\\2023.findings-emnlp.287.pdf"
+    "local_pdf_path": "data/raw/pdfs/2023.findings-emnlp.287.pdf"
   },
   {
     "anthology_id": "2024.emnlp-main.210",
@@ -123,7 +123,7 @@
     "sample_split": "pilot_14",
     "random_seed": 42,
     "inclusion_probability": 0.000789,
-    "local_pdf_path": "C:\\Users\\milos\\PycharmProjects\\nlp-papers-guidelines-following\\poc\\data\\pdfs\\2024.emnlp-main.210.pdf"
+    "local_pdf_path": "data/raw/pdfs/2024.emnlp-main.210.pdf"
   },
   {
     "anthology_id": "2024.findings-emnlp.693",
@@ -137,7 +137,7 @@
     "sample_split": "pilot_14",
     "random_seed": 42,
     "inclusion_probability": 0.000997,
-    "local_pdf_path": "C:\\Users\\milos\\PycharmProjects\\nlp-papers-guidelines-following\\poc\\data\\pdfs\\2024.findings-emnlp.693.pdf"
+    "local_pdf_path": "data/raw/pdfs/2024.findings-emnlp.693.pdf"
   },
   {
     "anthology_id": "2025.emnlp-main.1517",
@@ -151,7 +151,7 @@
     "sample_split": "pilot_14",
     "random_seed": 42,
     "inclusion_probability": 0.000553,
-    "local_pdf_path": "C:\\Users\\milos\\PycharmProjects\\nlp-papers-guidelines-following\\poc\\data\\pdfs\\2025.emnlp-main.1517.pdf"
+    "local_pdf_path": "data/raw/pdfs/2025.emnlp-main.1517.pdf"
   },
   {
     "anthology_id": "2025.findings-emnlp.1117",
@@ -165,7 +165,7 @@
     "sample_split": "pilot_14",
     "random_seed": 42,
     "inclusion_probability": 0.000712,
-    "local_pdf_path": "C:\\Users\\milos\\PycharmProjects\\nlp-papers-guidelines-following\\poc\\data\\pdfs\\2025.findings-emnlp.1117.pdf"
+    "local_pdf_path": "data/raw/pdfs/2025.findings-emnlp.1117.pdf"
   },
   {
     "anthology_id": "2026.emnlp-main.357",
@@ -179,7 +179,7 @@
     "sample_split": "pilot_14",
     "random_seed": 42,
     "inclusion_probability": 0.00037,
-    "local_pdf_path": "C:\\Users\\milos\\PycharmProjects\\nlp-papers-guidelines-following\\poc\\data\\pdfs\\2026.emnlp-main.357.pdf"
+    "local_pdf_path": "data/raw/pdfs/2026.emnlp-main.357.pdf"
   },
   {
     "anthology_id": "2026.findings-emnlp.2419",
@@ -193,6 +193,6 @@
     "sample_split": "pilot_14",
     "random_seed": 42,
     "inclusion_probability": 0.000404,
-    "local_pdf_path": "C:\\Users\\milos\\PycharmProjects\\nlp-papers-guidelines-following\\poc\\data\\pdfs\\2026.findings-emnlp.2419.pdf"
+    "local_pdf_path": "data/raw/pdfs/2026.findings-emnlp.2419.pdf"
   }
 ]

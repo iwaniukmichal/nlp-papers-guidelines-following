@@ -1,0 +1,13 @@
+{
+  "run_id": "2026-11-15_pilot_14_gemini-2.5-flash_rubric-v1.0.0",
+  "created": "2026-11-15 (archived from poc/, commit 5d324af)",
+  "split": "pilot_14",
+  "n_papers": 14,
+  "rubric_version": "1.0.0-poc",
+  "parser": "not recorded (parsed cache was not archived; code used PyMuPDF with pypdf fallback)",
+  "evaluator": "gemini-2.5-flash",
+  "temperature": 0.0,
+  "prompt_file": "config/prompts/llm_eval_v1.txt",
+  "prompt_sha256": "c605def81624ece18b619e180683c54abe5fe0c14c516ab5b21784daeef00cc9",
+  "max_paper_chars": 120000
+}
