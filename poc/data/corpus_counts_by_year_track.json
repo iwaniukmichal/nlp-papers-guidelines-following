@@ -1,0 +1,37 @@
+{
+  "2020": {
+    "Main": 751,
+    "Findings": 447,
+    "Total": 1198
+  },
+  "2021": {
+    "Main": 847,
+    "Findings": 424,
+    "Total": 1271
+  },
+  "2022": {
+    "Main": 828,
+    "Findings": 548,
+    "Total": 1376
+  },
+  "2023": {
+    "Main": 1047,
+    "Findings": 1059,
+    "Total": 2106
+  },
+  "2024": {
+    "Main": 1268,
+    "Findings": 1003,
+    "Total": 2271
+  },
+  "2025": {
+    "Main": 1809,
+    "Findings": 1405,
+    "Total": 3214
+  },
+  "2026": {
+    "Main": 2704,
+    "Findings": 2478,
+    "Total": 5182
+  }
+}

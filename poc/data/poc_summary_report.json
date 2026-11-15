@@ -1,0 +1,276 @@
+{
+  "pilot_papers_count": 14,
+  "total_evaluations": 84,
+  "verbatim_quote_verification_rate": 0.9881,
+  "rule_vs_llm_status_agreement": 0.6667,
+  "rule_vs_llm_compliance_agreement": 0.9405,
+  "per_item_evidence_status_counts": {
+    "I1_limitations_section": {
+      "explicitly_reported_inadequate": 2,
+      "not_reported": 2,
+      "adequately_reported": 10
+    },
+    "I2_specific_limitation": {
+      "adequately_reported": 13,
+      "not_reported": 1
+    },
+    "I3_ethical_risks": {
+      "adequately_reported": 11,
+      "not_reported": 2,
+      "not_applicable": 1
+    },
+    "I4_computational_budget": {
+      "not_reported": 4,
+      "explicitly_reported_inadequate": 6,
+      "not_applicable": 1,
+      "adequately_reported": 3
+    },
+    "I5_asset_licensing": {
+      "explicitly_reported_inadequate": 9,
+      "not_applicable": 1,
+      "adequately_reported": 4
+    },
+    "I6_ai_assistance": {
+      "not_reported": 13,
+      "adequately_reported": 1
+    }
+  },
+  "per_item_derived_compliance_counts": {
+    "I1_limitations_section": {
+      "Not applicable": 4,
+      "Compliant": 10
+    },
+    "I2_specific_limitation": {
+      "Not applicable": 4,
+      "Compliant": 10
+    },
+    "I3_ethical_risks": {
+      "Not applicable": 3,
+      "Compliant": 10,
+      "Non-compliant": 1
+    },
+    "I4_computational_budget": {
+      "Not applicable": 14
+    },
+    "I5_asset_licensing": {
+      "Not applicable": 14
+    },
+    "I6_ai_assistance": {
+      "Not applicable": 14
+    }
+  },
+  "pre_vs_post_2022_status_counts": {
+    "I1_limitations_section": {
+      "2020-2021 (Pre-mandate)": {
+        "explicitly_reported_inadequate": 2,
+        "not_reported": 2
+      },
+      "2022-2026 (Post-mandate)": {
+        "adequately_reported": 10
+      }
+    },
+    "I2_specific_limitation": {
+      "2020-2021 (Pre-mandate)": {
+        "adequately_reported": 3,
+        "not_reported": 1
+      },
+      "2022-2026 (Post-mandate)": {
+        "adequately_reported": 10
+      }
+    },
+    "I3_ethical_risks": {
+      "2020-2021 (Pre-mandate)": {
+        "adequately_reported": 3,
+        "not_reported": 1
+      },
+      "2022-2026 (Post-mandate)": {
+        "not_applicable": 1,
+        "adequately_reported": 8,
+        "not_reported": 1
+      }
+    },
+    "I4_computational_budget": {
+      "2020-2021 (Pre-mandate)": {
+        "not_reported": 1,
+        "explicitly_reported_inadequate": 1,
+        "not_applicable": 1,
+        "adequately_reported": 1
+      },
+      "2022-2026 (Post-mandate)": {
+        "explicitly_reported_inadequate": 5,
+        "not_reported": 3,
+        "adequately_reported": 2
+      }
+    },
+    "I5_asset_licensing": {
+      "2020-2021 (Pre-mandate)": {
+        "explicitly_reported_inadequate": 2,
+        "not_applicable": 1,
+        "adequately_reported": 1
+      },
+      "2022-2026 (Post-mandate)": {
+        "explicitly_reported_inadequate": 7,
+        "adequately_reported": 3
+      }
+    },
+    "I6_ai_assistance": {
+      "2020-2021 (Pre-mandate)": {
+        "not_reported": 4
+      },
+      "2022-2026 (Post-mandate)": {
+        "not_reported": 9,
+        "adequately_reported": 1
+      }
+    }
+  },
+  "workload_and_cost_estimates": {
+    "total_pilot_prompt_tokens": 309520,
+    "total_pilot_output_and_thought_tokens": 55547,
+    "total_pilot_tokens": 365067,
+    "mean_prompt_tokens_per_paper": 22108.6,
+    "mean_output_tokens_per_paper": 3967.6,
+    "total_pilot_latency_sec": 230.7,
+    "mean_latency_sec_per_paper": 16.48,
+    "estimated_pilot_cost_usd": 0.0798,
+    "total_eligible_corpus_papers_2020_2026": 16618,
+    "projected_full_corpus_cost_standard_usd": 94.67,
+    "projected_full_corpus_cost_batch_api_usd": 47.34
+  },
+  "notable_rule_vs_llm_disagreements": [
+    {
+      "anthology_id": "2020.emnlp-main.656",
+      "year": 2020,
+      "item_id": "I1_limitations_section",
+      "rule_status": "not_reported",
+      "llm_status": "explicitly_reported_inadequate",
+      "llm_quote": "Generality of Gendered Words. The gendered word lists used may not be comprehensive (Zhao et al., 2018a,b; Hoyle et al., 2019). For example,",
+      "llm_justification": "The paper discusses limitations within an appendix section titled 'Discussion of Generation Quality' rather than a dedicated 'Limitations' section in the main body of the paper or before the references."
+    },
+    {
+      "anthology_id": "2020.emnlp-main.656",
+      "year": 2020,
+      "item_id": "I2_specific_limitation",
+      "rule_status": "not_reported",
+      "llm_status": "adequately_reported",
+      "llm_quote": "Generality of Gendered Words. The gendered word lists used may not be comprehensive (Zhao et al., 2018a,b; Hoyle et al., 2019). For example,",
+      "llm_justification": "The paper explicitly states a methodological limitation regarding the comprehensiveness of gendered word lists used and suggests a consequence for future work."
+    },
+    {
+      "anthology_id": "2020.emnlp-main.656",
+      "year": 2020,
+      "item_id": "I3_ethical_risks",
+      "rule_status": "not_reported",
+      "llm_status": "adequately_reported",
+      "llm_quote": "LIGHT is also an interesting dataset for measuring and mitigating gender bias for three additional reasons: first, it has multiple potential",
+      "llm_justification": "The paper explicitly identifies the ethical risk of gender bias in crowdsourced data, discussing how crowdworkers' annotations can reflect and impart gender biases, and details mitigation strategies throughout the paper."
+    },
+    {
+      "anthology_id": "2020.emnlp-main.656",
+      "year": 2020,
+      "item_id": "I5_asset_licensing",
+      "rule_status": "not_reported",
+      "llm_status": "explicitly_reported_inadequate",
+      "llm_quote": "Models and code are released at https://parl.ai/projects/genderation_bias/.",
+      "llm_justification": "The paper states that models and code are released and cites datasets but does not explicitly name the license or terms of use for these assets."
+    },
+    {
+      "anthology_id": "2020.findings-emnlp.58",
+      "year": 2020,
+      "item_id": "I2_specific_limitation",
+      "rule_status": "not_reported",
+      "llm_status": "adequately_reported",
+      "llm_quote": "Note that the initial learning rates are tuned on original Chinese BERT, and it would be possible to achieve another gains by tuning the lea",
+      "llm_justification": "The paper explicitly states a methodological scope restriction (initial learning rates tuned only on original Chinese BERT) and its consequence (possible further gains if tuned individually), which constitutes a concrete limitation."
+    },
+    {
+      "anthology_id": "2021.emnlp-main.26",
+      "year": 2021,
+      "item_id": "I3_ethical_risks",
+      "rule_status": "not_reported",
+      "llm_status": "adequately_reported",
+      "llm_quote": "Better attribute inference can facilitate research to identify what Blodgett et al. (2020) call “harms of representation,” i.e., how differe",
+      "llm_justification": "The paper explicitly identifies 'harms of representation' and the risk of underrepresentation or stereotypical portrayal of communities as an ethical issue relevant to agent attribute inference, discussing its connection to personal dignity. It also mentions combating misinformation."
+    },
+    {
+      "anthology_id": "2021.emnlp-main.26",
+      "year": 2021,
+      "item_id": "I4_computational_budget",
+      "rule_status": "not_reported",
+      "llm_status": "not_applicable",
+      "llm_quote": "",
+      "llm_justification": "The paper is a position paper that does not report on any computational experiments, model training, fine-tuning, or large-scale inference/evaluation conducted by the authors."
+    },
+    {
+      "anthology_id": "2021.emnlp-main.26",
+      "year": 2021,
+      "item_id": "I5_asset_licensing",
+      "rule_status": "not_reported",
+      "llm_status": "not_applicable",
+      "llm_quote": "",
+      "llm_justification": "The paper is a position paper that does not use, adapt, or release any datasets, pretrained models, or code repositories."
+    },
+    {
+      "anthology_id": "2021.findings-emnlp.380",
+      "year": 2021,
+      "item_id": "I1_limitations_section",
+      "rule_status": "not_reported",
+      "llm_status": "explicitly_reported_inadequate",
+      "llm_quote": "While we anticipate that the task we are proposing can have a signiﬁcant positive impact in many domains (e.g., accessibility, storytelling,",
+      "llm_justification": "The paper discusses potential negative impacts and limitations within the 'Conclusion and Future Work' and 'Broader Impact' sections, but lacks a dedicated, explicitly titled 'Limitations' section as required by the structural criterion."
+    },
+    {
+      "anthology_id": "2021.findings-emnlp.380",
+      "year": 2021,
+      "item_id": "I2_specific_limitation",
+      "rule_status": "not_reported",
+      "llm_status": "adequately_reported",
+      "llm_quote": "Our dataset is collected from the licensed website, which is not a fully representative source. Therefore, we also need to understand biases",
+      "llm_justification": "The paper explicitly states a concrete limitation regarding the dataset's representativeness and potential biases, which has consequences for the generalisability of the findings."
+    },
+    {
+      "anthology_id": "2021.findings-emnlp.380",
+      "year": 2021,
+      "item_id": "I4_computational_budget",
+      "rule_status": "not_reported",
+      "llm_status": "adequately_reported",
+      "llm_quote": "We trained MAGIC 30 epochs with batch size 32 on each GPU using a machine with 4xV100 32G GPUs and the learning rate was 5e −5. Total traini",
+      "llm_justification": "The paper explicitly reports the hardware used (4xV100 32G GPUs) and the total training wall-clock time (7 days) for the MAGIC model, meeting the computational budget reporting criteria."
+    },
+    {
+      "anthology_id": "2021.findings-emnlp.380",
+      "year": 2021,
+      "item_id": "I5_asset_licensing",
+      "rule_status": "not_reported",
+      "llm_status": "adequately_reported",
+      "llm_quote": "Users can access code and to download the dataset at our ofﬁcial website: https://nicedataset.github.io/. Use of the code and dataset are go",
+      "llm_justification": "The paper explicitly states that the released code and dataset are governed by an End User License Agreement (EULA), which constitutes naming the terms of use for their artifacts."
+    },
+    {
+      "anthology_id": "2022.emnlp-main.282",
+      "year": 2022,
+      "item_id": "I3_ethical_risks",
+      "rule_status": "not_reported",
+      "llm_status": "not_applicable",
+      "llm_quote": "",
+      "llm_justification": "The paper focuses on a methodological contribution to relational triple extraction using general news and web datasets (NYT, WebNLG). It does not involve human subjects, sensitive data, or applications with obvious dual-use or societal harm risks, thus an ethics statement is not applicable."
+    },
+    {
+      "anthology_id": "2022.emnlp-main.282",
+      "year": 2022,
+      "item_id": "I4_computational_budget",
+      "rule_status": "not_reported",
+      "llm_status": "explicitly_reported_inadequate",
+      "llm_quote": "We train our model for 200 epochs with batch size as 1 on both datasets. We choose the model with the best validation performance and report",
+      "llm_justification": "The paper mentions training parameters like epochs and batch size but does not specify the type or number of GPUs used, nor the total training duration in explicit time/energy units (e.g., GPU-hours)."
+    },
+    {
+      "anthology_id": "2022.findings-emnlp.251",
+      "year": 2022,
+      "item_id": "I3_ethical_risks",
+      "rule_status": "not_reported",
+      "llm_status": "adequately_reported",
+      "llm_quote": "Further, it may not be feasible to adopt crowd-source labeling for privacy-sensitive domains, involving private data of the users. For insta",
+      "llm_justification": "The paper explicitly identifies user privacy and the handling of Personal Identifiable Information (PII) as a key ethical concern, explaining how their interactive labeling approach mitigates the risks associated with traditional crowd-sourcing."
+    }
+  ]
+}

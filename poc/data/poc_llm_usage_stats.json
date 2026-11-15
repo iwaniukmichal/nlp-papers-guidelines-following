@@ -1,0 +1,226 @@
+[
+  {
+    "promptTokenCount": 21862,
+    "candidatesTokenCount": 876,
+    "totalTokenCount": 27402,
+    "promptTokensDetails": [
+      {
+        "modality": "TEXT",
+        "tokenCount": 21862
+      }
+    ],
+    "thoughtsTokenCount": 4664,
+    "serviceTier": "standard",
+    "latency_sec": 22.56,
+    "model": "gemini-2.5-flash",
+    "anthology_id": "2020.emnlp-main.656"
+  },
+  {
+    "promptTokenCount": 18714,
+    "candidatesTokenCount": 844,
+    "totalTokenCount": 23319,
+    "promptTokensDetails": [
+      {
+        "modality": "TEXT",
+        "tokenCount": 18714
+      }
+    ],
+    "thoughtsTokenCount": 3761,
+    "serviceTier": "standard",
+    "latency_sec": 20.36,
+    "model": "gemini-2.5-flash",
+    "anthology_id": "2020.findings-emnlp.58"
+  },
+  {
+    "promptTokenCount": 19913,
+    "candidatesTokenCount": 708,
+    "totalTokenCount": 25080,
+    "promptTokensDetails": [
+      {
+        "modality": "TEXT",
+        "tokenCount": 19913
+      }
+    ],
+    "thoughtsTokenCount": 4459,
+    "serviceTier": "standard",
+    "latency_sec": 23.09,
+    "model": "gemini-2.5-flash",
+    "anthology_id": "2021.emnlp-main.26"
+  },
+  {
+    "promptTokenCount": 18490,
+    "candidatesTokenCount": 929,
+    "totalTokenCount": 22524,
+    "promptTokensDetails": [
+      {
+        "modality": "TEXT",
+        "tokenCount": 18490
+      }
+    ],
+    "thoughtsTokenCount": 3105,
+    "serviceTier": "standard",
+    "latency_sec": 17.48,
+    "model": "gemini-2.5-flash",
+    "anthology_id": "2021.findings-emnlp.380"
+  },
+  {
+    "promptTokenCount": 14518,
+    "candidatesTokenCount": 948,
+    "totalTokenCount": 17430,
+    "promptTokensDetails": [
+      {
+        "modality": "TEXT",
+        "tokenCount": 14518
+      }
+    ],
+    "thoughtsTokenCount": 1964,
+    "serviceTier": "standard",
+    "latency_sec": 12.95,
+    "model": "gemini-2.5-flash",
+    "anthology_id": "2022.emnlp-main.282"
+  },
+  {
+    "promptTokenCount": 19247,
+    "candidatesTokenCount": 1177,
+    "totalTokenCount": 22687,
+    "promptTokensDetails": [
+      {
+        "modality": "TEXT",
+        "tokenCount": 19247
+      }
+    ],
+    "thoughtsTokenCount": 2263,
+    "serviceTier": "standard",
+    "latency_sec": 13.82,
+    "model": "gemini-2.5-flash",
+    "anthology_id": "2022.findings-emnlp.251"
+  },
+  {
+    "promptTokenCount": 14949,
+    "candidatesTokenCount": 781,
+    "totalTokenCount": 19309,
+    "promptTokensDetails": [
+      {
+        "modality": "TEXT",
+        "tokenCount": 14949
+      }
+    ],
+    "thoughtsTokenCount": 3579,
+    "serviceTier": "standard",
+    "latency_sec": 16.57,
+    "model": "gemini-2.5-flash",
+    "anthology_id": "2023.emnlp-main.458"
+  },
+  {
+    "promptTokenCount": 18933,
+    "candidatesTokenCount": 858,
+    "totalTokenCount": 21704,
+    "promptTokensDetails": [
+      {
+        "modality": "TEXT",
+        "tokenCount": 18933
+      }
+    ],
+    "thoughtsTokenCount": 1913,
+    "serviceTier": "standard",
+    "latency_sec": 11.35,
+    "model": "gemini-2.5-flash",
+    "anthology_id": "2023.findings-emnlp.287"
+  },
+  {
+    "promptTokenCount": 25168,
+    "candidatesTokenCount": 787,
+    "totalTokenCount": 27012,
+    "promptTokensDetails": [
+      {
+        "modality": "TEXT",
+        "tokenCount": 25168
+      }
+    ],
+    "thoughtsTokenCount": 1057,
+    "serviceTier": "standard",
+    "latency_sec": 7.99,
+    "model": "gemini-2.5-flash",
+    "anthology_id": "2024.emnlp-main.210"
+  },
+  {
+    "promptTokenCount": 25847,
+    "candidatesTokenCount": 1215,
+    "totalTokenCount": 30035,
+    "promptTokensDetails": [
+      {
+        "modality": "TEXT",
+        "tokenCount": 25847
+      }
+    ],
+    "thoughtsTokenCount": 2973,
+    "serviceTier": "standard",
+    "latency_sec": 16.06,
+    "model": "gemini-2.5-flash",
+    "anthology_id": "2024.findings-emnlp.693"
+  },
+  {
+    "promptTokenCount": 39393,
+    "candidatesTokenCount": 954,
+    "totalTokenCount": 44062,
+    "promptTokensDetails": [
+      {
+        "modality": "TEXT",
+        "tokenCount": 39393
+      }
+    ],
+    "thoughtsTokenCount": 3715,
+    "serviceTier": "standard",
+    "latency_sec": 18.74,
+    "model": "gemini-2.5-flash",
+    "anthology_id": "2025.emnlp-main.1517"
+  },
+  {
+    "promptTokenCount": 30867,
+    "candidatesTokenCount": 1241,
+    "totalTokenCount": 34652,
+    "promptTokensDetails": [
+      {
+        "modality": "TEXT",
+        "tokenCount": 30867
+      }
+    ],
+    "thoughtsTokenCount": 2544,
+    "serviceTier": "standard",
+    "latency_sec": 15.22,
+    "model": "gemini-2.5-flash",
+    "anthology_id": "2025.findings-emnlp.1117"
+  },
+  {
+    "promptTokenCount": 19880,
+    "candidatesTokenCount": 1059,
+    "totalTokenCount": 25039,
+    "promptTokensDetails": [
+      {
+        "modality": "TEXT",
+        "tokenCount": 19880
+      }
+    ],
+    "thoughtsTokenCount": 4100,
+    "serviceTier": "standard",
+    "latency_sec": 20.75,
+    "model": "gemini-2.5-flash",
+    "anthology_id": "2026.emnlp-main.357"
+  },
+  {
+    "promptTokenCount": 21739,
+    "candidatesTokenCount": 847,
+    "totalTokenCount": 24812,
+    "promptTokensDetails": [
+      {
+        "modality": "TEXT",
+        "tokenCount": 21739
+      }
+    ],
+    "thoughtsTokenCount": 2226,
+    "serviceTier": "standard",
+    "latency_sec": 13.76,
+    "model": "gemini-2.5-flash",
+    "anthology_id": "2026.findings-emnlp.2419"
+  }
+]

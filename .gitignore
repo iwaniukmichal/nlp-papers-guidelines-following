@@ -21,3 +21,10 @@
 
 *.DS_STORE*
 priv
+.idea/
+.env
+*.env
+__pycache__/
+poc/data/pdfs/*.pdf
+poc/data/xml/*.xml
+poc/data/parsed/*.json

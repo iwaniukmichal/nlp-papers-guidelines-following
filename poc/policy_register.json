@@ -1,0 +1,143 @@
+{
+  "dataset_name": "EMNLP 2020-2026 Historical Policy Register",
+  "status": "READY (Pilot Freeze v1.0)",
+  "redistribution_policy": "Metadata, URLs, SHA-256 checksums, effective dates, and short statutory quotations (<50 words per rule) are released under CC0 1.0; full HTML/PDF snapshots retain source-specific copyright (ACL / conference organising committees) and are archived locally for audit verification only.",
+  "total_editions": 7,
+  "total_documents": 14,
+  "policies": [
+    {
+      "policy_id": "POL-2020-EMNLP-CFP",
+      "edition": "EMNLP 2020",
+      "year": 2020,
+      "document_title": "EMNLP 2020 Call for Papers & Reproducibility Checklist",
+      "source_url": "https://2020.emnlp.org/call-for-papers",
+      "tracks_covered": ["Main", "Findings"],
+      "stage": "Submission & Camera-ready",
+      "source_terms": "ACL Website Terms / Copyright Association for Computational Linguistics",
+      "rules": {
+        "limitations_section": "not_mandated",
+        "specific_limitation": "not_mandated",
+        "ethical_risks": "recommended_or_reviewer_flagged",
+        "computational_budget": "checklist_answer_required_content_optional",
+        "asset_licensing": "optional",
+        "ai_assistance": "not_applicable_pre_policy"
+      },
+      "notes": "First year of the ACL/EMNLP Reproducibility Checklist (Dodge et al., 2019; Magnusson et al., 2023). Answering the checklist at submission was required, but reporting every item (e.g., compute budget) inside the paper text remained optional if answered 'No'."
+    },
+    {
+      "policy_id": "POL-2021-EMNLP-CFP",
+      "edition": "EMNLP 2021",
+      "year": 2021,
+      "document_title": "EMNLP 2021 Call for Papers & Responsible NLP Checklist",
+      "source_url": "https://2021.emnlp.org/call-for-papers",
+      "tracks_covered": ["Main", "Findings"],
+      "stage": "Submission & Camera-ready",
+      "source_terms": "ACL Website Terms / Copyright Association for Computational Linguistics",
+      "rules": {
+        "limitations_section": "not_mandated",
+        "specific_limitation": "not_mandated",
+        "ethical_risks": "conditional_mandate_for_ethical_issues",
+        "computational_budget": "checklist_answer_required_content_optional",
+        "asset_licensing": "checklist_answer_required_content_optional",
+        "ai_assistance": "not_applicable_pre_policy"
+      },
+      "notes": "Incorporates ethics review and responsible data/reproducibility checklist items (Rogers et al., 2021); dedicated Limitations section not yet mandatory."
+    },
+    {
+      "policy_id": "POL-2022-EMNLP-CFP",
+      "edition": "EMNLP 2022",
+      "year": 2022,
+      "document_title": "EMNLP 2022 Call for Main Conference Papers",
+      "source_url": "https://2022.emnlp.org/calls/main_conference_papers/",
+      "tracks_covered": ["Main", "Findings"],
+      "stage": "Submission & Camera-ready",
+      "source_terms": "ACL Website Terms / Copyright Association for Computational Linguistics",
+      "rules": {
+        "limitations_section": "mandatory_all_papers",
+        "specific_limitation": "mandatory_all_papers",
+        "ethical_risks": "conditional_mandate_sensitive_data_or_tasks",
+        "computational_budget": "checklist_C1_justified_no_permitted",
+        "asset_licensing": "checklist_B2_justified_no_permitted",
+        "ai_assistance": "not_applicable_pre_policy"
+      },
+      "notes": "Explicit transition point: EMNLP 2022 introduces a mandatory 'Limitations' section for all papers (does not count toward page limit) and requires explicit discussion of ethical considerations where relevant."
+    },
+    {
+      "policy_id": "POL-2023-EMNLP-CFP",
+      "edition": "EMNLP 2023",
+      "year": 2023,
+      "document_title": "EMNLP 2023 Call for Papers & ACL 2023 AI Writing Assistance Policy",
+      "source_url": "https://2023.emnlp.org/calls/main_conference_papers/",
+      "tracks_covered": ["Main", "Findings"],
+      "stage": "Submission & Camera-ready",
+      "source_terms": "ACL Website Terms / Copyright Association for Computational Linguistics",
+      "rules": {
+        "limitations_section": "mandatory_all_papers",
+        "specific_limitation": "mandatory_all_papers",
+        "ethical_risks": "conditional_mandate_sensitive_data_or_tasks",
+        "computational_budget": "checklist_C1_justified_no_permitted",
+        "asset_licensing": "checklist_B2_justified_no_permitted",
+        "ai_assistance": "descriptive_disclosure_when_used"
+      },
+      "notes": "First EMNLP edition following ChatGPT's release (Nov 2022) and the January 2023 ACL Policy on AI Writing Assistance (Boyd-Graber et al., 2023)."
+    },
+    {
+      "policy_id": "POL-2024-EMNLP-CFP",
+      "edition": "EMNLP 2024",
+      "year": 2024,
+      "document_title": "EMNLP 2024 Call for Main Conference Papers & ARR Responsible NLP Checklist",
+      "source_url": "https://2024.emnlp.org/calls/main_conference_papers/",
+      "tracks_covered": ["Main", "Findings"],
+      "stage": "Submission & Camera-ready",
+      "source_terms": "ACL Website Terms / Copyright Association for Computational Linguistics",
+      "rules": {
+        "limitations_section": "mandatory_all_papers",
+        "specific_limitation": "mandatory_all_papers",
+        "ethical_risks": "conditional_mandate_sensitive_data_or_tasks",
+        "computational_budget": "checklist_C1_justified_no_permitted",
+        "asset_licensing": "checklist_B2_justified_no_permitted",
+        "ai_assistance": "descriptive_disclosure_when_used"
+      },
+      "notes": "Continues mandatory Limitations section and ARR Responsible NLP Checklist (items B2 and C1)."
+    },
+    {
+      "policy_id": "POL-2025-EMNLP-CFP",
+      "edition": "EMNLP 2025",
+      "year": 2025,
+      "document_title": "EMNLP 2025 Call for Main Conference Papers & ARR Public Checklist Appendices Announcement",
+      "source_url": "https://2025.emnlp.org/calls/main_conference_papers/",
+      "tracks_covered": ["Main", "Findings"],
+      "stage": "Submission & Camera-ready",
+      "source_terms": "ACL Website Terms / Copyright Association for Computational Linguistics",
+      "rules": {
+        "limitations_section": "mandatory_all_papers",
+        "specific_limitation": "mandatory_all_papers",
+        "ethical_risks": "conditional_mandate_sensitive_data_or_tasks",
+        "computational_budget": "checklist_C1_justified_no_permitted",
+        "asset_licensing": "checklist_B2_justified_no_permitted",
+        "ai_assistance": "descriptive_disclosure_when_used"
+      },
+      "notes": "From June 2025 (ARR announcement), Responsible NLP Checklists are appended to camera-ready PDFs. To preserve longitudinal comparability across 2020-2026, our primary audit excludes appended checklists and evaluates only main text and ordinary appendices."
+    },
+    {
+      "policy_id": "POL-2026-EMNLP-CFP",
+      "edition": "EMNLP 2026",
+      "year": 2026,
+      "document_title": "EMNLP 2026 Call for Main Conference Papers",
+      "source_url": "https://2026.emnlp.org/calls/main_conference_papers/",
+      "tracks_covered": ["Main", "Findings"],
+      "stage": "Submission & Camera-ready",
+      "source_terms": "ACL Website Terms / Copyright Association for Computational Linguistics",
+      "rules": {
+        "limitations_section": "mandatory_all_papers",
+        "specific_limitation": "mandatory_all_papers",
+        "ethical_risks": "conditional_mandate_sensitive_data_or_tasks",
+        "computational_budget": "checklist_C1_justified_no_permitted",
+        "asset_licensing": "checklist_B2_justified_no_permitted",
+        "ai_assistance": "descriptive_disclosure_when_used"
+      },
+      "notes": "Maintains mandatory Limitations section, ARR checklist requirements, and AI assistance policy."
+    }
+  ]
+}
+

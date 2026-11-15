@@ -1,0 +1,134 @@
+{
+  "rubric_version": "1.0.0-poc",
+  "description": "Versioned 6-item deductive coding rubric for EMNLP 2020-2026 papers. Separates policy applicability, practice applicability, 4-state evidence status (distinguishing not_applicable, not_reported, explicitly_reported_inadequate, and adequately_reported), and derived compliance.",
+  "evidence_status_definitions": {
+    "not_applicable": "The reporting item does not apply to the paper's methodology (e.g., purely theoretical/survey paper with no compute experiments for C1, or no external datasets/models/code reused for B2).",
+    "not_reported": "The reporting item applies to the paper, but no section, statement, or mention of the target information appears anywhere in the main text or ordinary appendices.",
+    "explicitly_reported_inadequate": "The paper explicitly mentions the topic or includes a relevant heading, but the content fails substantive rubric requirements (e.g., generic boilerplate 'Our work has limitations', future-work wishes only, hardware name without training duration/GPU-hours, or claiming 'no ethical issues' on sensitive personal/demographic data).",
+    "adequately_reported": "The paper provides concrete, qualifying evidence in the main text or ordinary appendices satisfying all substantive requirements of the item."
+  },
+  "derived_compliance_rules": {
+    "Compliant": "policy_applies == true AND practice_applies == true AND evidence_status == 'adequately_reported'",
+    "Non-compliant": "policy_applies == true AND practice_applies == true AND evidence_status IN ['not_reported', 'explicitly_reported_inadequate']",
+    "Not applicable": "policy_applies == false OR practice_applies == false (Note: practice presence is still tracked via evidence_status for longitudinal adoption series!)",
+    "Uncertain": "practice_applies == 'uncertain' OR extraction/parsing failure prevents verification"
+  },
+  "items": [
+    {
+      "item_id": "I1_limitations_section",
+      "name": "Limitations section (Structural)",
+      "checklist_code": "ARR Mandatory Section (EMNLP 2022+)",
+      "policy_mandate_years": [2022, 2023, 2024, 2025, 2026],
+      "practice_applicability_rule": "Applies to ALL research papers (always true).",
+      "criteria": {
+        "adequately_reported": "Contains a dedicated standalone section or clearly marked subsection/paragraph titled 'Limitations' (or 'Limitations and Future Work' / 'Ethics and Limitations') located in the main paper or before References.",
+        "explicitly_reported_inadequate": "Discusses limitations only embedded inside Conclusion/Discussion without any explicit 'Limitations' heading, OR places the 'Limitations' section only inside an external appendix when required in the main paper.",
+        "not_reported": "No 'Limitations' heading and no identifiable limitations section.",
+        "not_applicable": "Never (applies to all eligible papers)."
+      },
+      "positive_examples": [
+        "Section 6: Limitations (page 8, before References)."
+      ],
+      "negative_examples": [
+        "A final paragraph inside '5. Conclusion' starting with 'One limitation of our study is...' without a heading (coded as explicitly_reported_inadequate for structural section presence)."
+      ]
+    },
+    {
+      "item_id": "I2_specific_limitation",
+      "name": "Specific limitation (Substantive)",
+      "checklist_code": "ARR Limitations Content (EMNLP 2022+)",
+      "policy_mandate_years": [2022, 2023, 2024, 2025, 2026],
+      "practice_applicability_rule": "Applies to ALL research papers (always true).",
+      "criteria": {
+        "adequately_reported": "States at least one concrete methodological assumption, scope restriction (e.g., language/domain/compute boundary), or empirical failure mode AND its consequence for validity, performance, or generalisation.",
+        "explicitly_reported_inadequate": "Contains only generic boilerplate disclaimers ('Our method has some limitations'), purely future-work statements ('In the future we plan to test more languages'), or disguised strengths ('Our model requires only a single GPU').",
+        "not_reported": "No discussion of limitations anywhere in the paper or ordinary appendices.",
+        "not_applicable": "Never (applies to all eligible papers)."
+      },
+      "positive_examples": [
+        "The model assumes accurate transcripts; automatic speech recognition errors in noisy environments may substantially reduce downstream classification accuracy."
+      ],
+      "negative_examples": [
+        "Our method has limitations that we will address in future work.",
+        "We will test other languages in future work."
+      ]
+    },
+    {
+      "item_id": "I3_ethical_risks",
+      "name": "Ethical risks and broader impact",
+      "checklist_code": "ARR Responsible NLP Section A / EMNLP 2022+ Ethics",
+      "policy_mandate_years": [2021, 2022, 2023, 2024, 2025, 2026],
+      "practice_applicability_rule": "Conditional: true if the paper collects human/crowdsourced data, processes personal/demographic/clinical/social-media text, or develops models with plausible dual-use, bias, misinformation, or safety risks; false for purely formal/mathematical/syntactic studies without sensitive data or societal risk.",
+      "criteria": {
+        "adequately_reported": "Identifies at least one concrete ethical issue, societal risk, dual-use concern, bias, or human-subject protection measure (e.g., anonymisation, IRB, annotator pay) relevant to the work and discusses its implications or mitigation.",
+        "explicitly_reported_inadequate": "Includes an 'Ethics Statement' or 'Broader Impact' heading that contains only a boilerplate denial ('This work has no ethical issues' or 'We use public data so there are no ethical concerns') despite handling sensitive/human/LLM generation tasks.",
+        "not_reported": "No Ethics Statement section and no discussion of ethical concerns anywhere in the paper despite relevant ethical/data risks.",
+        "not_applicable": "Paper has no human subjects, sensitive data, or plausible dual-use/societal harm risks, and either omits ethics or states non-applicability."
+      },
+      "positive_examples": [
+        "Because our dataset is scraped from Reddit discussions on mental health, we remove all usernames and paraphrase quotes to prevent re-identification, though residual demographic bias Toward English-speaking users remains."
+      ],
+      "negative_examples": [
+        "Ethics Statement: Our work uses publicly available benchmark datasets and therefore raises no ethical concerns."
+      ]
+    },
+    {
+      "item_id": "I4_computational_budget",
+      "name": "Computational budget (Checklist C1)",
+      "checklist_code": "ARR Checklist C1 (Computational Experiments)",
+      "policy_mandate_years": [],
+      "practice_applicability_rule": "Conditional: true if the paper runs computational experiments (training, fine-tuning, or large-scale model inference/evaluation); false for purely theoretical or non-computational survey papers.",
+      "criteria": {
+        "adequately_reported": "Reports total or per-run computational budget with explicit time/energy units (e.g., GPU-hours, CPU-hours, training wall-clock time + hardware count such as '4 hours on 2x NVIDIA A100 GPUs', FLOPs, or kWh/CO2 estimates).",
+        "explicitly_reported_inadequate": "Mentions hardware type only (e.g., 'We trained our models on NVIDIA V100 GPUs') or software framework without any training duration, GPU-hours, or compute budget.",
+        "not_reported": "Runs computational experiments but mentions neither compute hardware nor training time/budget.",
+        "not_applicable": "Paper performs no computational experiments."
+      },
+      "positive_examples": [
+        "Fine-tuning LLaMA-7B took approximately 6.5 hours on 4 NVIDIA A100 (80GB) GPUs (26 GPU-hours per run)."
+      ],
+      "negative_examples": [
+        "All experiments were conducted using PyTorch on NVIDIA A100 GPUs."
+      ]
+    },
+    {
+      "item_id": "I5_asset_licensing",
+      "name": "Asset licensing (Checklist B2)",
+      "checklist_code": "ARR Checklist B2 (Use of Existing Scientific Artifacts)",
+      "policy_mandate_years": [],
+      "practice_applicability_rule": "Conditional: true if the paper uses, adapts, or releases any dataset, pretrained model, or code repository; false only if no external or new artifacts are used.",
+      "criteria": {
+        "adequately_reported": "Explicitly names the licence or terms of use (e.g., 'CC BY 4.0', 'MIT License', 'Apache-2.0', 'LDC User Agreement') for reused or released datasets, models, or code, OR explicitly states that the upstream licence is unspecified/unknown after checking.",
+        "explicitly_reported_inadequate": "Cites datasets/models or provides a GitHub/HuggingFace URL, or says 'publicly available datasets', without naming any licence or terms of use in the paper or appendices.",
+        "not_reported": "Uses datasets/models/code without any mention of availability, terms, or licensing.",
+        "not_applicable": "Paper uses no datasets, pretrained models, or code artifacts."
+      },
+      "positive_examples": [
+        "We evaluate on SQuAD 2.0 (distributed under CC BY-SA 4.0) and release our code under the MIT License."
+      ],
+      "negative_examples": [
+        "All datasets used in this study are publicly available for research purposes."
+      ]
+    },
+    {
+      "item_id": "I6_ai_assistance",
+      "name": "AI writing/coding assistance disclosure",
+      "checklist_code": "ACL 2023 Policy on AI Writing Assistance",
+      "policy_mandate_years": [],
+      "practice_applicability_rule": "Descriptive indicator across all papers (true use is unobserved when undisclosed; missing disclosure is NOT coded as non-compliance).",
+      "criteria": {
+        "adequately_reported": "Explicitly discloses the AI tool used (e.g., ChatGPT, GitHub Copilot, Grammarly, Claude) AND the scope of assistance (e.g., grammar editing, code autocompletion) in the text or Acknowledgments.",
+        "explicitly_reported_inadequate": "Mentions using 'an AI tool' or 'LLM assistance' for writing/coding without specifying either the tool or the scope/accountability.",
+        "not_reported": "No mention of AI writing or coding assistance (note: represents absence of disclosure, not non-compliance).",
+        "not_applicable": "Used only if explicitly pre-2023 and evaluating post-2023 policy window, though tracked descriptively across all years."
+      },
+      "positive_examples": [
+        "We used ChatGPT (GPT-4) solely for grammar correction and polishing of author-written drafts."
+      ],
+      "negative_examples": [
+        "AI tools were used during the preparation of this manuscript."
+      ]
+    }
+  ]
+}
+
