@@ -7,7 +7,9 @@ REPO_ROOT = Path(__file__).resolve().parents[2]
 
 CONFIG_DIR = REPO_ROOT / "config"
 RUBRIC_DIR = CONFIG_DIR / "rubric"
-POLICY_REGISTER_PATH = CONFIG_DIR / "policy_register" / "register.json"
+POLICY_REGISTER_DIR = CONFIG_DIR / "policy_register"
+POLICY_REGISTER_PATH = POLICY_REGISTER_DIR / "register.json"  # v1 (PoC draft)
+POLICY_DOCUMENTS_PATH = POLICY_REGISTER_DIR / "documents.csv"
 PROMPTS_DIR = CONFIG_DIR / "prompts"
 
 DATA_DIR = REPO_ROOT / "data"
@@ -18,6 +20,7 @@ PARSED_DIR = DATA_DIR / "interim" / "parsed"  # gitignored
 MANIFEST_DIR = DATA_DIR / "manifest"
 MANIFEST_PATH = MANIFEST_DIR / "eligible_manifest.csv"
 COUNTS_PATH = MANIFEST_DIR / "counts_by_year_track.json"
+POLICY_SOURCES_DIR = DATA_DIR / "policy_sources"  # committed snapshots of policy documents
 SAMPLES_DIR = DATA_DIR / "samples"
 ANNOTATIONS_DIR = DATA_DIR / "annotations"
 

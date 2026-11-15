@@ -1,0 +1,126 @@
+ACL Code of Ethics | ACL Member Portal
+
+Skip to main content
+
+Menu
+
+- About the ACL
+- What is Computational Linguistics?
+
+- Join the ACL
+
+- Officers
+
+- ACL LTA Winners
+
+- ACL Fellows
+
+- Best Paper Awards
+
+- ACL Diversity Statistics
+
+- News
+- ACL News
+
+- ACL Awards
+
+- Members in the News
+
+- News Archives
+
+- Journals
+- Computational Linguistics
+
+- Transactions of the ACL
+
+- Conferences
+- Conference News
+
+- ACL
+
+- EACL
+
+- EMNLP
+
+- NAACL
+
+- IJCNLP
+
+- Events
+- Browse ACL Events
+
+- Browse Non-ACL Events
+
+- Add Event to the Website
+
+- Browse Participants List
+
+- ACL Fellows
+- Make Fellows Nominations and Recommendations
+
+- SIGs
+
+- Anthology
+- Anthology
+
+- Network
+
+- Wiki
+
+- Education
+- NLP/CL Courses
+
+- NACLO
+
+- HSCLC
+
+- Policies
+- ACL Policies
+
+- Archives
+- Mirror of Past Conferences
+
+ACL Home
+
+Association for
+
+Computational Linguistics
+
+ACL Code of Ethics
+
+March 13, 2020 | BY webmaster
+
+ACL adopts the ACM Code of Ethics ( https://www.acm.org/code-of-ethics ) in the version adopted June 22nd, 2018, by the ACM Council. In its application to ACL, it is to be read in the contextually appropriate interpretation, e.g., "ACM member" is to be read as "ACL member". Sec 4.2 should be read as follows:
+
+"4.2 Treat violations of the Code as inconsistent with membership in the ACL. Each ACL member should encourage and support adherence by all members of the CL/NLP community regardless of ACL membership. ACL members who recognize a breach of the Code should consider reporting the violation to the ACL, which may result in remedial action."
+
+Hinrich Schütze, ACL President
+
+User login
+
+Username *
+
+Password *
+
+- Create New Member Account
+
+- Request New Password
+
+- Request Username Reminder
+
+lala
+
+To prevent automated spam submissions leave this field empty.
+
+Latest Events
+
+First Workshop on Language Technology for Equality, Diversity, Inclusion
+
+The First Workshop on Speech and Language Technologies for Dravidian Languages at EACL 2021
+
+1st International Workshop on Scientific Knowledge Representation, Discovery, and Assessment
+
+The Association for Computational Linguistics
+209 N. Eighth Street, Stroudsburg PA 18360, USA
+
+acl@org.aclweb (unscramble me), (tel) +1-570-476-8006, (fax) +1-570-476-0860

@@ -1,0 +1,4 @@
+# Policy snapshots must stay byte-identical (their SHA-256 is recorded in documents.csv):
+# no line-ending conversion or diffs for the original files.
+data/policy_sources/**/*.html binary
+data/policy_sources/**/*.pdf binary

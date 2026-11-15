@@ -1,0 +1,538 @@
+ACL Policy on Publication Ethics - Admin Wiki
+
+ACL Policy on Publication Ethics
+
+From Admin Wiki
+
+Jump to navigation
+Jump to search
+
+Approved by the ACL Exec, 2024-06-15, 2025-04-25, 2025-07-19, 2025-09-26; Authored by Cahill, A., Derczynski, L., & Jaidka, K.
+
+It is important for members of the ACL community, especially authors and reviewers, to understand ACL’s position on publication ethics, which is described in this document.
+
+ACL is a scientific and professional society for people working on computational problems involving human language. Since the ACL deals with reviewing and publishing research, it is important to be clear about what publication practices are considered ethical.
+
+This policy draws upon multiple authoritative sources, including IEEE Policy , ACM Policy , ACL 2023 Policy , COLM 2024 Policy , the Committee on Publishing Ethics (COPE) guidelines , USENIX , and others. #References are provided below.
+
+The goal of this policy is to provide a fair publication process and to prevent harm, as defined by ACM/COPE . Subsections below provide #Definitions , outline the #Scope , define the #Policies , and provide references for other issues.
+
+See also Process for ACL Publication Ethics Review .
+
+Contents
+
+- 1 Members
+
+- 1.1 Co-chairs
+
+- 1.2 General members
+
+- 2 Definitions
+
+- 3 Scope
+
+- 4 Policies
+
+- 4.1 Conflicts of Interest
+
+- 4.2 Authorship
+
+- 4.2.1 Scientific Integrity
+
+- 4.2.2 Guidelines for Generative Assistance in Authorship
+
+- 4.2.3 Prior Publication
+
+- 4.2.4 Consent of Content Holders
+
+- 4.2.5 Plagiarism
+
+- 4.2.6 Text Re-use
+
+- 4.2.7 Electronic Posting
+
+- 4.2.8 Dual Submission
+
+- 4.2.9 Author Conduct
+
+- 4.2.10 Co-ordinated disclosure
+
+- 4.3 Content of Submitted, Published, or Presented Material
+
+- 4.3.1 Content Guidelines
+
+- 4.3.2 Societal Impact
+
+- 4.3.3 Harmful Content
+
+- 4.4 Reviewing
+
+- 4.4.1 Reviewer Conduct
+
+- 4.4.2 Guidelines for Generative Assistance in Peer Review
+
+- 4.5 Convening
+
+- 5 Other Issues
+
+- 6 Handling of Articles from Authors in Embargoed Countries
+
+- 7 References
+
+Members
+
+Co-chairs
+
+- Aoife Cahill (2024 - )
+
+- Leon Derczynski (2024 - )
+
+- Kokil Jaidka (2024 - )
+
+General members
+
+Svetlana Churina (2024 - )
+
+Definitions
+
+ACL Venues
+
+The superset of ACL submission, reviewing, and publication venues, including: ACL Rolling Review; ACL main conference; ACL Regional body main conferences; ACL SIG conferences; workshops at these conferences; TACL; CL.
+
+ARR commitment
+
+The six-month period during which an ARR-reviewed paper can be committed to a venue without re-review.
+
+Author
+
+Any person named in the “Authors” field of a submission.
+
+Camera-ready
+
+The last date by which the accepted paper, formatted to venue specifications, must be delivered for publication. “Post camera-ready” refers to any time after this date.
+
+Conflict of interest
+
+The ACL definitions of a conflict of interest are detailed at the ACL Conference Conflict-of-interest policy page.
+
+Convener
+
+A person who arranges meetings of groups or committees, for example conferences or workshops.
+
+Corresponding author
+
+A designated author responsible for all communication with the venue. A manuscript must keep at least one and no more than two corresponding authors at all times.
+
+Editor
+
+Editor refers to people involved in making a decision about a submitted manuscript’s rejection, acceptance, scheduling, or format, but not writing direct (i.e. non-meta) reviews. Editors include action editors, area chairs, senior area chairs, programme chairs, and similar roles.
+
+Final decision
+
+The programme-chair or journal-editor outcome on a manuscript (accept, reject, assign to venue). For papers routed through ACL Rolling Review (ARR), the final-decision date is the venue-assignment decision.
+
+First author
+
+The author listed first on the manuscript; typically the primary contributor. Under this policy, the first author position cannot change after the submission deadline.
+
+Generative tools
+
+Here we include text and image generation tools, commonly referred to as generative AI tools, trained on massive datasets to generate multimedia outputs. These can be privacy-preserving or non-privacy preserving. An example of a non-privacy preserving tool is a text or image generation tool, that stores input data for a commercial purpose, and is typically hosted on remote servers managed by third-party companies. An example of a privacy-preserving tool is a text and image generation tool that doesn’t store input data.
+
+Reviewer
+
+Reviewer refers to people writing peer reviews of manuscripts submitted for consideration to ACL venues.
+
+Review process (for conference submissions)
+
+The interval beginning at the submission deadline and ending at the final decision (acceptance or rejection by the venue).
+
+Resubmission
+
+A manuscript submitted again as a new entry after (a) rejection, (b) a “major revisions” outcome, or (c) expiry of an ARR commitment window. Resubmissions reset authorship alteration rules as described in Section 4.
+
+Scientific integrity
+
+Adherence to scientific ethical principles and professional standards essential for the responsible practice of research.
+
+Submission deadline
+
+The official cut-off time at which a manuscript (or re-submission) must be uploaded to be considered for review.
+
+Top-level domain (TLD)
+
+The final segment of an Internet domain name (e.g., .edu, .ac.uk, .org). Email-address changes that keep the same TLD (3-g) are treated differently from those that introduce a new TLD (3-h).
+
+Works
+
+Author-created material submitted for review or created for presentation. This includes manuscripts as well as appendices, presentations, code, datasets, videos, images, etc.
+
+Scope
+
+This policy applies to works submitted to, reviewed by, published at, and presented at ACL venues. This includes all default versions of works in the ACL Anthology at any time (usually the most recent revision).
+
+Policies
+
+Conflicts of Interest
+
+Authors, reviewers, and editors must confidentially disclose all relevant affiliations and relationships that may constitute conflicts of interest at the time of submission. Review and publication must follow the ACL Conference Conflict-of-interest policy .
+
+Authorship
+
+Following existing ACL policies and the Vancouver Convention on Authorship , authorship of ACL papers must be based on the following 4 criteria:
+
+a. Substantial contributions to the conception or design of the work; or the acquisition, analysis, or interpretation of data for the work; AND
+
+b. Drafting the work or revising it critically for important intellectual content; AND
+
+c. Final approval of the version to be published; AND
+
+d. Agreement to be accountable for all aspects of the work in ensuring that questions related to the accuracy or integrity of any part of the work are appropriately investigated and resolved.
+
+All those designated as authors should meet all four criteria for authorship, and all who meet the four criteria should be identified as authors. Those who meet some but not all of the four criteria should be acknowledged. These authorship criteria are intended to reserve authorship status for those who deserve credit and can take responsibility for the work. The criteria are not intended for use as a means to disqualify colleagues from authorship who otherwise meet authorship criteria by denying them the opportunity to meet criteria (b) or (c). Persons who have contributed to one point must be invited to participate in the others; for example, someone who comes up with or conducts experiments must be invited to draft/revise and approve the final document.
+
+Authors must follow the Authorship Changes Policy for ACL Conference Papers as well as venue-specific policies.
+
+Scientific Integrity
+
+ACL defines scientific integrity as adherence to scientific ethical principles and professional standards essential for the responsible practice of research (see #Definitions ). This includes the accuracy, honesty, and objectivity of the research process and the reporting of results. Breaches of scientific integrity, therefore, encompass actions that compromise these. Such breaches are considered serious and are not permitted under the policy.
+
+Breaches of scientific integrity manifest in a variety of forms, including, but not limited to:
+
+a. Fabrication: Making up data or results and recording or reporting them in research publications is a serious breach of scientific integrity. Fabrication can manifest in various forms, including creating nonexistent data points, observations, or experiments and presenting them as factual in research findings; constructing data sets that do not represent the population studied, thereby skewing research outcomes; using software to generate favorable data; or documenting and discussing experiments or studies that were never performed.
+
+b. Falsification and manipulation: Manipulating research materials, equipment, processes, or changing or omitting data or results such that the research is not accurately represented in the research record. This includes modifying experimental outcomes (e.g., to align with a desired hypothesis or conclusion); adjusting or altering images, figures, text, or other data in a misleading way (e.g., that misrepresents the results of the study or the significance of the findings); falsifying or altering research notes, laboratory logs, or computer files to support fabricated findings; using software to inappropriately synthesize favorable results without basis in experimentation or collected data.
+
+d. Selective reporting: This includes omitting data or results in such a way that the research, intentionally or not, becomes misleading; applying inappropriate or misleading statistical techniques to enhance the significance or importance of research findings; or drastically changing the reporting of the conditions or results of experiments conducted.
+
+e. Neglecting ethical standards: Engaging in research involving human subjects without adherence to established ethical standards and applicable legal or institutional requirements. This includes failing to obtain informed consent from participants, debriefing participants in studies involving partial disclosure, not ensuring the confidentiality and privacy of the data collected where required, and conducting human subjects research without oversight by an Institutional Review Board (IRB) or an equivalent ethics review body where available. In cases where no such body exists, authors must justify the ethical safeguards implemented, following internationally recognized ethical standards such as the Belmont Report , the Declaration of Helsinki , or the OECD AI Principles .
+
+g. Flawed evaluation practices: Continuing to use evaluation measures that are known to be flawed, unverifiable, or misleading without acknowledging their limitations undermines the reliability of research findings and can be considered a breach of scientific integrity. While we recognize that community norms and common practices influence evaluation choices, authors are responsible for critically assessing the evaluation methods they adopt. Where known flaws exist, authors should disclose them and, when possible, take steps to improve evaluation practices.
+
+h. Failing to support replicability and correction: Scientific integrity includes the responsibility to support post-publication verification, replication, and correction. Papers that claim that data or code will be available must make those artifacts available by time of publication. Authors must respond in good faith to reasonable concerns about flaws identified after publication. This includes engaging with replication attempts, addressing valid errors when found, and correcting or retracting work where significant flaws are discovered. The failure to make reasonable, good faith efforts to acknowledge, correct, or transparently address in good faith major issues in published work undermines scientific integrity.
+
+i. Neglecting licensing guidelines: Authors are encouraged to clarify usage terms when releasing research artifacts. Failing to adhere to the licensing agreements of data, tools, or materials used in research. This includes not respecting licenses that stipulate how data or tools can be reused, modified, cited, and shared.
+
+j. Inappropriate use of AI: Authors and reviewers are encouraged to use generative tools responsibly and transparently, in accordance with the policies on #Generative Assistance in Authorship and #Generative Assistance in Peer Review . Their use in ways that are inconsistent with the ACL Policy on Publication Ethics is prohibited.
+
+As outlined in the Process for ACL Publication Ethics Review , breaches of the ACL Policy may lead to actions consistent with ACL’s post-publication ethics procedures, such as public correction statements or, in rare cases, retraction.
+
+Guidelines for Generative Assistance in Authorship
+
+Authors are responsible for all content submitted. Authors should familiarize themselves with the ACL policy on #Plagiarism detailed below, based on the COPE guidelines .
+
+Generative AI tools and technologies may not be listed as authors of a submission, and any use of generative AI tools and technologies to create content should instead be fully disclosed in the Acknowledgements section - for instance, “Section 3 was written with inputs from ChatGPT.”
+
+If and when required to use LLMs to support their research, authors are encouraged to use ethically-sourced and open models. Guidelines for appropriate use of generative assistance follow.
+
+a. Assistance purely with the language of the paper. This covers models used for paraphrasing or polishing the author’s original content, rather than for suggesting new content—similar to tools like grammar checkers, spell checkers, dictionaries, and synonym tools. The use of tools that only assist with proofreading, like grammar or spell checkers, does not need to be disclosed.
+
+b. Short-form input assistance. This covers predictive keyboards or tools that offer suggestions during typing, that might be powered by generative language models. The use of such tools does not need to be disclosed.
+
+c. Literature search. This covers search assistants, e.g., to identify relevant literature. The usual requirements for citation accuracy and thoroughness of literature reviews apply.
+
+d. Low-novelty text. This covers the automatic generation of text about pre-existing ideas. Authors should specify where such automatically generated text was used, and convince the reviewers that the generation was checked to be accurate and is accompanied by relevant and appropriate citations. If the generation copies text from existing work, the publication ethics policy applies to that text. Authors need (for example) to acknowledge all relevant citations: both the source of the text used and the source of the idea(s).
+
+e. New ideas. This covers when generative model output reads to the authors as new research ideas that would deserve co-authorship or acknowledgment from a human colleague (e.g., topics to discuss, framing of the problem), which the authors then develop themselves. As with all new ideas, the authors should conduct a literature search to determine relevant prior work and cite to ensure proper credit. The authors should disclose if models were used in this manner.
+
+f. New ideas + new text: ACL does not consider a generative model to be an entity that can fulfill the requirements of co-authorship.
+
+Prior Publication
+
+These guidelines recognize that it is common in technical publishing for material to be presented at various stages of its evolution. As one example, this can take the form of publishing early ideas in a workshop, more developed work in a conference, and fully developed contributions as journal articles. This publication process is an important means of scientific communication. The editor of a publication may choose to re-publish existing material for a variety of reasons, including promoting wider distribution and serving readers by aggregating special material in a single publication. This practice continues to be recognized and accepted by the ACL. At the same time, the ACL requires that this evolutionary process be fully referenced by the author.
+
+Authors submitting articles must disclose whether there are prior publications, e.g., conference articles, by the authors that are similar, whether published or submitted. They must also include information that very clearly states how the new submission differs from the previously published work(s). Such articles should be cited in the submitted article in a manner that maintains author anonymity.
+
+Note the point below on #Text Re-use , where there is a limit to how much material may be re-used across papers.
+
+Consent of Content Holders
+
+The ACL assumes that material submitted to its publications is properly available for general dissemination for the readership of those publications. It is the responsibility of the authors, not the ACL, to determine if disclosure of their material requires the prior consent of other parties. If prior consent is required, authors must obtain permission before article submission.
+
+Plagiarism
+
+ACL defines plagiarism as using someone else’s prior ideas, processes, results, or words without explicitly acknowledging the original author and source. Plagiarism in any form is unacceptable and considered a serious breach of professional conduct.
+
+Plagiarism manifests itself in a variety of forms, including:
+
+a. verbatim copying, near-verbatim copying (including translation), or intentionally paraphrasing substantive portions of prior or under-review work without proper attribution
+
+b. using automated tools that rephrase existing work as one's own text without proper attribution to the original author(s)
+
+c. self-plagiarism, or copying elements of another prior or under-review work, such as equations, tables, charts, illustrations, presentations, or photographs that are not common knowledge, or copying or intentionally paraphrasing sentences without proper or complete source citation, even if the works have a common author
+
+d. verbatim copying of portions of another's work with incorrect source citation
+
+Whether a prior article has been formally published is not a factor in determining plagiarism—work not formally published may still be plagiarized. This includes content provided online in preprints, tutorials, manuals, and essays, as well as offline content in any form. The representation of any other person's material as one's own work is plagiarism.
+
+Text Re-use
+
+An article submitted for publication to ACL should be original work submitted to a single ACL venue.
+
+Recycling of material in a new document happens when the material in the new document is identical, or substantially equivalent in both form and content, to that of the source. At times, it may be necessary for authors to recycle portions of their own previously published work or to include another author’s material.
+
+When an author recycles text, charts, photographs, or other graphics from his/her own previously published material, the author shall:
+
+a. Adhere to all copyright policies, clearly indicate all recycled material and provide a full reference to the original publication of the material (anonymized if necessary).
+
+b. If the previously published or submitted material is used as a basis for a new submission, clearly indicate how the new submission differs from the previously published work(s).
+
+Due to the volume of submissions received with duplicated content, the overlap threshold is now 10%. This means that there must be no more than a 10% (e.g., in terms of number of tokens) overlap between: (a) the text that a manuscript, at any point in the publication process, presents as original; (b) any other works submitted to ACL venues or published anywhere; and (c) concurrent submissions under review at ACL venues. Author’s own pre-prints are excluded from this limitation. See also the [ policy on double submission ].
+
+Electronic Posting
+
+Authors submitting manuscripts for review should be aware of the ACL Anonymity Policy . The policy applies to authors who post part or all of a submitted manuscript on a Web site.
+
+Dual Submission
+
+Authors should follow the [ policy on double submission ]. Articles submitted for consideration should not have been published previously and should not be concurrently under consideration for publication elsewhere. Authors must disclose all prior publication(s) and current submissions when submitting an article. At the venue chairs’ discretion, some forms of submission articles may be exempted from this rule.
+
+Author Conduct
+
+Authors should follow the ACL anti-harassment policy during the review and publication process. Attempts by authors to deanonymize reviewers, editors, or any works, or otherwise compromise the fairness of the review process are not permitted. Authors are expected to follow the ACL Anonymity Policy for Authors.
+
+Violating the expected behavior standards of a venue, which requires that interactions be free from harassment, bullying, discrimination, and retaliation across all forms of presentation as outlined in the Scope, may be referred to the ACL Professional Conduct Committee .
+
+Co-ordinated disclosure
+
+Works describing new ways of making models or other technologies behave in an unintended and potentially harmful way, e.g. papers documenting security vulnerabilities or weaknesses, may only be published at ACL venues as part of co-ordinated disclosure. This requires that authors attempt to contact the technology developers first, and give a reasonable but limited amount of time for them to address the problem and notify their communities of the problem, before openly publishing the weakness anywhere. An example of the process is given in this CISA blog post .
+
+For these kinds of works within the scope of the policy:
+
+a. Only cases where a specific and previously unpublished adversarial technique is used to elicit a harm are covered by this policy. For example, if some model behaves badly "out of the box", without using an adversarial technique, then there's no vulnerability.
+
+b. At least 30 days be given between notifying the technology developers and the first publication (e.g. on preprint server or the ACL Anthology). This period may run concurrently with the review process.
+
+c. The disclosure process must be documented.
+
+d. Documentation of disclosure should include at a minimum who was contacted, by which means they were contacted, on which dates, and on which dates there was a response (if any).
+
+e. Works detailing new (i.e. previously not public) security weaknesses/failures without any documentation of co-ordinated disclosure may be in breach of policy.
+
+f. This policy may not be applied to works published before this policy comes into effect (April 25 th 2025), even if a work in scope appears to have contravened it.
+
+Content of Submitted, Published, or Presented Material
+
+This subsection applies to all ACL works and serves as guidelines for relevant decisions made by the person responsible for the publication, as well as the PEC for issues raised post-publication.
+
+Content Guidelines
+
+The discussion of technical matters will continue to be the primary function of forums provided by ACL. The following guidelines clarify the characteristics of allowable content in ACL works:
+
+a. Technical, i.e. empirical and theoretical, articles accepted for inclusion in ACL publications shall comprise scientific content.
+
+b. Any nontechnical content or material in an article accepted for publication is expected to be essential to the technical content of that article (for example, content that extends, supports, or provides relevant background). Author(s) shall state how the nontechnical content or material contributes to the article.
+
+c. Acknowledgments of data consent and approval by stakeholders or subjects is allowed. Acknowledgments of contributors who are not authors of the article, such as in a footnote or an acknowledgments section, shall be limited to statements relative to funding sources, as well as technical or material contributions from individuals or organizations. Acknowledgments for technical or material contributions (such as developing instrumentation for collecting data) should briefly explain how such contributions are essential to the article's technical content.
+
+d. If any political opinions are expressed which also follow this policy and this set of guidelines, an Acknowledgments section must clarify that these are the opinions of the author(s), and no endorsement by ACL, its officials, or its members is implied. For political opinions beyond these guidelines, see (b) above.
+
+e. Submissions should follow the ACL formatting guidelines .
+
+f. Automatically generated text follows the policy given in the Authorship section above.
+
+g. For content about broader impact, see below.
+
+h. Scientific Integrity: Content that constitutes a breach of scientific integrity is unacceptable. For a description of what constitutes breaches in scientific integrity and how they are handled, refer to the #Scientific Integrity section under #Authorship .
+
+Examples of unallowable content include changes to the content of the paper during review or after acceptance that deviate from the original scope of the paper or constitute unacceptable content; conjecture, unless relevant to the presented research supported by citations; illegal content; potentially harmful content, unless preceded by a warning and gap (see policy on #Harmful content ); toxic content/inflammatory writing/hate speech unless it is a necessary scientific example (see policy on #Harmful content ); hidden or obscured prompts or cues inserted into the paper to manipulate its automated processing (see #Guidelines for Generative Assistance in Authorship ).
+
+Societal Impact
+
+Technical developments can profoundly impact society. Social conditions also shape the course of technical developments. It is, therefore, often appropriate to include discussions of the social aspects related to the technical content in the author’s work. It is also possible that the discussion of pertinent interrelated social, economic, and technical aspects leads to political conclusions on the author's part. Like other aspects of the paper’s content, discussions of social impact will be subject to peer review and may be referred to the ACL PEC process.
+
+Discussions of societal impact should adhere to the following guidelines:
+
+a. Relevance: The subject matter should be relevant to the ACL fields of interest and their impact on society. If the relevance or appropriateness is not self-evident from the author’s presentation, it should be made clear by adding a suitable introductory statement.
+
+b. Implications: Implications, including political conclusions, where discussed, should be contextualized to their relevance to a specific research problem.
+
+c. Limitations: Limitations and perspectives counter to the authors’ conclusions must be made clear if they are not self-evident. Inferences from the findings, whether technical (e.g., LLM’s beam search algorithms as a source of bias) or sociopolitical (e.g., race or culture as a source of differences in findings) should be appropriately hedged.
+
+Harmful Content
+
+The term ‘harmful’ refers to content that creates a risk of harm (e.g., hate speech as a cause of harm). In practice, whether a form of content presents a hazard depends on a range of intersecting factors, including the nature of the content; the immediate and broader context; the historical setting; where it comes from; who it is directed at; and who encounters it. Small differences in these factors can make a substantial difference, and not all content that presents a risk of harm will actually inflict harm in every case. We adopt the position that harmful content both constitutes harm in-of-itself (i.e., it is harmful because of its intrinsic features) and causes harm because of the substantial risk of detrimental effects on individuals, groups, or societies ( Kirk et al. 2022 ).
+
+Examples of harmful material include hate speech, misinformation, depictions of crime and violence, and accounts of trauma.
+
+Harmful material may only be included in works if:
+
+a. It is legal to do so in the ACL jurisdiction (USA)
+
+b. It is relevant to the technical content of the submission
+
+c. Doing so enhances the exposition of the content
+
+d. Inclusion follows guidelines for handling and presenting harmful content (see Kirk et al., 2022 )
+
+e. It is preceded by a warning and consumers are provided sufficient opportunities to avoid the harmful content.
+
+Reviewing
+
+Peer review assists editors in making publication decisions and, through the communications with the author, may also assist the author in improving the paper. Peer review is an essential component of formal scholarly communication. Reviewers are expected to follow the ACL Guidelines for Reviewers .
+
+Reviewer Conduct
+
+a. Reviewers and editors are responsible for maintaining the security and privacy of any paper and additional materials submitted as part of the review process.
+
+b. Any reviewer or editor who identifies a conflict of interest should notify the venue chairs and decline to review the manuscript.
+
+c. c. Any selected reviewer who is unqualified to review the research reported in a manuscript or knows that its prompt review will be impossible should notify the editor and decline to participate in the review process.
+
+d. Collusion, where the reviewer or editor might deliberately collude with authors or others to manipulate the review process unfairly, is forbidden.
+
+e. Reviewers and editors must not attempt to manipulate citations, which includes asking authors to cite the reviewer’s or editor’s work (or that of their associates) unnecessarily.
+
+f. Reviewers and editors must never disclose or reveal any personal information about authors with the intention to target them (doxxing), which could undermine the anonymity and integrity of the review process.
+
+g. Reviewers and editors must not participate in any form of bullying, harassment, discrimination, or retaliation towards authors or other participants in the review process.
+
+h. Reviewers and editors must not use confidential information from a reviewed manuscript for personal advantage before the information is publicly available, including leveraging research ideas or data.
+
+i. Secondary reviewers, if any, should first be officially added to the reviewing system before they are invited to provide a review, and they must similarly treat the manuscript as a confidential document. Please follow ACL's policy on secondary reviewers at | ARR Reviewer Guidelines
+
+j. Reviewers and editors must report observed discrepancies or signs of potential author, reviewer, or editor misconduct, such as plagiarism, data fabrication, data misuse, or duplicate submission to the designated channels.
+
+k. Reviewers should follow the ACL anti-harassment policy during the review and publication process.
+
+l. Reviewers and editors must complete their work to a high professional standard. Examples of low-quality work include but are not limited to: conflicting information, such as negative review comments with a high positive score; unsubstantiated score values; high confidence on insubstantial commentary.
+
+m. Reviewers and editors must follow venue-specific reviewing guidelines.
+
+Guidelines for Generative Assistance in Peer Review
+
+The reviewer has to read the paper fully and write the content and argument of the review by themselves, subject to the secondary reviewer policy described above, and it is not permitted to use generative assistance to create the first draft. This requirement extends to the meta-review, and the reviewer has to write any meaningful argumentation in the meta-review by themselves.
+
+Generative assistance should be used responsibly. For instance, it is reasonable to use writing assistance to paraphrase the review, e.g. to help reviewers who are not native speakers of English. It is also reasonable to use tools that help to check proofs.
+
+Neither reviewers nor editors should upload a submitted manuscript or any part of it into a non-privacy preserving generative tool as this may violate the authors’ confidentiality and intellectual property rights and, where the paper contains personally identifiable information, may breach data privacy rights.
+
+This confidentiality requirement extends to the peer review report, as it may contain confidential information about the manuscript and/or the authors. For this reason, neither reviewers nor editors may upload their peer review report into a non-privacy preserving generative tool, even if it is just for the purpose of improving language and readability.
+
+Convening
+
+Reasonable efforts should be made by editors and, in conference and workshop settings, conveners, to provide discussion that includes differing viewpoints as adjudicated feasible. This must also be taken into consideration by the ACL venue program chairs.
+
+Other Issues
+
+Issues not covered by existing policy but going against policy goals can be referred to the PEC. The PEC may add policy and take measures regarding issues not covered by policy but going against policy goals. Referred cases may be sent onwards to the appropriate committee.
+
+Handling of Articles from Authors in Embargoed Countries
+
+As a US-based organization, policy on handling works from authors in embargoed countries follows the United States Office of Foreign Assets Control ( OFAC ).
+
+References
+
+ACL 2023 Policy on AI Writing Assistance
+
+2023 Policy on AI Writing Assistance (FAQ) ]
+
+ACL Anti-Harassment Policy
+
+ACL Author Guidelines
+
+ACL formatting guidelines
+
+ACL Policies for Review and Citation
+
+ACL Reviewer Guidelines
+
+Double Submission Policy for Conferences
+
+ACM Policy on Authorship
+
+ACM Policy on Plagiarism, Misrepresentation, and Falsification
+
+Authorship Changes Policy for ACL Conference Papers
+
+Committee on Publishing Ethics (COPE)
+
+Elsevier: Duties of Reviewers
+
+Journal of Brand Management: Editorial Guidelines and Expectations of Authors
+
+IEEE Submission and Peer Review Policies
+
+IEEE Publication Services and Products Board Operations Manual
+
+COLM Code of Conduct
+
+ICMJE: Defining the Role of Authors and Contributors
+
+COPE: Ethical Guidelines for Peer Reviewers
+
+Kirk, H. R., Birhane, A., Vidgen, B., & Derczynski, L. (2022). Handling and Presenting Harmful Text in NLP Research. In Findings of EMNLP. Association for Computational Linguistics.
+
+National Commission for the Protection of Human Subjects of Biomedical and Behavioral Research. (1979). The Belmont Report: Ethical principles and guidelines for the protection of human subjects of research. U.S. Department of Health, Education, and Welfare.
+
+Organisation for Economic Co-operation and Development. (2019). OECD principles on artificial intelligence. OECD.
+
+USENIX: Instructions for Presenters
+
+World Medical Association. (2013). World Medical Association Declaration of Helsinki: Ethical principles for medical research involving human subjects. JAMA, 310(20), 2191–2194.
+
+Canonical PDF of the policy: ACL_Publication_Ethics_Policy.pdf
+
+Retrieved from " https://www.aclweb.org/adminwiki/index.php?title=ACL_Policy_on_Publication_Ethics&oldid=76854 "
+
+Navigation menu
+
+Personal tools
+
+- Log in
+
+- Request account
+
+- Dark mode
+
+Namespaces
+
+- Page
+
+- Discussion
+
+English
+
+Views
+
+- Read
+
+- View source
+
+- View history
+
+More
+
+Search
+
+Navigation
+
+- Main page
+
+- Recent changes
+
+- Random page
+
+- Help about MediaWiki
+
+Tools
+
+- What links here
+
+- Related changes
+
+- Special pages
+
+- Printable version
+
+- Permanent link
+
+- Page information
+
+- This page was last edited on 18 March 2026, at 13:55.
+
+- Privacy policy
+
+- About Admin Wiki
+
+- Disclaimers

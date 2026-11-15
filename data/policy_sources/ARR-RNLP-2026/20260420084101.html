@@ -1,0 +1,710 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+  <title>ACL Rolling Review – A peer review platform for the Association for Computational Linguistics</title>
+  <!-- Begin Jekyll SEO tag v2.8.0 -->
+<meta name="generator" content="Jekyll v3.10.0" />
+<meta property="og:title" content="ACL Rolling Review" />
+<meta property="og:locale" content="en_US" />
+<meta name="description" content="A peer review platform for the Association for Computational Linguistics" />
+<meta property="og:description" content="A peer review platform for the Association for Computational Linguistics" />
+<link rel="canonical" href="http://aclrollingreview.org/responsibleNLPresearch/" />
+<meta property="og:url" content="http://aclrollingreview.org/responsibleNLPresearch/" />
+<meta property="og:site_name" content="ACL Rolling Review" />
+<meta property="og:type" content="website" />
+<meta name="twitter:card" content="summary" />
+<meta property="twitter:title" content="ACL Rolling Review" />
+<script type="application/ld+json">
+{"@context":"https://schema.org","@type":"WebPage","description":"A peer review platform for the Association for Computational Linguistics","headline":"ACL Rolling Review","url":"http://aclrollingreview.org/responsibleNLPresearch/"}</script>
+<!-- End Jekyll SEO tag -->
+
+  <meta content='text/html; charset=utf-8' http-equiv='Content-Type'>
+<meta http-equiv='X-UA-Compatible' content='IE=edge'>
+<meta name='viewport' content='width=device-width, initial-scale=1.0, maximum-scale=1.0'>
+
+
+<meta property="og:description" content="A peer review platform for the Association for Computational Linguistics" />
+
+<meta name="author" content="ACL Rolling Review" />
+
+
+
+
+<meta property="og:image" content="http://aclrollingreview.org/images/ARR.png"/>
+<meta property="twitter:image" content="http://aclrollingreview.org/images/ARR.png"/>
+
+
+
+  <link rel="stylesheet" type="text/css" href="/assets/style.css" />
+  <link rel="alternate" type="application/rss+xml" title="ACL Rolling Review - A peer review platform for the Association for Computational Linguistics"
+    href="/feed.xml" />
+  <link rel="canonical" href="http://aclrollingreview.org/responsibleNLPresearch/" />
+
+  <meta name="theme-color" content="#000000">
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/ARR.png">
+  
+      <script async src="https://www.googletagmanager.com/gtag/js?id=G-NQ9259P3ZZ"></script>
+      <script>
+        window.dataLayer = window.dataLayer || [];
+        function gtag(){dataLayer.push(arguments);}
+        gtag('js', new Date());
+        gtag('config', 'G-NQ9259P3ZZ');
+      </script>
+
+
+  <style>
+.svg-icon.bluesky {
+  background-image: url('/images/icons/bluesky.svg.png');
+  background-size: 32px 32px;
+  background-position: center;
+  background-repeat: no-repeat;
+  opacity: 0.9;
+  transition: opacity 0.3s ease;
+  border-radius: 50%;
+}
+
+.svg-icon.bluesky:hover {
+  opacity: 1;
+}
+</style> 
+
+<script>
+  function searchSite() {
+    var query = document.getElementById('search-input').value;
+    if (query) {
+      window.location.href = "/search?q=" + encodeURIComponent(query);
+    }
+  }
+
+  function handleKeyPress(event) {
+    if (event.key === "Enter") {
+      searchSite();
+    }
+  }
+</script>
+
+
+
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+      margin: 0;
+    }
+
+    .menu-icon {
+      position: fixed;
+      top: 10px;
+      right: 100px;
+      width: 30px;
+      height: 30px;
+      cursor: pointer;
+      z-index: 1000;
+    }
+
+    .line {
+      background-color: #000;
+      height: 3px;
+      margin: 5px 0;
+      width: 100%;
+      transition: all 0.3s ease;
+    }
+
+    .sidebar {
+      position: fixed;
+      top: 0;
+      right: -480px;
+      width: 400px;
+      height: 100%;
+      background-color: #333;
+      padding: 20px;
+      box-shadow: -2px 0 5px rgba(0, 0, 0, 0.5);
+      transition: right 0.3s ease;
+      z-index: 999;
+      display: flex;
+      flex-direction: column;
+    }
+
+    .sidebar a {
+      display: block;
+      color: #fff;
+      padding: 15px;
+      text-decoration: none;
+      width: 100%;
+    }
+
+    /* Completely disable hover effects for dropdown buttons */
+    .sidebar .dropdown .dropbtn {
+      transition: none !important;
+    }
+    
+    .sidebar .dropdown .dropbtn:hover,
+    .sidebar .dropdown a.dropbtn:hover,
+    nav .dropdown .dropbtn:hover,
+    #sidebar .dropdown .dropbtn:hover {
+      background-color: transparent !important;
+      background: transparent !important;
+      color: #fff !important;
+      box-shadow: none !important;
+    }
+
+    /* Keep hover effect only for regular links and dropdown content links */
+    .sidebar > a:not(.dropbtn):hover,
+    .dropdown-content a:hover {
+      background-color: #575757;
+    }
+
+    .sidebar.active {
+      right: 0;
+    }
+
+    .dropdown {
+      position: relative;
+    }
+
+    .dropdown-content {
+      display: none;
+      position: relative;
+      background-color: #333;
+      padding: 10px;
+      box-shadow: 0 2px 5px rgba(0, 0, 0, 0.5);
+      max-height: 0;
+      overflow: hidden;
+      transition: max-height 0.3s ease;
+    }
+
+    .dropdown.active .dropdown-content {
+      display: block;
+      max-height: 500px;
+    }
+
+    .dropbtn {
+      position: relative;
+      cursor: pointer;
+    }
+
+    .dropbtn::after {
+      content: "▼";
+      position: absolute;
+      right: 15px;
+      top: 50%;
+      transform: translateY(-50%);
+      font-size: 12px;
+      transition: transform 0.3s ease;
+    }
+
+    .dropdown.active .dropbtn::after {
+      transform: translateY(-50%) rotate(180deg);
+    }
+
+    .dropdown-content a {
+      color: #fff;
+      padding: 10px;
+      text-decoration: none;
+      display: block;
+      width: 100%;
+      box-sizing: border-box;
+    }
+
+    .dropdown-content a:hover {
+      background-color: #575757;
+    }
+
+    .menu-icon.active .line:nth-child(1) {
+      transform: rotate(45deg) translate(5px, 5px);
+    }
+
+    .menu-icon.active .line:nth-child(2) {
+      opacity: 0;
+    }
+
+    .menu-icon.active .line:nth-child(3) {
+      transform: rotate(-45deg) translate(5px, -5px);
+    }
+    @media (max-width: 768px) {
+      .menu-icon {
+        position: fixed;
+        top: 10px;
+        right: 20px;
+        width: 40px;
+        height: 40px;
+      }
+
+      .sidebar {
+        width: 80%;
+        right: -100%;
+      }
+
+      .sidebar.active {
+        right: 0;
+      }
+
+      .dropdown-content {
+        position: static;
+        max-height: 0;
+        transition: max-height 0.3s ease;
+      }
+
+      .dropdown.active .dropdown-content {
+        max-height: 500px;
+      }
+
+      .wrapper-container {
+        padding-top: 60px;
+      }
+    }
+
+.search-container {
+  background: transparent;
+  display: flex;
+  align-items: center;
+  gap: 5px;
+  width: 100%;
+  max-width: 400px;
+}
+
+.search-container input {
+  flex: 1;
+  padding: 12px;
+  border-radius: 8px;
+  border: 1px solid rgba(255, 255, 255, 0.5);
+  background-color: white;
+  color: black;
+  outline: none;
+  height: 44px;
+  font-size: 16px;
+}
+
+.search-container button {
+  padding: 12px;
+  border-radius: 8px;
+  border: none;
+  background-color: #575757;
+  color: white;
+  cursor: pointer;
+  height: 44px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  min-width: 44px;
+}
+
+@media (max-width: 768px) {
+  .search-container {
+    width: 100%;
+    max-width: 90%;
+  }
+
+  .search-container input {
+    font-size: 14px;
+    padding: 10px;
+    height: 40px;
+  }
+
+  .search-container button {
+    height: 40px;
+    padding: 10px;
+    min-width: 40px;
+  }
+}
+
+  </style>
+</head>
+
+<body>
+  <div class="menu-icon" id="menu-icon">
+    <div class="line"></div>
+    <div class="line"></div>
+    <div class="line"></div>
+  </div>
+
+  <nav id="sidebar" class="sidebar">
+    <a href="/">Home</a>
+    <div class="dropdown">
+      <a href="javascript:void(0)" class="dropbtn">CFP & Submissions</a>
+      <div class="dropdown-content">
+        <a href="/reviewing">How ARR works</a>
+        <a href="/cfp">Call for papers</a>
+        <a href="/dates">Dates & Venues</a>
+        <a href="/organizers">Information for Organizers</a>
+      </div>
+    </div>
+    <div class="dropdown">
+      <a href="javascript:void(0)" class="dropbtn">Guidelines</a>
+      <div class="dropdown-content">
+        <a href="/authors">Authors guidelines</a>
+        <a href="/authorchecklist">Common submission problems</a>
+        <a href="/areas">Guide for ARR track selection</a>
+        <a href="/responsibleNLPresearch">Responsible NLP checklist</a>
+        <a href="/reviewerguidelines">Reviewer guidelines</a>
+        <a href="/acguidelines">Area Chair guidelines</a>
+        <a href="/sacguidelines">Senior Area Chair guidelines</a>
+      </div>
+    </div>
+    <div class="dropdown">
+      <a href="javascript:void(0)" class="dropbtn">People</a>
+      <div class="dropdown-content">
+        <a href="/organization">ARR team</a>
+        <a href="/saes">SACs</a>
+        <a href="/aes">ACs</a>
+        <a href="/reviewers">Reviewers</a>
+        <a href="/others">Others</a>
+      </div>
+    </div>
+    <div class="dropdown">
+      <a href="javascript:void(0)" class="dropbtn">ARR reporting</a>
+      <div class="dropdown-content">
+        <a href="http://stats.aclrollingreview.org/">Statistics</a>
+        <a href="/changelog">ARR changelog</a>
+        <a href="/future">Future plans</a>
+      </div>
+    </div>
+    <a href="https://openreview.net/group?id=aclweb.org/ACL/ARR">ARR@OpenReview</a>
+
+    <div class="search-container">
+      <input type="text" id="search-input" placeholder="Search..." onkeypress="handleKeyPress(event)">
+      <button onclick="searchSite()">🔍</button>
+    </div>
+
+  </nav>
+
+  <div class="wrapper-container">
+    <div class="wrapper-masthead">
+      <div class="container">
+        <header class="masthead clearfix">
+          <a href="/" class="site-avatar"><img src="/images/ARR.png"
+              alt="" /></a>
+
+          <div class="site-info">
+            <h1 class="site-name"><a href="/">ACL Rolling Review</a></h1>
+            <p class="site-description">A peer review platform for the Association for Computational Linguistics</p>
+          </div>
+        </header>
+      </div>
+    </div>
+
+    <div class="wrapper-main">
+      <div id="main" role="main" class="container">
+        <article class="page">
+
+  <h1></h1>
+
+  <div class="entry">
+    
+<p>Members of the ACL are responsible for adhering to the <a href="https://www.aclweb.org/portal/content/acl-code-ethics">ACL code of ethics</a>. The ARR Responsible NLP Research checklist is designed to encourage best practices for responsible research, addressing issues of research ethics, societal impact and reproducibility. It is largely based on the <a href="https://neurips.cc/Conferences/2021/PaperInformation/PaperChecklist">NeurIPS 2021 paper checklist</a>, the reproducible data checklist from <a href="https://aclanthology.org/2021.findings-emnlp.414.pdf">Rogers, Baldwin, Leins’s EMNLP 2021 paper “Just What do You Think You’re Doing, Dave? A Checklist for Responsible Data Use in NLP”</a>, and the NLP Reproducibility Checklist built from <a href="https://aclanthology.org/D19-1224.pdf">Dodge et al. EMNLP 2019’s paper “Show Your Work: Improved Reporting of Experimental Results”</a>.</p>
+
+<p>We expect authors to show that they follow best practices in two ways:</p>
+
+<ol>
+  <li>by filling in the checklist to ensure that best practices are put in place when using, creating or providing assets,</li>
+  <li>by including a discussion in the paper about any potential positive or negative societal impacts and any limitations of the work. The guidelines below provide additional information about what should be discussed.</li>
+</ol>
+
+<p>The checklist is completed as part of the submission form. Note, prior to February 2024, it was completed as a separate PDF.</p>
+
+<p>Most questions in this checklist address the kinds of information that is often asked by reviewers (e.g. experimental details, annotation protocols, IRB approval, etc.). This allows the checklist to serve as a kind of FAQ for the reviewers, pre-empting questions that would otherwise be asked in the author response period. Reviewers are asked to use the checklist information as one of the factors in their evaluation.</p>
+
+<h2 id="guidelines-for-answering-checklist-questions">Guidelines for Answering Checklist Questions</h2>
+
+<p>For each question in the checklist:</p>
+
+<ul>
+  <li>If you answer “Yes”, indicate the section(s) where the information can be found in your paper. Note that you do not need to have a separate entitled section in the paper for each of the questions. Information about limitations for instance could be part of the conclusion. Several questions can indicate the same section (for instance, citation and license for data are likely going to appear in the same (sub)section of your paper).</li>
+  <li>If you answer “No” to the question, provide a justification for why, or the missing information.</li>
+</ul>
+
+<p><strong>Submissions that systematically fail to provide either specific relevant sections or justification to the questions relevant for their research will be desk-rejected.</strong></p>
+
+<p>The list is meant as a point of reflection for the authors. You are strongly encouraged to take a look at the checklist early on as it likely will positively influence the way you do your research and write the paper.</p>
+
+<p>The questions are framed in terms of transparency: “Did you include [information]?” While it is generally preferable that your paper clearly answers positively to the question, it is perfectly acceptable that it does not, provided a proper justification is given (e.g., “We were unable to find the license for the dataset we used”). Not answering positively to a question is not grounds for rejection. While the questions are phrased in a binary way, we acknowledge that the true answer is often more nuanced, so please just use your best judgement and write a justification to elaborate. All supporting evidence can appear either in the main paper or the supplemental material.</p>
+
+<p>We provide guidance on how to answer each of the checklist questions below.</p>
+
+<h3 id="a-for-every-submission">A. For every submission:</h3>
+<p><strong>A1. Did you describe the <em>limitations</em> of your work?</strong></p>
+
+<ul>
+  <li>Point out any strong assumptions and how robust your results are to violations of these assumptions (e.g., independence assumptions, noiseless settings, model well-specification, asymptotic approximations only held locally). Reflect on how these assumptions might be violated in practice and what the implications would be.</li>
+  <li>Reflect on the scope of your claims, e.g., if you only tested your approach on a few datasets, languages, or did a few runs. In general, empirical results often depend on implicit assumptions, which should be articulated.
+Reflect on the factors that influence the performance of your approach. For example, a speech-to-text system might not be able to be reliably used to provide closed captions for online lectures because it fails to handle technical jargon.</li>
+  <li>If you analyze model biases: which definition of bias are you using? Did you state the motivation and definition explicitly? See the discussion in <a href="https://aclanthology.org/2020.acl-main.485.pdf">Blodgett et al. (2020)</a>.</li>
+  <li>We understand that authors might fear that complete honesty about limitations might be used by reviewers as grounds for rejection. It is worth keeping in mind that a worse outcome might be if reviewers discover limitations that aren’t acknowledged in the paper. In general, we advise authors to use their best judgement and recognize that individual actions in favor of transparency play an important role in developing norms that preserve the integrity of the community. Reviewers will be specifically instructed to not penalize honesty concerning limitations.</li>
+</ul>
+
+<p><strong>A2. Did you discuss any potential <em>risks</em> of your work?</strong></p>
+
+<ul>
+  <li>Examples of risks include potential malicious or unintended harmful effects and uses (e.g., disinformation, generating fake profiles, surveillance), environmental impact (e.g., training huge models), fairness considerations (e.g., deployment of technologies that could further disadvantage or exclude historically disadvantaged groups), privacy considerations (e.g., a paper on model/data stealing), and security considerations (e.g., adversarial attacks). See discussion in <a href="https://aclanthology.org/2020.acl-main.261.pdf">Leins et. al. (2020)</a> as examples.</li>
+  <li>Does the research contribute to overgeneralization, bias confirmation, under or overexposure of specific languages, topics, or applications at the expense of others? See <a href="https://aclanthology.org/P16-2096.pdf">Hovy and Spruit (2016)</a> for examples.</li>
+  <li>We expect many papers to be foundational research and not tied to particular applications, let alone deployments. However, we encourage authors to discuss potential  risks if they see a path to any positive or negative applications. For example, the authors can emphasize how their systems are intended to be used, how they can safeguard their systems against misuse, or propose future research directions.</li>
+  <li>Consider different stakeholders that could be impacted by your work. Is it possible that research benefits some stakeholders while harming others? Does it pay special attention to vulnerable or marginalized communities? Does the research lead to exclusion of certain groups? See <a href="https://aclanthology.org/2021.emnlp-main.150.pdf">Dev et. al (2021)</a> for examples.</li>
+  <li>Consider dual use, i.e, possible benefits or harms that could arise when the technology is being used as intended and functioning correctly, benefits or harms that could arise when the technology is being used as intended but gives incorrect results, and benefits or harms following from (intentional or unintentional) misuse of the technology.</li>
+  <li>Consider citing previous work on relevant mitigation strategies for the potential risks of the work (e.g., gated release of models, providing defenses in addition to attacks, mechanisms for monitoring misuse, mechanisms to monitor how a system learns from feedback over time, improving the efficiency and accessibility of NLP).</li>
+</ul>
+
+<h3 id="b-did-you-use-or-create-scientific-artifacts">B. Did you use or create <em>scientific artifacts</em>?</h3>
+
+<ul>
+  <li>Scientific artifacts may include code, data, models or other artifacts.</li>
+  <li>Most NLP research uses scientific artifacts.</li>
+  <li>Many NLP papers are accompanied by new scientific artifacts.</li>
+</ul>
+
+<p><strong>B1. Did you cite the creators of artifacts you used?</strong></p>
+
+<ul>
+  <li>For composite artifacts like the <a href="https://gluebenchmark.com/">GLUE benchmark</a>, this means all creators.</li>
+  <li>Cite the original paper that produced the code package or dataset.</li>
+  <li>Remember to state which version of the asset you’re using.</li>
+  <li>If possible, include a URL.</li>
+</ul>
+
+<p><strong>B2. Did you discuss the <em>license or terms</em> for use and / or distribution of any artifacts?</strong></p>
+
+<ul>
+  <li>State the name of the license (e.g., CC-BY 4.0) for each asset.</li>
+  <li>If you scraped or collected data from a particular source (e.g., website or social media API), you should state the copyright and terms of service of that source. Please note that some sources do not allow inference of protected categories like gender, sexual orientation, health status, etc.
+    <ul>
+      <li>The data might be in public domain and licensed for research purposes.</li>
+      <li>The data might be used with consent of its creators or copyright holders.</li>
+      <li>If the data is used without consent, the paper makes the case to justify its legal basis (e.g., research performed in the public interest under GDPR).</li>
+    </ul>
+  </li>
+  <li>If you are releasing assets, you should include a license, copyright information, and terms of use in the package.</li>
+  <li>If you are repackaging an existing dataset, you should state the original license as well as the one for the derived asset (if it has changed).</li>
+  <li>If you cannot find this information online, you are encouraged to reach out to the asset’s creators.</li>
+</ul>
+
+<p><strong>B3. Did you discuss if your use of existing artifact(s) was consistent with their <em>intended use</em>, provided that it was specified? For the artifacts you create, do you specify intended use and whether that is compatible with the original access conditions (in particular, derivatives of data accessed for research purposes should not be used outside of research contexts)?</strong></p>
+
+<ul>
+  <li>Data and/or pretrained models are released under a specified license that is compatible with the conditions under which access to data was granted (in particular, derivatives of data accessed for research purposes should not be deployed in the real world as anything other than a research prototype, especially commercially)</li>
+  <li>The paper specifies the efforts to limit the potential use to circumstances in which the data/models could be used safely (such as an accompanying data/model statement).</li>
+  <li>The data is sufficiently anonymized to make identification of individuals impossible without significant effort. If this is not possible due to the research type, please state so explicitly and explain why.</li>
+  <li>The paper discusses the harms that may ensue from the limitations of the data collection methodology, especially concerning marginalized/vulnerable populations, and specifies the scope within which the data can be used safely.</li>
+</ul>
+
+<p><strong>B4. Did you discuss the steps taken to check whether the data that was collected / used contains any <em>information that names or uniquely identifies individual people</em> or <em>offensive content</em>, and the steps taken to protect / anonymize it?</strong></p>
+
+<ul>
+  <li>There are some settings where the existence of offensive content is not necessarily bad (e.g., swear words occur naturally in text), or part of the research question (i.e., hate speech). This question is just to encourage discussion of potentially undesirable properties.</li>
+  <li>Explain how you checked for offensive content and identifiers (e.g., with a script, manually on a sample, etc.).</li>
+  <li>Explain how you anonymized the data, i.e., removed identifying information like names, phone and credit card numbers, addresses, user names, etc. Examples are monodirectional hashes, replacement, or removal of data points. If anonymization is not possible due to the nature of the research (e.g., author identification), explain why.</li>
+  <li>List any further privacy protection measures you are using: separation of author metadata from text, licensing, etc.</li>
+  <li>If any personal data is used: the paper specifies the standards applied for its storage and processing, and any anonymization efforts.</li>
+  <li>If the individual speakers remain identifiable via search: the paper discusses possible harms from misuse of this data, and their mitigation.</li>
+</ul>
+
+<p><strong>B5. Did you provide documentation of the artifacts, e.g., coverage of domains, languages, and linguistic phenomena, demographic groups represented, etc.?</strong></p>
+
+<ul>
+  <li>Be sure to report the language of any language data, even if it is commonly-used benchmarks.</li>
+  <li>Describe basic information about the data that was used, such as the domain of the text, any information about the demographics of the authors, etc.</li>
+</ul>
+
+<p>Here are some documentation toolkits you may find useful:</p>
+
+<ul>
+  <li>Data statements: https://techpolicylab.uw.edu/data-statements/</li>
+  <li>Model cards (Hugging Face): https://huggingface.co/docs/hub/en/model-cards</li>
+  <li>Dataset cards (Hugging Face): https://huggingface.co/docs/hub/en/datasets-cards</li>
+  <li>Datasheets for datasets: https://dl.acm.org/doi/10.1145/3458723</li>
+</ul>
+
+<p><strong>B6. Did you report relevant statistics like the number of examples, details of train / test / dev splits, etc. for the data that you used / created?</strong></p>
+
+<p>Even for commonly-used benchmark datasets, include the number of examples in train / validation / test splits, as these provide necessary context for a reader to understand experimental results. For example, small differences in accuracy on large test sets may be significant, while on small test sets they may not be.</p>
+
+<h3 id="c-did-you-run-computational-experiments">C. Did you run <em>computational experiments</em>?</h3>
+
+<p><strong>C1. Did you report the <em>number of parameters</em> in the models used, the <em>total computational budget</em> (e.g., GPU hours), and <em>computing infrastructure</em> used?</strong></p>
+
+<ul>
+  <li>Even for commonly-used models like BERT, reporting the number of parameters is important because it provides context necessary for readers to understand experimental results. The size of a model has an impact on performance, and it shouldn’t be up to a reader to have to go look up the number of parameters in models to remind themselves of this information.</li>
+  <li>The total computational budget can be presented however is most appropriate for the paper – if most experiments were run on GPUs, then important information would likely include the total number of GPU hours, the amount of parallelism across GPUs, the size of the GPUs, etc. to allow a reader to estimate the computational requirements to reproduce, use, or build upon the work.</li>
+  <li>Note that this should include information about all experiments, not just the final runs that led to the results presented in the paper. If exact numbers are not available, an estimate is better than nothing.</li>
+</ul>
+
+<p><strong>C2. Did you discuss the experimental setup, including <em>hyperparameter search</em> and <em>best-found hyperparameter</em> values?</strong></p>
+
+<ul>
+  <li>The experimental setup should include information about exactly how experiments were set up, like how model selection was done (e.g., early stopping on validation data, the single model with the lowest loss, etc.), how data was preprocessed, etc.</li>
+  <li>Many research projects involve manually tuning hyperparameters until some “good” values are found, and then running a final experiment which is reported in the paper. Other projects involve using random search or grid search to find hyperparameters. In all cases, report the results of such experiments, even if they were stopped early or didn’t lead to your best results, as it allows a reader to know the process necessary to get to the final result and to estimate which hyperparameters were important to tune.</li>
+  <li>Be sure to include the best-found hyperparameter values (e.g., learning rate, regularization, etc.) as these are critically important for others to build on your work.</li>
+  <li>The experimental setup should likely be described in the main body of the paper, as that is important for reviewers to understand the results, but large tables of hyperparameters or the results of hyperparameter searches could be presented in the main paper or appendix.</li>
+  <li>Report which dataset was used to determine the hyperparameters. Unless under special circumstances, hyperparameters should not be tuned on the evaluation (held-out) dataset.</li>
+</ul>
+
+<p><strong>C3. Did you report <em>descriptive statistics</em> about your results (e.g., error bars around results, summary statistics from sets of experiments), and is it transparent whether you are reporting the max, mean, etc. or just a single run?</strong></p>
+
+<ul>
+  <li>Error bars can be computed by running experiments with different random seeds, Clopper–Pearson confidence intervals can be placed around the results (e.g., accuracy), or expected validation performance can be useful tools here.</li>
+  <li>In all cases, when a result is reported, it should be clear if it is from a single run, the max across N random seeds, the average, etc.</li>
+  <li>When reporting a result on a test set, be sure to report a result of the same model on the validation set (if available) so others reproducing your work don’t need to evaluate on the test set to confirm a reproduction.</li>
+</ul>
+
+<p><strong>C4. If you used existing packages (e.g., for preprocessing, for normalization, or for evaluation, such as NLTK, Spacy, ROUGE, etc.), did you report the implementation, model, and parameter settings used?</strong></p>
+
+<ul>
+  <li>The version number or reference to specific implementation is important because different implementations of the same metric can lead to slightly different results (e.g., ROUGE).</li>
+  <li>The paper cites the original work for the model or software package. If no paper exists, a URL to the website or repository is included.</li>
+  <li>If you modified an existing library, explain what changes you made.</li>
+</ul>
+
+<h3 id="d-did-you-use-human-annotators-eg-crowdworkers-or-research-with-human-participants">D. Did you use <em>human annotators</em> (e.g., crowdworkers) or <em>research with human participants</em>?</h3>
+
+<p><strong>D1. Did you report the full text of instructions given to participants, including e.g., screenshots, disclaimers of any risks to participants or annotators, etc.?</strong></p>
+
+<ul>
+  <li>Examples of risks include a crowdsourcing experiment which might show offensive content or collect personal identifying information (PII). Ideally, the participants should be warned.</li>
+  <li>Including this information in the supplemental material is fine, but if the main contribution of your paper involves human subjects, then we strongly encourage you to include as much detail as possible in the main paper.</li>
+</ul>
+
+<p><strong>D2. Did you report information about how you recruited (e.g., crowdsourcing platform, students) and paid participants, and discuss if such <em>payment is adequate</em> given the participants’ demographic (e.g., country of residence)?</strong></p>
+
+<ul>
+  <li>Be explicit about how you recruited your participants. For instance, mention the specific crowdsourcing platform used. If participants are students, give information about the population (e.g., graduate/undergraduate, from a specific field), and how they were compensated (e.g., for course credit or through payment).</li>
+  <li>In case of payment, provide the amount paid for each task (including any bonuses), and discuss how you determined the amount of time a task would take.
+Include discussion on how the wage was determined and how you determined that this was a fair wage.</li>
+</ul>
+
+<p><strong>D3. Did you discuss whether and how <em>consent</em> was obtained from people whose data you’re using/curating?</strong></p>
+
+<p>For example, if you collected data via crowdsourcing, did your instructions to crowdworkers explain how the data would be used?</p>
+
+<p><strong>D4. Was the data collection protocol <em>approved (or determined exempt)</em> by an ethics review board?</strong></p>
+
+<ul>
+  <li>Depending on the country in which research is conducted, ethics review (e.g., from an IRB board in the US context) may be required for any human subjects research. If an ethics review board was involved, you should clearly state it in the paper. However, stating that you obtained approval from an ethics review board does not imply that the societal impact of the work does not need to be discussed.</li>
+  <li>For initial submissions, do not include any information that would break anonymity, such as the institution conducting the review.</li>
+</ul>
+
+<p><strong>D5. Did you report the basic demographic and geographic characteristics of the <em>annotator</em> population that is the source of the data?</strong></p>
+
+<ul>
+  <li>State if your data include any protected information (e.g., sexual orientation or political views under GDPR).</li>
+  <li>The paper is accompanied by a data statement (see <a href="https://aclanthology.org/Q18-1041.pdf">Bender and Friedman, 2018</a>) describing the basic demographic and geographic characteristics of the author population that is the source of the data, and the population that it is intended to represent.</li>
+  <li>If applicable: the paper describes whether any characteristics of the human subjects were self-reported (preferably) or inferred (in what way), justifying the methodology and choice of description categories.</li>
+</ul>
+
+<h3 id="e-did-you-use-ai-assistants-eg-chatgpt-copilot-in-your-research-coding-or-writing">E. Did you use AI assistants (e.g., ChatGPT, Copilot) in your research, coding, or writing?</h3>
+
+<p><strong>E1. If you used any AI assistants, did you include information about your use?</strong></p>
+
+<p><strong>E1. Elaboration For Yes Or No. For yes, provide a section number, or include your elaboration directly in the checklist response. For no, justify why not.</strong></p>
+
+<p>Any use of AI assistants has to conform with the <a href="">ACL publications ethics policy</a>, especially with respect to authorship criteria.</p>
+
+<p><strong>E1. Section Or Justification</strong></p>
+
+<h2 id="arr-review-form">ARR review form</h2>
+<p>The <a href="https://aclrollingreview.org/reviewform">ARR review form</a> takes aspects of ethics and reproducibility into account.</p>
+
+<h2 id="credits">Credits</h2>
+
+<p>This checklist was developed by Marine Carpuat, Marie-Catherine de Marneffe and Ivan Vladimir Meza Ruiz, the NAACL 2022 program chairs, working with Jesse Dodge, and with the ARR editors in chief. Additional input was provided by the other NAACL 2022 reproducibility chairs, Margot Mieskes, Anna Rogers, and the ACL Ethics Committee. Updated for ARR October 2024 cycle by Anna Rogers, based on discussions with ARR board.</p>
+
+  </div>
+</article>
+
+      </div>
+    </div>
+
+    <div class="wrapper-footer">
+      <div class="container">
+        <footer class="footer">
+          
+<a href="mailto:support@aclrollingreview.org"><i class="svg-icon email"></i></a>
+
+
+
+
+
+
+<a href="/feed.xml"><i class="svg-icon rss"></i></a>
+<a href="https://www.twitter.com/ReviewAcl"><i class="svg-icon twitter"></i></a>
+<a href="https://bsky.app/profile/aclrollingreview.bsky.social"><i class="svg-icon bluesky"></i></a>
+
+
+
+
+
+        </footer>
+      </div>
+    </div>
+  </div>
+
+  
+
+
+<script>
+  document.addEventListener('DOMContentLoaded', function () {
+    var menuIcon = document.getElementById('menu-icon');
+    var sidebar = document.getElementById('sidebar');
+    var searchInput = document.getElementById("search-input");
+    var dropdowns = document.querySelectorAll('.dropdown');
+    var dropdownButtons = document.querySelectorAll('.dropbtn');
+
+    // Toggle main menu on click
+    menuIcon.addEventListener('click', function (e) {
+      e.stopPropagation();
+      sidebar.classList.toggle('active');
+      menuIcon.classList.toggle('active');
+    });
+
+    // Handle dropdown menu clicks
+    dropdownButtons.forEach(function(button) {
+      button.addEventListener('click', function(e) {
+        e.preventDefault();
+        e.stopPropagation();
+        
+        var dropdown = this.closest('.dropdown');
+        var isActive = dropdown.classList.contains('active');
+        
+        // Close all other dropdowns first
+        dropdowns.forEach(function(dd) {
+          dd.classList.remove('active');
+        });
+        
+        // Toggle current dropdown (open if it was closed, keep closed if it was open)
+        if (!isActive) {
+          dropdown.classList.add('active');
+        }
+      });
+    });
+
+    // Close menu and dropdowns when clicking outside
+    document.addEventListener('click', function(e) {
+      // Don't close if clicking inside the sidebar
+      if (!sidebar.contains(e.target) && !menuIcon.contains(e.target)) {
+        // Close main menu
+        sidebar.classList.remove('active');
+        menuIcon.classList.remove('active');
+        
+        // Close all dropdowns
+        dropdowns.forEach(function(dropdown) {
+          dropdown.classList.remove('active');
+        });
+      }
+    });
+
+    // Prevent closing when clicking inside sidebar (except on dropdown buttons)
+    sidebar.addEventListener('click', function(e) {
+      e.stopPropagation();
+    });
+
+    // Search functionality
+    if (searchInput) {
+      searchInput.addEventListener("keypress", function(event) {
+        if (event.key === "Enter") {
+          searchSite();
+        }
+      });
+    }
+  });
+</script>
+
+</body>
+
+</html>

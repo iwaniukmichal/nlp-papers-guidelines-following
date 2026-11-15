@@ -9,9 +9,11 @@ See [docs/proposal/project-proposal.tex](docs/proposal/project-proposal.tex).
 
 ```
 docs/                proposal, course rules, LaTeX templates
+  methodology/       rubric-development.md (how the policy register and rubric are built)
 config/              everything that is frozen and versioned
   rubric/            rubric_v<version>.json + CHANGELOG.md
-  policy_register/   register.json (dated EMNLP/ACL/ARR obligations)
+  policy_register/   documents.csv (dated policy sources), requirement_dictionary.csv,
+                     inventory.csv (requirement x year evidence); register.json (v1 PoC draft)
   prompts/           LLM prompt templates
 src/emnlp_audit/     pipeline code (installable package)
   corpus/            ACL Anthology manifest, sampling, PDF download
@@ -22,6 +24,7 @@ src/emnlp_audit/     pipeline code (installable package)
 scripts/             numbered entry points (01 ... 08)
 data/
   manifest/          eligible_manifest.csv, counts_by_year_track.json
+  policy_sources/    committed Wayback/Anthology snapshots of policy documents (+ .txt)
   samples/           frozen samples: pilot_14, later dev_70, test_140
   annotations/       human annotation sheets per sample
   raw/, interim/     PDFs, XML, parsed text (gitignored, re-creatable)
@@ -48,6 +51,8 @@ Run any script with `uv run`, e.g. `uv run python scripts/01_build_manifest.py`.
 
 | Step | Command | Output |
 |---|---|---|
+| 0 | `python scripts/00_fetch_policy_sources.py` (`--verify` offline) | `data/policy_sources/`, fills `documents.csv` |
+| 0 | `python scripts/00_validate_inventory.py` | checks `inventory.csv`, writes `inventory_by_year.csv` |
 | 1 | `python scripts/01_build_manifest.py` | `data/manifest/` |
 | 2 | `python scripts/02_draw_sample.py --split pilot_14 --seed 42` | `data/samples/pilot_14.*`, PDFs in `data/raw/pdfs/` |
 | 3 | `python scripts/03_parse.py --split pilot_14` | `data/interim/parsed/` |
