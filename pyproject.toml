@@ -1,0 +1,25 @@
+[project]
+name = "emnlp-audit"
+version = "0.1.0"
+description = "Reporting-compliance audit of EMNLP 2020-2026 papers (NLP course project, WUT)."
+readme = "README.md"
+requires-python = ">=3.10"
+dependencies = [
+    "pymupdf>=1.24",
+    "pypdf>=4.0",
+    "truststore>=0.10.5",
+]
+
+[dependency-groups]
+dev = ["pytest>=8"]
+
+[build-system]
+requires = ["uv_build>=0.9,<0.14"]
+build-backend = "uv_build"
+
+[tool.uv.build-backend]
+module-name = "emnlp_audit"
+module-root = "src"
+
+[tool.pytest.ini_options]
+testpaths = ["tests"]

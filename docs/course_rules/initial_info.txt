@@ -1,0 +1,26 @@
+Welcome to NLP 2026/27. Everything you need is here and in the attached files.
+
+**Key dates**
+- 28.10: project topic selection + 1-page proposition form
+- 4.11: Phase 1 proposal with SOTA analysis (up to 5 pages)
+- 18.11: mid-term video (10 min) and presentation: SOTA + proof of concept
+- 2.12: Phase 2: report + source code + rebuttals
+- 13.01.2027: Phase 3: presentation + final video + final report
+
+**Three conditions for every phase report.** Without them the report is not graded:
+1. a contribution table (who did what, hours),
+2. a declaration of LLM use,
+3. a submission folder named surname_surname_surname_surname or team topic (all team members; the order set at the first submission stays the same all semester).
+
+**Grading.** Core 100 points plus an optional bonus of 15. 
+To pass you need at least 30 of the 60 project points. 
+
+**Files**
+- Course rules
+- Grading criteria
+- Proposition form (due 28.10): Own topic proposal
+- LaTeX templates for the proposal, the final report and the reproducibility appendix: Overleaf template
+- 1st lecture slides (PDF, posted after each lecture): 1st lecture
+- 1st tutorial notebook (not mandatory, but recommended): notebook 1 - exc
+- Reading list with the full reference for every "Sources" line on the slides: Reading list
+- Our in-progress book: Course book

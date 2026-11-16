@@ -1,23 +1,23 @@
-# LaTeX build artifacts in proposal/ (keep sources, bibliography, styles and PDFs).
-/proposal/*.aux
-/proposal/*.bbl
-/proposal/*.bcf
-/proposal/*.blg
-/proposal/*.dvi
-/proposal/*.fdb_latexmk
-/proposal/*.fls
-/proposal/*.lof
-/proposal/*.log
-/proposal/*.lot
-/proposal/*.nav
-/proposal/*.out
-/proposal/*.run.xml
-/proposal/*.snm
-/proposal/*.synctex.gz
-/proposal/*.synctex(busy)
-/proposal/*.toc
-/proposal/*.vrb
-/proposal/*.xdv
+# LaTeX build artifacts in docs/proposal/ (keep sources, bibliography, styles and PDFs).
+/docs/proposal/*.aux
+/docs/proposal/*.bbl
+/docs/proposal/*.bcf
+/docs/proposal/*.blg
+/docs/proposal/*.dvi
+/docs/proposal/*.fdb_latexmk
+/docs/proposal/*.fls
+/docs/proposal/*.lof
+/docs/proposal/*.log
+/docs/proposal/*.lot
+/docs/proposal/*.nav
+/docs/proposal/*.out
+/docs/proposal/*.run.xml
+/docs/proposal/*.snm
+/docs/proposal/*.synctex.gz
+/docs/proposal/*.synctex(busy)
+/docs/proposal/*.toc
+/docs/proposal/*.vrb
+/docs/proposal/*.xdv
 
 *.DS_STORE*
 priv
@@ -25,6 +25,10 @@ priv
 .env
 *.env
 __pycache__/
-poc/data/pdfs/*.pdf
-poc/data/xml/*.xml
-poc/data/parsed/*.json
+*.egg-info/
+.venv/
+.pytest_cache/
+
+# Large or copyrighted pipeline artefacts (re-creatable with scripts/).
+/data/raw/
+/data/interim/

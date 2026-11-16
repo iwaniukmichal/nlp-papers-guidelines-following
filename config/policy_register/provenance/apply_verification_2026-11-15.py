@@ -1,0 +1,290 @@
+"""Provenance record: corrections applied to the LLM-drafted inventory after the self-audit in
+verification_2026-11-15.md. Applied ONCE on 2026-11-15 (run from the repository root with
+`uv run python config/policy_register/provenance/apply_verification_2026-11-15.py`).
+Do NOT re-run: it would duplicate rows and overwrite later human edits.
+
+Decisions (agreed with the team member running the session):
+ 1. 2021 'none' rows: split into direct = none and arr = unverified (ARR pilot, no ARR documents).
+ 2. 2022-23: EMNLP CFP supplementary-material rows -> route direct (ARR papers cannot be modified).
+ 3. Ethics FAQ 2021-22: add recommended rows for risks/misuse, dataset documentation, energy (2022).
+ 4. tracks unified to 'all_submissions'.
+ 5. condition filled for checklist items that only apply to some papers (from checklist section headers).
+ 6. ACL Policy on Publication Ethics added as a source (AI disclosure in Acknowledgements; co-ordinated disclosure).
+ 7. ARR checklist 2022-23 ('should upload') -> recommended; 'must complete' from 2024 recorded in notes.
+ 8. Guidance text under a checklist question counts as part of that question (C2 -> preprocessing,
+    C3 -> validation performance), consistently.
+ 9. EMNLP-specific ethics rules (CFP sanction, Ethics FAQ) 2022-23 -> route direct.
+10. Dictionary: COMPUTE_BUDGET split into COMPUTE_RUNTIME / COMPUTE_BUDGET_TOTAL; RESULT_STATISTICS split
+    off EXPECTED_VALIDATION_PERFORMANCE; 'languages' item mapped to both DATA_STATISTICS and
+    ARTIFACT_DOCUMENTATION; new COORDINATED_DISCLOSURE; areas unified to the topic's five areas;
+    columns source_wording and mapping_note added.
+11. Other UNSURE verdicts kept as in the draft, with the reason added to notes.
+"""
+
+import csv
+
+from emnlp_audit.policy import inventory as inv
+
+TAG = "[changed after verification 2026-11-15]"
+CODER = "claude-opus-5-5 (LLM, after self-audit 2026-11-15)"
+CHECKED_DOCS = {
+    2019: "EMNLP2019-CFP",
+    2020: "EMNLP2020-CFP;EMNLP2020-REPRO-BLOG;EMNLP2020-SUBMISSION-FAQ;EMNLP2020-CAMERA",
+    2021: "EMNLP2021-CFP;EMNLP2021-ETHICS-FAQ;EMNLP2021-SUBMISSION-FAQ;EMNLP2021-ARR-PILOT;EMNLP2021-CAMERA;ACL-CODE-ETHICS-2021",
+    2022: "EMNLP2022-CFP;EMNLP2022-ETHICS-FAQ;ARR-CFP-2022;ARR-RNLP-2022",
+    2023: "EMNLP2023-CFP;ARR-CFP-2023;ARR-RNLP-2023;ACL2023-AI-POLICY",
+    2024: "EMNLP2024-CFP;ARR-CFP-2024;ARR-RNLP-2024",
+    2025: "EMNLP2025-CFP;ARR-CFP-2025;ARR-RNLP-2025;ACL-PUB-ETHICS-2025",
+    2026: "EMNLP2026-CFP;ARR-CFP-2026;ARR-RNLP-2026;ACL-PUB-ETHICS-2026",
+}
+
+# ------------------------------------------------------------------ dictionary (decision 10)
+# (req_id, area, definition, arr_code, repro_item, source_wording [verbatim, checked], mapping_note)
+DICTIONARY = [
+    ("LIMITATIONS_SECTION", "limitations", 'A dedicated section titled "Limitations" (structure and placement)', "", "",
+     "requires all papers to have a clear discussion of limitations, in a dedicated section titled", "From calls for papers (EMNLP 2022-23, ARR 2024+)."),
+    ("LIMITATIONS_DISCUSSION", "limitations", "Discussion of the limitations of the work (content; anywhere in the paper)", "A1", "",
+     "A1. Did you describe the limitations of your work?", ""),
+    ("RISKS", "responsible_research", "Discussion of potential risks, harms or misuse of the work", "A2", "",
+     "A2. Did you discuss any potential risks of your work?", "Also covers the Ethics FAQ 'Misuse potential' questions (2021-22)."),
+    ("ETHICS_DISCUSSION", "responsible_research", "Explicit discussion of ethical issues raised by the paper (ethics / broader impact statement)", "", "",
+     "we ask that you include in the paper an explicit discussion of these issues", "From calls for papers; distinct from A2, which asks every paper about risks."),
+    ("COORDINATED_DISCLOSURE", "responsible_research", "Documentation of co-ordinated disclosure for works describing new vulnerabilities / adversarial techniques", "", "",
+     "The disclosure process must be documented.", "ACL Policy on Publication Ethics, section Co-ordinated disclosure (in effect 2025-04-25)."),
+    ("CLAIMS_SUMMARY", "other", "Abstract and introduction summarize the paper's main claims", "A3", "",
+     "A3. Do the abstract and introduction summarize the paper’s main claims?", "Not a reporting requirement in the sense of the project topic; kept for completeness."),
+    ("ANNOTATOR_INSTRUCTIONS", "responsible_research", "Full text of instructions given to participants / annotators", "D1", "",
+     "D1. Did you report the full text of instructions given to participants", "The 2020-23 reproducibility item on new data names annotator instructions only as an example; mapped to DATA_COLLECTION_DESCRIPTION, not here."),
+    ("PARTICIPANT_RECRUITMENT_PAY", "responsible_research", "How participants were recruited and paid, and whether pay is adequate", "D2", "",
+     "D2. Did you report information about how you recruited (e.g., crowdsourcing platform, students) and paid participants", ""),
+    ("CONSENT", "responsible_research", "Whether and how consent was obtained from people whose data is used", "D3", "",
+     "D3. Did you discuss whether and how consent was obtained from people whose data you’re using/curating?", ""),
+    ("ETHICS_REVIEW_BOARD", "responsible_research", "Approval (or exemption) of the data collection protocol by an ethics review board (IRB)", "D4", "",
+     "D4. Was the data collection protocol approved (or determined exempt) by an ethics review board?", ""),
+    ("ANNOTATOR_DEMOGRAPHICS", "responsible_research", "Basic demographic and geographic characteristics of the annotators", "D5", "",
+     "D5. Did you report the basic demographic and geographic characteristics of the annotator population", ""),
+    ("ARTIFACT_CITATION", "model_data_documentation", "Creators of used artifacts (code, data, models) are cited", "B1", "",
+     "B1. Did you cite the creators of artifacts you used?", ""),
+    ("ARTIFACT_LICENSE", "model_data_documentation", "License or terms of use / distribution of artifacts are discussed", "B2", "",
+     "B2. Did you discuss the license or terms for use and / or distribution of any artifacts?", ""),
+    ("ARTIFACT_INTENDED_USE", "model_data_documentation", "Use of existing artifacts is consistent with their intended use; intended use of created artifacts is specified", "B3", "",
+     "B3. Did you discuss if your use of existing artifact(s) was consistent with their intended use", "The Ethics FAQ 'Intended use' question (2021-22) is about the technology, not artifacts: counted under RISKS context, not here."),
+    ("DATA_PII_OFFENSIVE", "model_data_documentation", "Steps to check data for personal identifiers or offensive content and to protect / anonymize it", "B4", "",
+     "B4. Did you discuss the steps taken to check whether the data that was collected / used contains any information that names or uniquely identifies individual people or offensive content", ""),
+    ("ARTIFACT_DOCUMENTATION", "model_data_documentation", "Documentation of artifacts: domains, languages, linguistic phenomena, demographic groups", "B5", "",
+     "B5. Did you provide documentation of the artifacts, e.g., coverage of domains, languages, and linguistic phenomena, demographic groups represented, etc.?",
+     "The 2021-23 item 'Relevant details such as languages, and number of examples and label distributions' is mapped to both B5 (languages) and B6 (counts)."),
+    ("DATA_STATISTICS", "model_data_documentation", "Dataset statistics such as number of examples and train / validation / test splits", "B6",
+     "Relevant statistics such as number of examples; Details of train/validation/test splits",
+     "B6. Did you report relevant statistics like the number of examples, details of train / test / dev splits, etc. for the data that you used / created?",
+     "Two 2020-21 items (counts, splits) merged: B6 asks for both in one question."),
+    ("DATA_COLLECTION_DESCRIPTION", "model_data_documentation", "Description of the collection process for new data (e.g. annotator instructions, quality control)", "",
+     "For new data collected, a complete description of the data collection process",
+     "For new data collected, a complete description of the data collection process", ""),
+    ("METHOD_DESCRIPTION", "reproducibility", "Clear description of the mathematical setting / algorithm / model", "", "A clear description of the mathematical setting, algorithm, and/or model",
+     "A clear description of the mathematical setting, algorithm, and/or model", "No ARR checklist question; the ARR CFP only has a placement rule for model specifications (kept as none)."),
+    ("CODE_AVAILABILITY", "reproducibility", "Source code (link or archive) with dependencies", "", "A link to a downloadable source code, with specification of all dependencies",
+     "A link to a downloadable source code, with specification of all dependencies", ""),
+    ("DATA_AVAILABILITY", "reproducibility", "Downloadable version (link or archive) of the data", "", "A link to a downloadable version of the data",
+     "A link to a downloadable version of the data", ""),
+    ("DATA_PREPROCESSING", "reproducibility", "Excluded data and pre-processing steps", "C2 (guidance)", "Explanation of any data that were excluded, and all pre-processing steps",
+     "Explanation of any data that were excluded, and all pre-processing steps", "Mapped to the C2 guidance text ('how data was preprocessed'); guidance under a question counts as part of it."),
+    ("COMPUTE_INFRASTRUCTURE", "reproducibility", "Description of the computing infrastructure used", "C1", "Description of computing infrastructure used",
+     "Description of computing infrastructure used", "C1 is split into three requirements (parameters, budget, infrastructure)."),
+    ("COMPUTE_RUNTIME", "reproducibility", "Average runtime per model / approach (or estimated energy cost)", "", "Average runtime for each approach",
+     "Average runtime for each approach", "Split from C1 budget: per-run runtime is not the total budget over all experiments."),
+    ("COMPUTE_BUDGET_TOTAL", "reproducibility", "Total computational budget over all experiments (e.g. GPU hours) or energy requirement", "C1", "",
+     "the total computational budget (e.g., GPU hours)", "Includes the Ethics FAQ request to estimate the energy requirement of all experiments (2021-22)."),
+    ("MODEL_PARAMETERS", "reproducibility", "Number of parameters of the models used", "C1", "Number of parameters in each model",
+     "Number of parameters in each model", ""),
+    ("VALIDATION_PERFORMANCE", "reproducibility", "Validation performance corresponding to each reported test result", "C3 (guidance)", "Corresponding validation performance for each reported test result",
+     "Corresponding validation performance for each reported test result", "Mapped to the C3 guidance text ('be sure to report a result of the same model on the validation set')."),
+    ("EVALUATION_METRICS", "reproducibility", "Explanation of evaluation metrics (with code)", "", "Explanation of evaluation metrics used, with links to code",
+     "Explanation of evaluation metrics used, with links to code", "C4 (settings of evaluation packages) overlaps only partly; not mapped."),
+    ("HYPERPARAMETERS", "reproducibility", "Experimental setup incl. hyperparameter search (bounds, trials, selection method) and best values", "C2",
+     "Bounds; best configurations; number of trials; selection method",
+     "C2. Did you discuss the experimental setup, including hyperparameter search and best-found hyperparameter values?", "Four 2020-21 hyperparameter items merged (C2 covers search and best values). C2 is also the source of DATA_PREPROCESSING."),
+    ("EXPECTED_VALIDATION_PERFORMANCE", "reproducibility", "Expected validation performance / mean and variance as a function of hyperparameter trials", "",
+     "Expected validation performance (Dodge et al., 2019)", "Expected validation performance, as introduced in Section 3.1", "Split from RESULT_STATISTICS: variance over hyperparameter trials, 2020 only."),
+    ("RESULT_STATISTICS", "reproducibility", "Descriptive statistics of results (number of runs; mean, variance, error bars; max vs mean vs single run)", "C3", "",
+     "C3. Did you report descriptive statistics about your results", "Summary statistics and number of runs (2021-23 reproducibility items) and C3."),
+    ("SOFTWARE_PACKAGES", "reproducibility", "Implementation, model and parameter settings of existing packages used (e.g. NLTK, ROUGE)", "C4", "",
+     "did you report the implementation, model, and parameter settings used", ""),
+    ("AI_ASSISTANCE_CHECKLIST", "ai_tools", "Disclosure of the use of AI assistants in the submission checklist", "E1", "",
+     "information about your use", "E1 wording changes in 2026 ('If you used any AI assistants, ...')."),
+    ("AI_DISCLOSURE_IN_PAPER", "ai_tools", "Disclosure of the use and scope of AI writing / coding assistance in the paper itself (e.g. Acknowledgements)", "", "",
+     "should instead be fully disclosed in the Acknowledgements section", ""),
+]
+DICT_FIELDS = ["req_id", "area", "definition", "arr_checklist_code", "repro_checklist_item", "source_wording", "mapping_note"]
+
+B_REQS = {"ARTIFACT_CITATION", "ARTIFACT_LICENSE", "ARTIFACT_INTENDED_USE", "DATA_PII_OFFENSIVE", "ARTIFACT_DOCUMENTATION", "DATA_STATISTICS"}
+C_REQS = {"MODEL_PARAMETERS", "COMPUTE_BUDGET_TOTAL", "COMPUTE_INFRASTRUCTURE", "HYPERPARAMETERS", "RESULT_STATISTICS",
+          "SOFTWARE_PACKAGES", "DATA_PREPROCESSING", "VALIDATION_PERFORMANCE"}
+D_REQS = {"ANNOTATOR_INSTRUCTIONS", "PARTICIPANT_RECRUITMENT_PAY", "CONSENT", "ETHICS_REVIEW_BOARD", "ANNOTATOR_DEMOGRAPHICS"}
+
+
+def tag(row, text=""):
+    row["notes"] = " ".join(x for x in (row["notes"], TAG, text) if x).strip()
+
+
+def new_row(req, year, doc, quote, status, where="paper", condition="", route="all", location="", notes=""):
+    return {"req_id": req, "year": str(year), "doc_id": doc, "quote": quote, "location": location,
+            "where_reported": where, "status": status, "condition": condition, "route": route,
+            "tracks": "all_submissions", "coded_by": CODER, "verified_by": "", "verification": "pending",
+            "notes": f"{notes} {TAG}".strip()}
+
+
+rows = [r for r in inv.load_inventory() if r["status"] != "none"]  # none rows are regenerated at the end
+
+out = []
+for r in rows:
+    y = int(r["year"])
+    # 10: dictionary splits
+    if r["req_id"] == "COMPUTE_BUDGET":
+        r["req_id"] = "COMPUTE_RUNTIME" if "runtime" in r["quote"].lower() else "COMPUTE_BUDGET_TOTAL"
+        tag(r, "Re-mapped from COMPUTE_BUDGET (dictionary split).")
+    if r["req_id"] == "RESULT_STATISTICS" and y == 2020:
+        r["req_id"] = "EXPECTED_VALIDATION_PERFORMANCE"
+        tag(r, "Re-mapped from RESULT_STATISTICS (dictionary split).")
+    # 10: 'languages' item -> also ARTIFACT_DOCUMENTATION
+    if r["req_id"] == "DATA_STATISTICS" and r["quote"].startswith("Relevant details such as languages"):
+        dup = dict(r, req_id="ARTIFACT_DOCUMENTATION")
+        tag(dup, "Same item also mapped to B5 (languages).")
+        out.append(dup)
+    # 2 / 9: EMNLP-specific rules in 2022-23 apply to direct submissions
+    if y in (2022, 2023) and r["route"] == "all":
+        if r["doc_id"] in ("EMNLP2022-CFP", "EMNLP2023-CFP") and r["req_id"] in ("CODE_AVAILABILITY", "DATA_AVAILABILITY"):
+            r["route"] = "direct"
+            tag(r, "EMNLP supplementary-material clause; ARR papers 'cannot be modified' when committed.")
+        elif r["doc_id"] in ("EMNLP2022-CFP", "EMNLP2023-CFP") and r["req_id"] == "ETHICS_DISCUSSION":
+            r["route"] = "direct"
+            tag(r, "EMNLP's own ethics review; ARR route covered by the ARR CFP sanction row.")
+        elif r["doc_id"] == "EMNLP2022-ETHICS-FAQ":
+            r["route"] = "direct"
+            tag(r, "FAQ 'applies in the first instance to papers submitted to the main conference'.")
+    if r["doc_id"] == "EMNLP2023-ETHICS-FAQ":  # missing FAQ: EMNLP-specific guidance -> direct route
+        r["route"] = "direct"
+        tag(r, "Route direct, consistent with the 2022 Ethics FAQ.")
+    # 7: ARR checklist 2022-23 is 'should upload'
+    if r["doc_id"] in ("ARR-RNLP-2022", "ARR-RNLP-2023") and r["status"] == "checklist_question":
+        r["status"] = "recommended"
+        tag(r, "ARR CFP: checklist 'which authors should upload alongside their paper'; 'must complete' only from 2024.")
+    if r["doc_id"] in ("ARR-RNLP-2024", "ARR-RNLP-2025", "ARR-RNLP-2026"):
+        r["notes"] = f"{r['notes']} ARR CFP: checklist 'which authors must complete as part of their paper submission'."
+    # verification: content-restriction rows are not reporting requirements
+    if r["req_id"] == "LIMITATIONS_SECTION" and r["quote"].startswith("We reserve the right to desk reject the submissions that use this section"):
+        continue
+    if r["req_id"] == "LIMITATIONS_SECTION" and r["doc_id"] in ("ARR-CFP-2025", "ARR-CFP-2026"):
+        tag(r, "Also: the section 'should not introduce new methods, analysis, or results' (desk rejection reserved).")
+    # verification: AI 2024 'we suggest acknowledging'
+    if r["req_id"] == "AI_DISCLOSURE_IN_PAPER" and y == 2024:
+        r.update(quote="we suggest acknowledging the use of the model", status="recommended",
+                 condition="model output used as new research ideas")
+        tag(r, "Was unverified; the 'New ideas' case suggests acknowledging the model (in the paper).")
+    out.append(r)
+rows = out
+
+# 8: C3 guidance -> validation performance
+for y in range(2022, 2027):
+    rows.append(new_row("VALIDATION_PERFORMANCE", y, f"ARR-RNLP-{y}", "be sure to report a result of the same model on the validation set",
+                        "recommended" if y <= 2023 else "checklist_question", where="checklist",
+                        route="arr" if y <= 2023 else "all", location="C3 guidance",
+                        notes="Guidance under C3 counts as part of the question (same basis as DATA_PREPROCESSING from C2)."))
+
+# 3: Ethics FAQ additions (direct route)
+for y, doc in ((2021, "EMNLP2021-ETHICS-FAQ"), (2022, "EMNLP2022-ETHICS-FAQ")):
+    rows.append(new_row("RISKS", y, doc, "Misuse potential . What kinds of potential misuse is there for the technology and what harms might ensue?",
+                        "recommended", condition="paper involves an NLP application", route="direct", location="... if my paper involves an NLP application?"))
+    rows.append(new_row("ARTIFACT_DOCUMENTATION", y, doc,
+                        "Describe the characteristics of the dataset in enough detail for a reader to understand which speaker populations the technology could be expected to work for.",
+                        "recommended", condition="paper presents a new dataset", route="direct", location="What should I be aware of if my paper presents a new dataset?"))
+for req in ("RISKS", "ARTIFACT_DOCUMENTATION", "COMPUTE_BUDGET_TOTAL"):
+    rows.append(new_row(req, 2023, "EMNLP2023-ETHICS-FAQ", "", "unverified", where="", route="direct",
+                        notes="The EMNLP 2023 ethics FAQ (recommendations in 2021-2022) has no Wayback capture before the deadline."))
+rows.append(new_row("COMPUTE_BUDGET_TOTAL", 2022, "EMNLP2022-ETHICS-FAQ",
+                    "We encourage authors to use tools such as Henderson et al’s (2020) experiment impact tracker or other available information to estimate the energy requirement of the experiments reported in the paper",
+                    "recommended", condition="experiments with lots of compute", route="direct",
+                    location="... if my paper reports on experiments that involve lots of compute time/power?"))
+
+# 6: ACL Policy on Publication Ethics
+for y in (2025, 2026):
+    rows.append(new_row("AI_DISCLOSURE_IN_PAPER", y, f"ACL-PUB-ETHICS-{y}",
+                        "any use of generative AI tools and technologies to create content should instead be fully disclosed in the Acknowledgements section",
+                        "recommended", condition="generative AI used to create content", location="Guidelines for Generative Assistance in Authorship"))
+rows.append(new_row("COORDINATED_DISCLOSURE", 2026, "ACL-PUB-ETHICS-2026", "The disclosure process must be documented.",
+                    "conditional_mandatory", where="unspecified", condition="work describes a new adversarial technique / security weakness",
+                    location="Co-ordinated disclosure",
+                    notes="'Works detailing new ... security weaknesses/failures without any documentation of co-ordinated disclosure may be in breach of policy.'"))
+rows.append(new_row("COORDINATED_DISCLOSURE", 2025, "ACL-PUB-ETHICS-2025;EMNLP2025-CFP", "", "unverified", where="",
+                    condition="work describes a new adversarial technique / security weakness",
+                    notes="The 2026 version says the policy came into effect on 2025-04-25 and EMNLP2025-CFP links 'ACL’s Disclosure Policy' "
+                          "(#Co-ordinated_disclosure), but the only pre-deadline capture of the policy (2025-04-20) predates the section."))
+
+# 5: conditions for checklist / reproducibility items
+for r in rows:
+    if r["condition"]:
+        continue
+    req, doc = r["req_id"], r["doc_id"]
+    if doc.startswith("ARR-RNLP"):
+        if req in B_REQS:
+            r["condition"] = "paper uses or creates scientific artifacts"
+        elif req in C_REQS:
+            r["condition"] = "paper runs computational experiments"
+        elif req in D_REQS:
+            r["condition"] = "paper uses human annotators or research with human participants"
+        elif req == "AI_ASSISTANCE_CHECKLIST":
+            r["condition"] = "AI assistants were used"
+    elif doc.startswith("EMNLP20") and doc.endswith("-CFP") and r["status"] in ("checklist_question", "reviewer_criterion"):
+        if req == "DATA_COLLECTION_DESCRIPTION":
+            r["condition"] = "new data collected"
+        elif req.startswith("DATA_") or req in ("ARTIFACT_DOCUMENTATION",):
+            r["condition"] = "datasets used"
+        elif req in ("HYPERPARAMETERS", "EXPECTED_VALIDATION_PERFORMANCE") or (req == "RESULT_STATISTICS"):
+            r["condition"] = "experiments with hyperparameter search"
+        else:
+            r["condition"] = "reported experimental results"
+
+# 1 + regeneration of 'none' rows
+UNSURE_KEPT = {
+    (2019, "DATA_PREPROCESSING"): "Verification UNSURE: 'preprocessing decisions' only listed as possible appendix content; kept none.",
+    (2019, "METHOD_DESCRIPTION"): "Verification UNSURE: only a placement rule for model specifications; kept none.",
+    (2019, "MODEL_PARAMETERS"): "Verification UNSURE: 'model parameters' as appendix content likely means settings, not counts; kept none.",
+    (2020, "ANNOTATOR_INSTRUCTIONS"): "Verification UNSURE: instructions named only as an example of the data-collection item (DATA_COLLECTION_DESCRIPTION); kept none.",
+    (2021, "ANNOTATOR_INSTRUCTIONS"): "Verification UNSURE: as 2020; kept none.",
+    (2021, "ARTIFACT_LICENSE"): "Verification UNSURE: Ethics FAQ asks for collection consistent with terms of use (conduct, not reporting); kept none.",
+    (2021, "ARTIFACT_INTENDED_USE"): "Verification UNSURE: Ethics FAQ 'Intended use' concerns the technology, not artifacts; kept none.",
+}
+for y in (2024, 2025, 2026):
+    UNSURE_KEPT[(y, "METHOD_DESCRIPTION")] = "Verification UNSURE: ARR CFP only says where model specifications should go; kept none."
+    UNSURE_KEPT[(y, "EVALUATION_METRICS")] = "Verification UNSURE: C4 (evaluation package settings) overlaps only partly; kept none."
+
+covered = {(r["req_id"], int(r["year"])) for r in rows}
+for req, *_ in DICTIONARY:
+    for y, docs in CHECKED_DOCS.items():
+        note = UNSURE_KEPT.get((y, req), "No such requirement in the documents checked for this year.")
+        if req == "CLAIMS_SUMMARY" and y >= 2025:
+            note = "Question A3 was removed from the ARR checklist (present in 2022-2024)."
+        if y == 2021:
+            if (req, y) not in covered:
+                rows.append(new_row(req, y, docs, "", "none", where="", route="direct", notes=note))
+            rows.append(new_row(req, y, "EMNLP2021-ARR-PILOT;ARR-RNLP-2021", "", "unverified", where="", route="arr",
+                                notes="ARR pilot route (EMNLP2021-CFP: 'a small proportion of our papers to come from ARR'); no ARR-route document archived."))
+        elif (req, y) not in covered:
+            rows.append(new_row(req, y, docs, "", "none", where="", notes=note))
+
+# 4: tracks
+for r in rows:
+    r["tracks"] = "all_submissions"
+
+order = [d[0] for d in DICTIONARY]
+rows.sort(key=lambda r: (order.index(r["req_id"]), int(r["year"]), r["route"], r["doc_id"]))
+
+with open(inv.DICTIONARY_PATH, "w", newline="", encoding="utf-8") as f:
+    w = csv.writer(f)
+    w.writerow(DICT_FIELDS)
+    w.writerows(DICTIONARY)
+with open(inv.INVENTORY_PATH, "w", newline="", encoding="utf-8") as f:
+    w = csv.DictWriter(f, fieldnames=inv.INVENTORY_FIELDS)
+    w.writeheader()
+    w.writerows(rows)
+print(len(rows), "rows,", len(DICTIONARY), "requirements")
