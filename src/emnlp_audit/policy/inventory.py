@@ -18,6 +18,7 @@ from emnlp_audit.files import read_csv
 INVENTORY_PATH = paths.POLICY_REGISTER_DIR / "inventory.csv"
 DICTIONARY_PATH = paths.POLICY_REGISTER_DIR / "requirement_dictionary.csv"
 BY_YEAR_PATH = paths.POLICY_REGISTER_DIR / "inventory_by_year.csv"
+REQUIREMENTS_PATH = paths.POLICY_REQUIREMENTS_PATH
 
 INVENTORY_FIELDS = [
     "req_id", "year", "doc_id", "quote", "location", "where_reported", "status", "condition",
@@ -162,6 +163,92 @@ def year_level(rows: list[dict]) -> list[dict]:
                 "route": route,
                 "status": _strongest([g["status"] for g in applicable]),
                 "sources": ";".join(sorted({g["doc_id"] for g in applicable if g["status"] not in ("none",)})),
-                "verified": all(g["verification"] == "verified" for g in applicable) if applicable else False,
+                "verified": all(g["verification"] == "verified" for g in (applicable or group)),
+            })
+    return out
+
+
+def _status_applies_to_compliance(status: str, descriptive_only: bool = False) -> bool | str:
+    if descriptive_only:
+        return False
+    if status == "unverified":
+        return "unverified"
+    return status in ("mandatory_in_paper", "conditional_mandatory")
+
+
+def build_requirements_table(by_year: list[dict], rubric: dict) -> list[dict]:
+    """Derive config/policy_register/requirements.csv (Stage 5) from inventory_by_year.csv and rubric v2."""
+    lookup: dict[tuple[str, int, str], dict] = {}
+    routes_by_year: dict[int, set[str]] = defaultdict(set)
+    for r in by_year:
+        y = int(r["year"])
+        lookup[(r["req_id"], y, r["route"])] = r
+        routes_by_year[y].add(r["route"])
+
+    all_items = list(rubric.get("items", [])) + [
+        {
+            "item_id": ind["indicator_id"],
+            "req_ids": ind["req_ids"],
+            "descriptive_only": True,
+        }
+        for ind in rubric.get("automatic_indicators", [])
+    ]
+
+    out = []
+    for item in all_items:
+        iid = item["item_id"]
+        req_ids = item.get("req_ids", [])
+        descriptive_only = bool(item.get("descriptive_only", False)) or iid == "I6_ai_assistance"
+
+        for year in YEARS:
+            year_routes = routes_by_year.get(year, {"all"})
+            route_statuses = {}
+            route_sources = set()
+            all_verified = True
+
+            for route in ("direct", "arr"):
+                r_key = route if route in year_routes else "all"
+                statuses = []
+                for req_id in req_ids:
+                    cell = lookup.get((req_id, year, r_key)) or lookup.get((req_id, year, "all"))
+                    if cell:
+                        statuses.append(cell["status"])
+                        if cell["sources"]:
+                            route_sources.update(cell["sources"].split(";"))
+                        if not str(cell["verified"]).lower() == "true":
+                            all_verified = False
+                route_statuses[route] = _strongest(statuses) if statuses else "none"
+
+            st_direct = route_statuses["direct"]
+            st_arr = route_statuses["arr"]
+            if st_direct == st_arr:
+                combined_status = st_direct
+            elif year == 2021 and st_arr == "unverified":
+                # In 2021 only a small pilot fraction came from ARR; direct CFP is the primary known status
+                combined_status = st_direct
+            else:
+                combined_status = f"direct:{st_direct}|arr:{st_arr}"
+
+            app_direct = _status_applies_to_compliance(st_direct, descriptive_only)
+            app_arr = _status_applies_to_compliance(st_arr, descriptive_only)
+            if app_direct == app_arr:
+                pol_applies = app_direct
+            elif year == 2021 and app_arr == "unverified":
+                pol_applies = app_direct
+            else:
+                pol_applies = "unverified"
+
+            out.append({
+                "item_id": iid,
+                "year": year,
+                "req_ids": ";".join(req_ids),
+                "status_direct": st_direct,
+                "status_arr": st_arr,
+                "status": combined_status,
+                "policy_applies_direct": app_direct,
+                "policy_applies_arr": app_arr,
+                "policy_applies": pol_applies,
+                "sources": ";".join(sorted(s for s in route_sources if s)),
+                "verified": all_verified,
             })
     return out

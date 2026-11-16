@@ -7,7 +7,11 @@ import argparse
 
 from emnlp_audit import paths
 from emnlp_audit.analysis.iaa import load_double_annotations
-from emnlp_audit.analysis.validation import iaa_and_validation_report
+from emnlp_audit.analysis.validation import (
+    iaa_and_validation_report,
+    load_adjudicated_labels,
+    sync_adjudication_sheet,
+)
 from emnlp_audit.evaluators.runs import resolve_run_dir
 from emnlp_audit.files import read_json, write_json
 
@@ -24,12 +28,21 @@ def main():
 
     grouped = load_double_annotations(sheet)
     if not grouped:
-        print(f"No completed human annotations found yet in {sheet}.")
+        print(f"No completed human annotations found yet in {sheet} (or by_annotator/).")
         print("Fill in the 'evidence_status_human' column and re-run to get Cohen's kappa and macro-F1.")
         return
 
+    adj_path = paths.ANNOTATIONS_DIR / args.split / "adjudication.csv"
+    unresolved = sync_adjudication_sheet(grouped, adj_path)
+    if unresolved > 0:
+        print(
+            f"[INFO] {unresolved} annotator disagreement(s) need adjudication in {adj_path} "
+            "(fill 'adjudicated_status' and re-run for complete reference F1)."
+        )
+
     run_dir = resolve_run_dir(args.run)
-    report = iaa_and_validation_report(grouped, read_json(run_dir / "evaluations.json"))
+    adjudicated = load_adjudicated_labels(adj_path)
+    report = iaa_and_validation_report(grouped, read_json(run_dir / "evaluations.json"), adjudicated)
 
     out_path = paths.RESULTS_DIR / args.split / f"iaa_and_validation_{run_dir.name}.json"
     write_json(out_path, report)

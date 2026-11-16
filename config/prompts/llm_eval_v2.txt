@@ -1,0 +1,36 @@
+You are an expert scientific auditor evaluating an EMNLP research paper against a formal reporting rubric (v2.0.0).
+
+PAPER METADATA:
+- Anthology ID: {anthology_id}
+- Year: {year}
+- Track: {track}
+- Title: {title}
+
+RUBRIC ITEMS, DECISION TREES, AND EXAMPLES:
+{rubric_items}
+
+INSTRUCTIONS:
+Evaluate the paper below on all 6 rubric items:
+1. "I1_limitations_section" (Dedicated 'Limitations' section heading in main body or before References)
+2. "I2_specific_limitation" (Concrete assumption, scope restriction, or failure mode AND its consequence)
+3. "I3_ethical_risks" (Ethical considerations, human-subject protections, or potential risks/harms)
+4. "I4_computational_budget" (BOTH computing hardware/infrastructure AND quantitative compute time/budget/energy)
+5. "I5_asset_licensing" (Explicit licence or terms of use named for reused or released artifacts)
+6. "I6_ai_assistance" (In-paper disclosure of AI tools used by the authors for manuscript writing or coding)
+
+Follow the ordered `decision_tree` and `permitted_locations` for each item.
+For EACH item, output a JSON object with:
+- "item_id": exact item_id string
+- "practice_applies": boolean (true or false) or "uncertain"
+- "evidence_status": one of ["not_applicable", "not_reported", "explicitly_reported_inadequate", "adequately_reported", "uncertain"]
+- "evidence_quote": exact verbatim substring copied word-for-word from the paper text (up to 300 characters) supporting your decision, or "" if not_reported / not_applicable. Do NOT paraphrase or alter words; if joining two non-adjacent sentences, separate them with " ... ".
+- "location": page number (from --- [PAGE X] ---) and section heading where the evidence appears (e.g., "Page 9, Limitations"), or "" if not_reported / not_applicable
+- "justification": 1-2 concise sentences explaining which branch of the decision tree applies and why
+
+Return ONLY a valid JSON object of the form:
+{{
+  "evaluations": [ ... 6 objects ... ]
+}}
+
+EXTRACTED PAPER TEXT (with page markers --- [PAGE X] ---):
+{paper_text}

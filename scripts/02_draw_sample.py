@@ -7,10 +7,14 @@ import argparse
 
 from emnlp_audit import paths
 from emnlp_audit.corpus.anthology import download_pdf, manifest_row_from_csv
-from emnlp_audit.corpus.sampling import draw_pilot_sample
+from emnlp_audit.corpus.sampling import draw_dev_sample, draw_pilot_sample, draw_test_sample
 from emnlp_audit.files import read_csv, read_json, write_csv, write_json
 
-DESIGNS = {"pilot": draw_pilot_sample}
+DESIGNS = {
+    "pilot": draw_pilot_sample,
+    "dev": draw_dev_sample,
+    "test": draw_test_sample,
+}
 
 
 def main():

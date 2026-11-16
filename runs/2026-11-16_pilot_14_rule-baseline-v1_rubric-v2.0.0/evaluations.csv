@@ -1,0 +1,99 @@
+anthology_id,year,track,item_id,policy_applies,practice_applies,evidence_status,derived_compliance,evidence_quote,location,evaluator
+2020.emnlp-main.656,2020,Main,I1_limitations_section,False,True,not_reported,Not applicable,,,rule_baseline_v1
+2020.emnlp-main.656,2020,Main,I2_specific_limitation,False,True,not_reported,Not applicable,,,rule_baseline_v1
+2020.emnlp-main.656,2020,Main,I3_ethical_risks,True,True,not_reported,Non-compliant,,,rule_baseline_v1
+2020.emnlp-main.656,2020,Main,I4_computational_budget,False,True,not_reported,Not applicable,,,rule_baseline_v1
+2020.emnlp-main.656,2020,Main,I5_asset_licensing,False,True,explicitly_reported_inadequate,Not applicable,Artifact URL without named license: https://parl.ai/projects/genderation_,Page 2,rule_baseline_v1
+2020.emnlp-main.656,2020,Main,I6_ai_assistance,False,True,not_reported,Not applicable,,,rule_baseline_v1
+2020.emnlp-main.656,2020,Main,A1_code_link,False,True,adequately_reported,Not applicable,https://parl.ai/projects/genderation_,Page 2,rule_baseline_v1
+2020.findings-emnlp.58,2020,Findings,I1_limitations_section,False,True,not_reported,Not applicable,,,rule_baseline_v1
+2020.findings-emnlp.58,2020,Findings,I2_specific_limitation,False,True,not_reported,Not applicable,,,rule_baseline_v1
+2020.findings-emnlp.58,2020,Findings,I3_ethical_risks,True,True,not_reported,Non-compliant,,,rule_baseline_v1
+2020.findings-emnlp.58,2020,Findings,I4_computational_budget,False,True,explicitly_reported_inadequate,Not applicable,TPU v3,Page 11,rule_baseline_v1
+2020.findings-emnlp.58,2020,Findings,I5_asset_licensing,False,True,explicitly_reported_inadequate,Not applicable,Artifact URL without named license: https://github.com/ymcui/MacBERT,Page 1,rule_baseline_v1
+2020.findings-emnlp.58,2020,Findings,I6_ai_assistance,False,True,not_reported,Not applicable,,,rule_baseline_v1
+2020.findings-emnlp.58,2020,Findings,A1_code_link,False,True,adequately_reported,Not applicable,https://github.com/ymcui/MacBERT,Page 1,rule_baseline_v1
+2021.emnlp-main.26,2021,Main,I1_limitations_section,False,True,not_reported,Not applicable,,,rule_baseline_v1
+2021.emnlp-main.26,2021,Main,I2_specific_limitation,False,True,not_reported,Not applicable,,,rule_baseline_v1
+2021.emnlp-main.26,2021,Main,I3_ethical_risks,True,True,not_reported,Non-compliant,,,rule_baseline_v1
+2021.emnlp-main.26,2021,Main,I4_computational_budget,False,True,not_reported,Not applicable,,,rule_baseline_v1
+2021.emnlp-main.26,2021,Main,I5_asset_licensing,False,True,not_reported,Not applicable,,,rule_baseline_v1
+2021.emnlp-main.26,2021,Main,I6_ai_assistance,False,True,not_reported,Not applicable,,,rule_baseline_v1
+2021.emnlp-main.26,2021,Main,A1_code_link,False,True,not_reported,Not applicable,,,rule_baseline_v1
+2021.findings-emnlp.380,2021,Findings,I1_limitations_section,False,True,not_reported,Not applicable,,,rule_baseline_v1
+2021.findings-emnlp.380,2021,Findings,I2_specific_limitation,False,True,not_reported,Not applicable,,,rule_baseline_v1
+2021.findings-emnlp.380,2021,Findings,I3_ethical_risks,True,True,adequately_reported,Compliant,"Broader Impact: Visual text generation has many applications. In addition to commenting, grounded language mod- els could help drive content generation for bots and AI agents, and assist in productivity applica- tions, helping to re-wri",Page 9,rule_baseline_v1
+2021.findings-emnlp.380,2021,Findings,I4_computational_budget,False,True,explicitly_reported_inadequate,Not applicable,4xV100 32G,Page 8,rule_baseline_v1
+2021.findings-emnlp.380,2021,Findings,I5_asset_licensing,False,True,adequately_reported,Not applicable,End User License Agreement (EULA) to avoid any potential violation,Page 2,rule_baseline_v1
+2021.findings-emnlp.380,2021,Findings,I6_ai_assistance,False,True,not_reported,Not applicable,,,rule_baseline_v1
+2021.findings-emnlp.380,2021,Findings,A1_code_link,False,True,not_reported,Not applicable,,,rule_baseline_v1
+2022.emnlp-main.282,2022,Main,I1_limitations_section,True,True,adequately_reported,Compliant,Limitations,Page 9,rule_baseline_v1
+2022.emnlp-main.282,2022,Main,I2_specific_limitation,True,True,adequately_reported,Compliant,"There are two main drawbacks of our model. First,",Page 9,rule_baseline_v1
+2022.emnlp-main.282,2022,Main,I3_ethical_risks,True,True,not_reported,Non-compliant,,,rule_baseline_v1
+2022.emnlp-main.282,2022,Main,I4_computational_budget,False,True,not_reported,Not applicable,,,rule_baseline_v1
+2022.emnlp-main.282,2022,Main,I5_asset_licensing,False,True,explicitly_reported_inadequate,Not applicable,Artifact URL without named license: https://github.com/explosion/spaCy,Page 5,rule_baseline_v1
+2022.emnlp-main.282,2022,Main,I6_ai_assistance,False,True,not_reported,Not applicable,,,rule_baseline_v1
+2022.emnlp-main.282,2022,Main,A1_code_link,False,True,adequately_reported,Not applicable,https://github.com/explosion/spaCy,Page 5,rule_baseline_v1
+2022.findings-emnlp.251,2022,Findings,I1_limitations_section,True,True,adequately_reported,Compliant,Limitations,Page 9,rule_baseline_v1
+2022.findings-emnlp.251,2022,Findings,I2_specific_limitation,True,True,adequately_reported,Compliant,One of the limitations is that our interactive learn-,Page 9,rule_baseline_v1
+2022.findings-emnlp.251,2022,Findings,I3_ethical_risks,True,True,not_reported,Non-compliant,,,rule_baseline_v1
+2022.findings-emnlp.251,2022,Findings,I4_computational_budget,False,True,not_reported,Not applicable,,,rule_baseline_v1
+2022.findings-emnlp.251,2022,Findings,I5_asset_licensing,False,True,not_reported,Not applicable,,,rule_baseline_v1
+2022.findings-emnlp.251,2022,Findings,I6_ai_assistance,False,True,not_reported,Not applicable,,,rule_baseline_v1
+2022.findings-emnlp.251,2022,Findings,A1_code_link,False,True,not_reported,Not applicable,,,rule_baseline_v1
+2023.emnlp-main.458,2023,Main,I1_limitations_section,True,True,adequately_reported,Compliant,Limitations,Page 5,rule_baseline_v1
+2023.emnlp-main.458,2023,Main,I2_specific_limitation,True,True,adequately_reported,Compliant,The analysis conducted in this study focuses on,Page 5,rule_baseline_v1
+2023.emnlp-main.458,2023,Main,I3_ethical_risks,True,True,not_reported,Non-compliant,,,rule_baseline_v1
+2023.emnlp-main.458,2023,Main,I4_computational_budget,False,True,not_reported,Not applicable,,,rule_baseline_v1
+2023.emnlp-main.458,2023,Main,I5_asset_licensing,False,True,not_reported,Not applicable,,,rule_baseline_v1
+2023.emnlp-main.458,2023,Main,I6_ai_assistance,False,True,not_reported,Not applicable,,,rule_baseline_v1
+2023.emnlp-main.458,2023,Main,A1_code_link,False,True,not_reported,Not applicable,,,rule_baseline_v1
+2023.findings-emnlp.287,2023,Findings,I1_limitations_section,True,True,adequately_reported,Compliant,Limitations,Page 5,rule_baseline_v1
+2023.findings-emnlp.287,2023,Findings,I2_specific_limitation,True,True,adequately_reported,Compliant,The domain of our dataset is rather limited. It only,Page 5,rule_baseline_v1
+2023.findings-emnlp.287,2023,Findings,I3_ethical_risks,True,True,adequately_reported,Compliant,"Ethics Statement: Our dataset contains legal wills collected from An- cestry. These legal wills are in public domain in the US, and we did not violate Ancestry’s Terms and Conditions during the data collection process. All the collected w",Page 6,rule_baseline_v1
+2023.findings-emnlp.287,2023,Findings,I4_computational_budget,False,True,not_reported,Not applicable,,,rule_baseline_v1
+2023.findings-emnlp.287,2023,Findings,I5_asset_licensing,False,True,adequately_reported,Not applicable,public domain in the U,Page 1,rule_baseline_v1
+2023.findings-emnlp.287,2023,Findings,I6_ai_assistance,False,True,not_reported,Not applicable,,,rule_baseline_v1
+2023.findings-emnlp.287,2023,Findings,A1_code_link,False,True,adequately_reported,Not applicable,https://github.com/ml4ai/ie4wills/,Page 5,rule_baseline_v1
+2024.emnlp-main.210,2024,Main,I1_limitations_section,True,True,adequately_reported,Compliant,Limitations,Page 9,rule_baseline_v1
+2024.emnlp-main.210,2024,Main,I2_specific_limitation,True,True,adequately_reported,Compliant,While evaluating LLMs from the user-centric per-,Page 9,rule_baseline_v1
+2024.emnlp-main.210,2024,Main,I3_ethical_risks,True,True,adequately_reported,Compliant,"Ethical Considerations: In the user study, participants were informed that their reported conversations would be publicly re- leased for research purposes. The notification is detailed in Appendix A. At the same time, they voluntarily chose whe",Page 10,rule_baseline_v1
+2024.emnlp-main.210,2024,Main,I4_computational_budget,False,True,not_reported,Not applicable,,,rule_baseline_v1
+2024.emnlp-main.210,2024,Main,I5_asset_licensing,False,True,adequately_reported,Not applicable,Apache License,Page 10,rule_baseline_v1
+2024.emnlp-main.210,2024,Main,I6_ai_assistance,False,True,not_reported,Not applicable,,,rule_baseline_v1
+2024.emnlp-main.210,2024,Main,A1_code_link,False,True,adequately_reported,Not applicable,https://github.com/Alice1998/URS,Page 1,rule_baseline_v1
+2024.findings-emnlp.693,2024,Findings,I1_limitations_section,True,True,adequately_reported,Compliant,Limitations,Page 10,rule_baseline_v1
+2024.findings-emnlp.693,2024,Findings,I2_specific_limitation,True,True,adequately_reported,Compliant,"Our work has several limitations. Firstly, our re-",Page 10,rule_baseline_v1
+2024.findings-emnlp.693,2024,Findings,I3_ethical_risks,True,True,adequately_reported,Compliant,"Ethics Statement: Our ethical concerns involve the following. First, our experimental results are mainly obtained in English datasets, where the applicability on other languages are not comprehensively evaluated. Sec- ondly, our research ",Page 10,rule_baseline_v1
+2024.findings-emnlp.693,2024,Findings,I4_computational_budget,False,True,not_reported,Not applicable,,,rule_baseline_v1
+2024.findings-emnlp.693,2024,Findings,I5_asset_licensing,False,True,not_reported,Not applicable,,,rule_baseline_v1
+2024.findings-emnlp.693,2024,Findings,I6_ai_assistance,False,True,not_reported,Not applicable,,,rule_baseline_v1
+2024.findings-emnlp.693,2024,Findings,A1_code_link,False,True,not_reported,Not applicable,,,rule_baseline_v1
+2025.emnlp-main.1517,2025,Main,I1_limitations_section,True,True,adequately_reported,Compliant,Limitations,Page 9,rule_baseline_v1
+2025.emnlp-main.1517,2025,Main,I2_specific_limitation,True,True,adequately_reported,Compliant,Our study makes significant strides in demonstrat-,Page 9,rule_baseline_v1
+2025.emnlp-main.1517,2025,Main,I3_ethical_risks,True,True,adequately_reported,Compliant,"Ethical considerations: Our work broadly falls under the rubric of “self- improvement"" of language models. There is a small, but non-zero chance that such self- improvement, if run unsupervised and in recursive loops, might lead to uncontrolled",Page 10,rule_baseline_v1
+2025.emnlp-main.1517,2025,Main,I4_computational_budget,False,True,explicitly_reported_inadequate,Not applicable,NVIDIA A100 GPU with 80 GB of VRAM and,Page 23,rule_baseline_v1
+2025.emnlp-main.1517,2025,Main,I5_asset_licensing,False,True,adequately_reported,Not applicable,MIT License for PLAYPEN,Page 16,rule_baseline_v1
+2025.emnlp-main.1517,2025,Main,I6_ai_assistance,False,True,not_reported,Not applicable,,,rule_baseline_v1
+2025.emnlp-main.1517,2025,Main,A1_code_link,False,True,adequately_reported,Not applicable,https://github.com/lm-playpen/playpen,Page 1,rule_baseline_v1
+2025.findings-emnlp.1117,2025,Findings,I1_limitations_section,True,True,adequately_reported,Compliant,Limitations and Future Work,Page 10,rule_baseline_v1
+2025.findings-emnlp.1117,2025,Findings,I2_specific_limitation,True,True,adequately_reported,Compliant,We note several limitations of our current study.,Page 10,rule_baseline_v1
+2025.findings-emnlp.1117,2025,Findings,I3_ethical_risks,True,True,adequately_reported,Compliant,"Potential Risks and Ethical Considerations: The synthetic debate dialogues generated and an- alyzed in this study were developed solely for re- search and model training purposes. While our framework offers scalability, flexibility, and high accuracy for rhetorica",Page 10,rule_baseline_v1
+2025.findings-emnlp.1117,2025,Findings,I4_computational_budget,False,True,explicitly_reported_inadequate,Not applicable,NVIDIA A100 GPU with a learning rate of,Page 7,rule_baseline_v1
+2025.findings-emnlp.1117,2025,Findings,I5_asset_licensing,False,True,adequately_reported,Not applicable,Community License,Page 12,rule_baseline_v1
+2025.findings-emnlp.1117,2025,Findings,I6_ai_assistance,False,True,not_reported,Not applicable,,,rule_baseline_v1
+2025.findings-emnlp.1117,2025,Findings,A1_code_link,False,True,not_reported,Not applicable,,,rule_baseline_v1
+2026.emnlp-main.357,2026,Main,I1_limitations_section,True,True,adequately_reported,Compliant,Limitations,Page 9,rule_baseline_v1
+2026.emnlp-main.357,2026,Main,I2_specific_limitation,True,True,adequately_reported,Compliant,Claim-locked reporting controls how structured sta-,Page 9,rule_baseline_v1
+2026.emnlp-main.357,2026,Main,I3_ethical_risks,True,True,adequately_reported,Compliant,"Ethics Statement: The institutional FC cohort used in this work was collected under a protocol approved by the Institu- tional Review Board of Xijing Hospital, and all par- ticipants provided written informed consent (trial registration: ",Page 9,rule_baseline_v1
+2026.emnlp-main.357,2026,Main,I4_computational_budget,False,True,not_reported,Not applicable,,,rule_baseline_v1
+2026.emnlp-main.357,2026,Main,I5_asset_licensing,False,True,adequately_reported,Not applicable,data-use agreement that does not,Page 9,rule_baseline_v1
+2026.emnlp-main.357,2026,Main,I6_ai_assistance,False,True,not_reported,Not applicable,,,rule_baseline_v1
+2026.emnlp-main.357,2026,Main,A1_code_link,False,True,not_reported,Not applicable,,,rule_baseline_v1
+2026.findings-emnlp.2419,2026,Findings,I1_limitations_section,True,True,adequately_reported,Compliant,Limitations,Page 9,rule_baseline_v1
+2026.findings-emnlp.2419,2026,Findings,I2_specific_limitation,True,True,adequately_reported,Compliant,A key limitation of TRUSTMEM is that our current,Page 9,rule_baseline_v1
+2026.findings-emnlp.2419,2026,Findings,I3_ethical_risks,True,True,not_reported,Non-compliant,,,rule_baseline_v1
+2026.findings-emnlp.2419,2026,Findings,I4_computational_budget,False,True,explicitly_reported_inadequate,Not applicable,NVIDIA H100 GPUs,Page 13,rule_baseline_v1
+2026.findings-emnlp.2419,2026,Findings,I5_asset_licensing,False,True,explicitly_reported_inadequate,Not applicable,Artifact URL without named license: https://github.com/memodb-io/,Page 11,rule_baseline_v1
+2026.findings-emnlp.2419,2026,Findings,I6_ai_assistance,False,True,not_reported,Not applicable,,,rule_baseline_v1
+2026.findings-emnlp.2419,2026,Findings,A1_code_link,False,True,adequately_reported,Not applicable,https://github.com/memodb-io/,Page 11,rule_baseline_v1

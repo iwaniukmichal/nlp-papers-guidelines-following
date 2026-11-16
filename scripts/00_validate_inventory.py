@@ -47,6 +47,12 @@ def main():
 
     by_year = inv.year_level(rows)
     write_csv(inv.BY_YEAR_PATH, by_year)
+    rubric_v2_path = inv.paths.rubric_path("2.0.0")
+    if rubric_v2_path.exists():
+        from emnlp_audit.files import read_json
+
+        req_rows = inv.build_requirements_table(by_year, read_json(rubric_v2_path))
+        write_csv(inv.REQUIREMENTS_PATH, req_rows)
     if not args.quiet:
         print_matrix(by_year)
 

@@ -1,0 +1,11 @@
+{
+  "run_id": "2026-11-16_pilot_14_rule-baseline-v1_rubric-v2.0.0",
+  "created": "2026-11-16T19:04:31",
+  "evaluator": "rule_baseline_v1",
+  "split": "pilot_14",
+  "n_papers": 14,
+  "rubric_version": "2.0.0",
+  "parser": [
+    "PyMuPDF-1.24.12:"
+  ]
+}
