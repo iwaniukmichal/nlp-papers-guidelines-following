@@ -1,0 +1,1011 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>EMNLP Reporting Audit</title>
+
+  <style>
+    /* Fonts bundled locally in fonts/ (from @fontsource 5.0.18) so the deck and PDF work offline. */
+    @font-face { font-family: 'Inter'; font-style: normal; font-weight: 300; font-display: block; src: url('fonts/inter-latin-300-normal.woff2') format('woff2'); unicode-range: U+0000-00FF, U+0131, U+0152-0153, U+02BB-02BC, U+02C6, U+02DA, U+02DC, U+0304, U+0308, U+0329, U+2000-206F, U+2074, U+20AC, U+2122, U+2191, U+2193, U+2212, U+2215, U+FEFF, U+FFFD; }
+    @font-face { font-family: 'Inter'; font-style: normal; font-weight: 300; font-display: block; src: url('fonts/inter-latin-ext-300-normal.woff2') format('woff2'); unicode-range: U+0100-02AF, U+0304, U+0308, U+0329, U+1E00-1E9F, U+1EF2-1EFF, U+2020, U+20A0-20AB, U+20AD-20C0, U+2113, U+2C60-2C7F, U+A720-A7FF; }
+    @font-face { font-family: 'Inter'; font-style: normal; font-weight: 400; font-display: block; src: url('fonts/inter-latin-400-normal.woff2') format('woff2'); unicode-range: U+0000-00FF, U+0131, U+0152-0153, U+02BB-02BC, U+02C6, U+02DA, U+02DC, U+0304, U+0308, U+0329, U+2000-206F, U+2074, U+20AC, U+2122, U+2191, U+2193, U+2212, U+2215, U+FEFF, U+FFFD; }
+    @font-face { font-family: 'Inter'; font-style: normal; font-weight: 400; font-display: block; src: url('fonts/inter-latin-ext-400-normal.woff2') format('woff2'); unicode-range: U+0100-02AF, U+0304, U+0308, U+0329, U+1E00-1E9F, U+1EF2-1EFF, U+2020, U+20A0-20AB, U+20AD-20C0, U+2113, U+2C60-2C7F, U+A720-A7FF; }
+    @font-face { font-family: 'Inter'; font-style: normal; font-weight: 500; font-display: block; src: url('fonts/inter-latin-500-normal.woff2') format('woff2'); unicode-range: U+0000-00FF, U+0131, U+0152-0153, U+02BB-02BC, U+02C6, U+02DA, U+02DC, U+0304, U+0308, U+0329, U+2000-206F, U+2074, U+20AC, U+2122, U+2191, U+2193, U+2212, U+2215, U+FEFF, U+FFFD; }
+    @font-face { font-family: 'Inter'; font-style: normal; font-weight: 500; font-display: block; src: url('fonts/inter-latin-ext-500-normal.woff2') format('woff2'); unicode-range: U+0100-02AF, U+0304, U+0308, U+0329, U+1E00-1E9F, U+1EF2-1EFF, U+2020, U+20A0-20AB, U+20AD-20C0, U+2113, U+2C60-2C7F, U+A720-A7FF; }
+    @font-face { font-family: 'Inter'; font-style: normal; font-weight: 600; font-display: block; src: url('fonts/inter-latin-600-normal.woff2') format('woff2'); unicode-range: U+0000-00FF, U+0131, U+0152-0153, U+02BB-02BC, U+02C6, U+02DA, U+02DC, U+0304, U+0308, U+0329, U+2000-206F, U+2074, U+20AC, U+2122, U+2191, U+2193, U+2212, U+2215, U+FEFF, U+FFFD; }
+    @font-face { font-family: 'Inter'; font-style: normal; font-weight: 600; font-display: block; src: url('fonts/inter-latin-ext-600-normal.woff2') format('woff2'); unicode-range: U+0100-02AF, U+0304, U+0308, U+0329, U+1E00-1E9F, U+1EF2-1EFF, U+2020, U+20A0-20AB, U+20AD-20C0, U+2113, U+2C60-2C7F, U+A720-A7FF; }
+    @font-face { font-family: 'Inter'; font-style: normal; font-weight: 700; font-display: block; src: url('fonts/inter-latin-700-normal.woff2') format('woff2'); unicode-range: U+0000-00FF, U+0131, U+0152-0153, U+02BB-02BC, U+02C6, U+02DA, U+02DC, U+0304, U+0308, U+0329, U+2000-206F, U+2074, U+20AC, U+2122, U+2191, U+2193, U+2212, U+2215, U+FEFF, U+FFFD; }
+    @font-face { font-family: 'Inter'; font-style: normal; font-weight: 700; font-display: block; src: url('fonts/inter-latin-ext-700-normal.woff2') format('woff2'); unicode-range: U+0100-02AF, U+0304, U+0308, U+0329, U+1E00-1E9F, U+1EF2-1EFF, U+2020, U+20A0-20AB, U+20AD-20C0, U+2113, U+2C60-2C7F, U+A720-A7FF; }
+    @font-face { font-family: 'Space Grotesk'; font-style: normal; font-weight: 300; font-display: block; src: url('fonts/space-grotesk-latin-300-normal.woff2') format('woff2'); unicode-range: U+0000-00FF, U+0131, U+0152-0153, U+02BB-02BC, U+02C6, U+02DA, U+02DC, U+0304, U+0308, U+0329, U+2000-206F, U+2074, U+20AC, U+2122, U+2191, U+2193, U+2212, U+2215, U+FEFF, U+FFFD; }
+    @font-face { font-family: 'Space Grotesk'; font-style: normal; font-weight: 300; font-display: block; src: url('fonts/space-grotesk-latin-ext-300-normal.woff2') format('woff2'); unicode-range: U+0100-02AF, U+0304, U+0308, U+0329, U+1E00-1E9F, U+1EF2-1EFF, U+2020, U+20A0-20AB, U+20AD-20C0, U+2113, U+2C60-2C7F, U+A720-A7FF; }
+    @font-face { font-family: 'Space Grotesk'; font-style: normal; font-weight: 400; font-display: block; src: url('fonts/space-grotesk-latin-400-normal.woff2') format('woff2'); unicode-range: U+0000-00FF, U+0131, U+0152-0153, U+02BB-02BC, U+02C6, U+02DA, U+02DC, U+0304, U+0308, U+0329, U+2000-206F, U+2074, U+20AC, U+2122, U+2191, U+2193, U+2212, U+2215, U+FEFF, U+FFFD; }
+    @font-face { font-family: 'Space Grotesk'; font-style: normal; font-weight: 400; font-display: block; src: url('fonts/space-grotesk-latin-ext-400-normal.woff2') format('woff2'); unicode-range: U+0100-02AF, U+0304, U+0308, U+0329, U+1E00-1E9F, U+1EF2-1EFF, U+2020, U+20A0-20AB, U+20AD-20C0, U+2113, U+2C60-2C7F, U+A720-A7FF; }
+    @font-face { font-family: 'Space Grotesk'; font-style: normal; font-weight: 500; font-display: block; src: url('fonts/space-grotesk-latin-500-normal.woff2') format('woff2'); unicode-range: U+0000-00FF, U+0131, U+0152-0153, U+02BB-02BC, U+02C6, U+02DA, U+02DC, U+0304, U+0308, U+0329, U+2000-206F, U+2074, U+20AC, U+2122, U+2191, U+2193, U+2212, U+2215, U+FEFF, U+FFFD; }
+    @font-face { font-family: 'Space Grotesk'; font-style: normal; font-weight: 500; font-display: block; src: url('fonts/space-grotesk-latin-ext-500-normal.woff2') format('woff2'); unicode-range: U+0100-02AF, U+0304, U+0308, U+0329, U+1E00-1E9F, U+1EF2-1EFF, U+2020, U+20A0-20AB, U+20AD-20C0, U+2113, U+2C60-2C7F, U+A720-A7FF; }
+    @font-face { font-family: 'Space Grotesk'; font-style: normal; font-weight: 600; font-display: block; src: url('fonts/space-grotesk-latin-600-normal.woff2') format('woff2'); unicode-range: U+0000-00FF, U+0131, U+0152-0153, U+02BB-02BC, U+02C6, U+02DA, U+02DC, U+0304, U+0308, U+0329, U+2000-206F, U+2074, U+20AC, U+2122, U+2191, U+2193, U+2212, U+2215, U+FEFF, U+FFFD; }
+    @font-face { font-family: 'Space Grotesk'; font-style: normal; font-weight: 600; font-display: block; src: url('fonts/space-grotesk-latin-ext-600-normal.woff2') format('woff2'); unicode-range: U+0100-02AF, U+0304, U+0308, U+0329, U+1E00-1E9F, U+1EF2-1EFF, U+2020, U+20A0-20AB, U+20AD-20C0, U+2113, U+2C60-2C7F, U+A720-A7FF; }
+    @font-face { font-family: 'Space Grotesk'; font-style: normal; font-weight: 700; font-display: block; src: url('fonts/space-grotesk-latin-700-normal.woff2') format('woff2'); unicode-range: U+0000-00FF, U+0131, U+0152-0153, U+02BB-02BC, U+02C6, U+02DA, U+02DC, U+0304, U+0308, U+0329, U+2000-206F, U+2074, U+20AC, U+2122, U+2191, U+2193, U+2212, U+2215, U+FEFF, U+FFFD; }
+    @font-face { font-family: 'Space Grotesk'; font-style: normal; font-weight: 700; font-display: block; src: url('fonts/space-grotesk-latin-ext-700-normal.woff2') format('woff2'); unicode-range: U+0100-02AF, U+0304, U+0308, U+0329, U+1E00-1E9F, U+1EF2-1EFF, U+2020, U+20A0-20AB, U+20AD-20C0, U+2113, U+2C60-2C7F, U+A720-A7FF; }
+
+    /* Template: "Blue Professional" (template/template.html). The deck is laid out on a fixed
+       1920x1080 stage that is scaled to the window on screen and printed 1:1 to PDF. */
+    :root {
+      --bg: #fdfae7;
+      --primary: #1e2bfa;
+      --rule: #d9792a;            /* second series (rule baseline) */
+      --text: #111111;
+      --text-muted: #5f5f5f;
+      --text-light: #9a9a9a;
+      --accent-light: rgba(30, 43, 250, 0.08);
+      --accent-medium: rgba(30, 43, 250, 0.15);
+      --border: rgba(30, 43, 250, 0.2);
+      --card-bg: rgba(30, 43, 250, 0.04);
+      --good: #0f7a4a;
+    }
+
+    * { margin: 0; padding: 0; box-sizing: border-box; }
+
+    html, body {
+      width: 100%; height: 100%; overflow: hidden;
+      font-family: 'Inter', sans-serif; background: var(--bg); color: var(--text);
+    }
+
+    .viewport { position: fixed; inset: 0; background: var(--bg); }
+
+    .deck {
+      position: absolute; top: 0; left: 0;
+      width: 1920px; height: 1080px;
+      transform-origin: top left;
+      overflow: hidden;
+    }
+
+    .slide {
+      position: absolute; top: 0; left: 0;
+      width: 1920px; height: 1080px;
+      display: flex; flex-direction: column;
+      padding: 64px 80px 92px 80px;
+      opacity: 0; pointer-events: none;
+      transform: translateX(40px);
+      transition: opacity 0.5s ease, transform 0.5s ease;
+      overflow: hidden;
+      background: var(--bg);
+    }
+    .slide.active { opacity: 1; pointer-events: all; transform: translateX(0); z-index: 10; }
+    .slide.prev { transform: translateX(-40px); }
+
+    h1, h2, h3, h4 { font-family: 'Space Grotesk', sans-serif; font-weight: 600; line-height: 1.1; letter-spacing: -0.02em; }
+    h1 { font-size: 76px; font-weight: 700; }
+    h2 { font-size: 46px; margin-bottom: 30px; max-width: 1650px; }
+    h3 { font-size: 27px; font-weight: 600; line-height: 1.25; }
+    h4 { font-size: 19px; font-weight: 600; text-transform: uppercase; letter-spacing: 0.08em; color: var(--primary); }
+    p, li { font-size: 22px; line-height: 1.5; color: var(--text-muted); }
+    strong { color: var(--text); font-weight: 600; }
+    .blue { color: var(--primary); }
+
+    .slide-header { display: flex; align-items: center; justify-content: space-between; margin-bottom: 30px; flex-shrink: 0; }
+    .slide-header .tag {
+      font-family: 'Space Grotesk', sans-serif; font-size: 17px; font-weight: 500;
+      color: var(--primary); background: var(--accent-light); padding: 8px 20px; border-radius: 100px;
+    }
+    .slide-content { flex: 1; display: flex; flex-direction: column; min-height: 0; }
+
+    .accent-line { width: 72px; height: 5px; background: var(--primary); border-radius: 3px; margin-bottom: 30px; }
+
+    .footnote { font-size: 16px; color: var(--text-light); line-height: 1.45; margin-top: auto; padding-top: 14px; }
+    .footnote b { color: var(--text-muted); font-weight: 600; }
+
+    /* Navigation chrome (screen only) */
+    .nav-controls { position: fixed; bottom: 22px; right: 3vw; display: flex; gap: 12px; z-index: 100; }
+    .nav-btn {
+      width: 44px; height: 44px; border-radius: 50%; border: 1.5px solid var(--border);
+      background: var(--bg); color: var(--primary); cursor: pointer;
+      display: flex; align-items: center; justify-content: center; transition: all 0.2s ease;
+    }
+    .nav-btn:hover { background: var(--primary); color: var(--bg); border-color: var(--primary); }
+    .nav-btn:disabled { opacity: 0.3; cursor: not-allowed; }
+    .slide-counter {
+      font-family: 'Space Grotesk', sans-serif; font-size: 14px; font-weight: 500; color: var(--text-muted);
+      letter-spacing: 0.05em; position: fixed; bottom: 34px; left: 3vw; z-index: 100;
+    }
+    .progress-bar { position: fixed; bottom: 0; left: 0; height: 3px; background: var(--primary); transition: width 0.4s ease; z-index: 100; }
+
+    /* Printed page number inside the stage (visible in PDF) */
+    .page-num {
+      position: absolute; bottom: 34px; left: 80px;
+      font-family: 'Space Grotesk', sans-serif; font-size: 16px; color: var(--text-light); letter-spacing: 0.05em;
+    }
+    .page-src {
+      position: absolute; bottom: 34px; right: 80px;
+      font-family: 'Space Grotesk', sans-serif; font-size: 16px; color: var(--text-light);
+    }
+
+    /* ---------- Cover ---------- */
+    .layout-cover { justify-content: center; padding-left: 150px; }
+    .layout-cover h1 { max-width: 1150px; margin-bottom: 34px; line-height: 1.06; }
+    .layout-cover .subtitle { font-size: 28px; color: var(--text-muted); max-width: 1020px; margin-bottom: 60px; line-height: 1.45; }
+    .layout-cover .meta { font-family: 'Space Grotesk', sans-serif; font-size: 20px; color: var(--text-muted); letter-spacing: 0.02em; line-height: 1.7; }
+    .layout-cover .meta .light { color: var(--text-light); }
+    .cover-decoration {
+      position: absolute; top: 0; right: 0; width: 640px; height: 1080px;
+      background: var(--accent-light); clip-path: polygon(30% 0, 100% 0, 100% 100%, 0% 100%);
+    }
+    .cover-dots { position: absolute; bottom: 130px; right: 150px; display: grid; grid-template-columns: repeat(3, 1fr); gap: 14px; opacity: 0.25; }
+    .cover-dots .dot { width: 8px; height: 8px; background: var(--primary); border-radius: 50%; }
+
+    /* ---------- Two-column split ---------- */
+    .split-body { display: grid; grid-template-columns: 1.05fr 1fr; gap: 64px; }
+    .split-left, .split-right { display: flex; flex-direction: column; gap: 22px; }
+    .split-right { padding-left: 48px; border-left: 2px solid var(--border); }
+
+    .insight-list { list-style: none; display: flex; flex-direction: column; gap: 20px; counter-reset: insight; }
+    .insight-list li { position: relative; padding-left: 58px; font-size: 23px; color: var(--text); line-height: 1.45; counter-increment: insight; }
+    .insight-list li::before {
+      content: counter(insight, decimal-leading-zero); position: absolute; left: 0; top: 2px;
+      font-family: 'Space Grotesk', sans-serif; font-size: 18px; font-weight: 600; color: var(--primary); letter-spacing: 0.05em;
+    }
+    .insight-list li span.sub { display: block; font-size: 19px; color: var(--text-muted); margin-top: 3px; }
+
+    .policy-timeline { list-style: none; display: flex; flex-direction: column; gap: 0; }
+    .policy-timeline li { display: grid; grid-template-columns: 110px 1fr; gap: 22px; padding: 16px 0; border-bottom: 1px solid var(--border); font-size: 22px; color: var(--text); }
+    .policy-timeline li:last-child { border-bottom: none; }
+    .policy-timeline .yr { font-family: 'Space Grotesk', sans-serif; font-weight: 700; font-size: 26px; color: var(--primary); }
+    .policy-timeline .what span { display: block; font-size: 18px; color: var(--text-muted); margin-top: 2px; }
+
+    .split-highlight {
+      font-family: 'Space Grotesk', sans-serif; font-size: 27px; font-weight: 500; color: var(--text); line-height: 1.35;
+      padding: 26px 30px; background: var(--accent-light); border-radius: 14px; border-left: 5px solid var(--primary);
+    }
+    .split-highlight cite { display: block; margin-top: 12px; font-style: normal; font-size: 16px; font-weight: 500; color: var(--text-muted); letter-spacing: 0.04em; text-transform: uppercase; }
+
+    .rq { padding: 20px 24px; border-radius: 12px; background: var(--card-bg); border: 1px solid var(--border); }
+    .rq b { font-family: 'Space Grotesk', sans-serif; color: var(--primary); font-size: 22px; margin-right: 8px; }
+    .rq p { color: var(--text); font-size: 22px; }
+    .rq p.small { color: var(--text-muted); font-size: 18px; margin-top: 6px; }
+
+    /* ---------- Pipeline ---------- */
+    .pipeline { display: grid; grid-template-columns: repeat(7, 1fr); gap: 18px; margin-top: 10px; }
+    .pipe-step {
+      position: relative; padding: 22px 18px 20px; border-radius: 14px; background: var(--card-bg);
+      border: 1.5px solid var(--border); display: flex; flex-direction: column; gap: 10px;
+    }
+    .pipe-step:not(:last-child)::after {
+      content: ''; position: absolute; top: 50px; right: -16px; width: 14px; height: 14px;
+      border-top: 3px solid var(--primary); border-right: 3px solid var(--primary); transform: rotate(45deg); opacity: 0.6;
+    }
+    .pipe-num {
+      width: 46px; height: 46px; border-radius: 50%; background: var(--primary); color: var(--bg);
+      display: flex; align-items: center; justify-content: center;
+      font-family: 'Space Grotesk', sans-serif; font-size: 21px; font-weight: 700;
+    }
+    .pipe-step.human .pipe-num { background: var(--bg); color: var(--primary); border: 2.5px solid var(--primary); }
+    .pipe-title { font-family: 'Space Grotesk', sans-serif; font-size: 23px; font-weight: 600; color: var(--text); line-height: 1.2; }
+    .pipe-desc { font-size: 17px; color: var(--text-muted); line-height: 1.45; }
+    .pipe-status { margin-top: auto; font-family: 'Space Grotesk', sans-serif; font-size: 14px; font-weight: 600; letter-spacing: 0.06em; text-transform: uppercase; }
+    .st-done { color: var(--good); }
+    .st-prog { color: var(--rule); }
+    .st-todo { color: var(--text-light); }
+
+    .deliverables { display: grid; grid-template-columns: repeat(3, 1fr); gap: 22px; margin-top: 34px; }
+    .deliv { padding: 20px 24px; border-radius: 12px; border-left: 5px solid var(--primary); background: var(--accent-light); }
+    .deliv h4 { font-size: 15px; margin-bottom: 8px; }
+    .deliv p { font-size: 20px; color: var(--text); line-height: 1.4; }
+    .deliv p.metric { font-size: 17px; color: var(--text-muted); margin-top: 8px; }
+
+    /* ---------- Data & rubric ---------- */
+    .data-grid { display: grid; grid-template-columns: 640px 1fr; gap: 56px; }
+    .year-bars { display: flex; flex-direction: column; gap: 9px; }
+    .yb { display: grid; grid-template-columns: 64px 1fr 82px; align-items: center; gap: 14px; }
+    .yb .y { font-family: 'Space Grotesk', sans-serif; font-size: 20px; color: var(--text); font-weight: 600; }
+    .yb .track { height: 30px; display: flex; gap: 2px; }
+    .yb .main { background: var(--primary); border-radius: 4px 0 0 4px; height: 100%; }
+    .yb .find { background: rgba(30, 43, 250, 0.38); border-radius: 0 4px 4px 0; height: 100%; }
+    .yb .n { font-family: 'Space Grotesk', sans-serif; font-size: 19px; color: var(--text); text-align: right; }
+    .legend { display: flex; gap: 24px; font-size: 17px; color: var(--text-muted); margin: 6px 0 16px; align-items: center; }
+    .legend i { display: inline-block; width: 16px; height: 16px; border-radius: 4px; margin-right: 8px; vertical-align: -2px; }
+
+    .big-num { font-family: 'Space Grotesk', sans-serif; font-size: 64px; font-weight: 700; color: var(--primary); line-height: 1; }
+    .big-label { font-size: 21px; color: var(--text); margin: 8px 0 22px; }
+
+    .mini-stat-row { display: grid; grid-template-columns: repeat(3, 1fr); gap: 16px; margin-top: 26px; }
+    .mini-stat { padding: 16px 18px; border-radius: 12px; background: var(--card-bg); border: 1px solid var(--border); }
+    .mini-stat .mini-val { font-family: 'Space Grotesk', sans-serif; font-size: 34px; font-weight: 700; color: var(--primary); line-height: 1; }
+    .mini-stat .mini-label { font-size: 16px; color: var(--text-muted); margin-top: 8px; line-height: 1.35; }
+
+    table.rubric { width: 100%; border-collapse: collapse; }
+    table.rubric th {
+      text-align: left; font-family: 'Space Grotesk', sans-serif; font-size: 15px; font-weight: 600; letter-spacing: 0.07em;
+      text-transform: uppercase; color: var(--primary); padding: 0 12px 12px 0; border-bottom: 2px solid var(--primary);
+    }
+    table.rubric td { font-size: 19px; color: var(--text-muted); padding: 13px 12px 13px 0; border-bottom: 1px solid var(--border); vertical-align: top; line-height: 1.38; }
+    table.rubric td:first-child { color: var(--text); font-weight: 600; white-space: nowrap; }
+    table.rubric td .code { font-family: 'Space Grotesk', sans-serif; color: var(--primary); margin-right: 8px; }
+
+    .states { display: flex; align-items: center; gap: 12px; margin-top: 22px; flex-wrap: wrap; }
+    .chip { font-family: 'Space Grotesk', sans-serif; font-size: 17px; font-weight: 500; padding: 8px 16px; border-radius: 100px; border: 1.5px solid var(--border); color: var(--text); background: var(--bg); }
+    .chip.on { background: var(--primary); color: var(--bg); border-color: var(--primary); }
+    .arrow { color: var(--primary); font-size: 24px; font-weight: 700; }
+
+    /* ---------- SOTA tables ---------- */
+    table.sota { width: 100%; border-collapse: collapse; table-layout: fixed; }
+    table.sota th {
+      text-align: left; font-family: 'Space Grotesk', sans-serif; font-size: 15px; font-weight: 600; letter-spacing: 0.08em;
+      text-transform: uppercase; color: var(--primary); padding: 0 18px 12px 0; border-bottom: 2px solid var(--primary);
+    }
+    table.sota td { font-size: 18.5px; line-height: 1.4; color: var(--text-muted); padding: 15px 18px 15px 0; border-bottom: 1px solid var(--border); vertical-align: top; }
+    table.sota td.study { color: var(--text); }
+    table.sota td.study b { display: block; font-family: 'Space Grotesk', sans-serif; font-size: 21px; font-weight: 600; color: var(--text); }
+    table.sota td.study span { font-size: 15px; color: var(--text-light); letter-spacing: 0.02em; }
+    table.sota td.find { color: var(--text); }
+    table.sota td .k { font-family: 'Space Grotesk', sans-serif; font-weight: 700; color: var(--primary); }
+    table.sota tr.key td { background: var(--accent-light); }
+    table.sota tr.key td:first-child { box-shadow: inset 5px 0 0 var(--primary); padding-left: 16px; }
+    .method-tag { display: inline-block; font-family: 'Space Grotesk', sans-serif; font-size: 13px; font-weight: 600; letter-spacing: 0.06em; text-transform: uppercase; padding: 3px 9px; border-radius: 100px; margin: 0 6px 6px 0; }
+    .m-man { background: rgba(17,17,17,0.07); color: var(--text); }
+    .m-auto { background: rgba(217,121,42,0.15); color: #8a4a12; }
+    .m-llm { background: var(--accent-medium); color: var(--primary); }
+
+    /* ---------- Takeaways ---------- */
+    .take-grid { display: grid; grid-template-columns: repeat(2, 1fr); gap: 20px 28px; }
+    .take {
+      display: grid; grid-template-columns: 1fr 44px 1fr; align-items: center; gap: 16px;
+      padding: 20px 24px; border-radius: 14px; background: var(--card-bg); border: 1px solid var(--border);
+    }
+    .take .ev { font-size: 19px; color: var(--text-muted); line-height: 1.4; }
+    .take .ev b { display: block; font-family: 'Space Grotesk', sans-serif; font-size: 22px; color: var(--text); margin-bottom: 4px; }
+    .take .to { color: var(--primary); font-size: 30px; font-weight: 700; text-align: center; }
+    .take .dec { font-size: 19px; color: var(--text); line-height: 1.4; }
+    .take .dec b { color: var(--primary); }
+    .gap-box {
+      margin-top: 26px; padding: 22px 30px; border-radius: 14px; background: var(--primary); color: var(--bg);
+      font-family: 'Space Grotesk', sans-serif; font-size: 25px; line-height: 1.4; font-weight: 500;
+    }
+    .gap-box b { color: #ffe9a8; font-weight: 600; }
+
+    /* ---------- Metric cards (PoC setup) ---------- */
+    .metrics-row { display: grid; grid-template-columns: repeat(3, 1fr); gap: 28px; }
+    .metric-card { display: flex; flex-direction: column; gap: 12px; padding: 28px 30px; border-radius: 16px; border: 1.5px solid var(--border); background: var(--card-bg); }
+    .metric-card .metric-value { font-family: 'Space Grotesk', sans-serif; font-size: 54px; font-weight: 700; color: var(--primary); line-height: 1; }
+    .metric-card.rule .metric-value { color: var(--rule); }
+    .metric-card .metric-label { font-size: 24px; font-weight: 600; color: var(--text); line-height: 1.3; }
+    .metric-card .metric-desc { font-size: 19px; color: var(--text-muted); line-height: 1.45; }
+    .metric-card ul { list-style: none; display: flex; flex-direction: column; gap: 9px; padding-top: 14px; border-top: 1px solid var(--border); }
+    .metric-card ul li { font-size: 18px; color: var(--text-muted); padding-left: 22px; position: relative; line-height: 1.42; }
+    .metric-card ul li::before { content: '-'; position: absolute; left: 0; color: var(--text-light); }
+    .metric-card code, .footnote code { font-family: 'Space Grotesk', monospace; font-size: 0.92em; color: var(--text); background: rgba(17,17,17,0.05); padding: 1px 6px; border-radius: 5px; }
+
+    /* ---------- Results chart ---------- */
+    .res-grid { display: grid; grid-template-columns: 1.32fr 1fr; gap: 56px; }
+    .chart-title { font-family: 'Space Grotesk', sans-serif; font-size: 22px; font-weight: 600; color: var(--text); margin-bottom: 4px; }
+    .chart-sub { font-size: 17px; color: var(--text-muted); margin-bottom: 8px; }
+    .gbar-chart { display: flex; flex-direction: column; gap: 14px; margin-top: 8px; }
+    .gbar { display: grid; grid-template-columns: 250px 1fr 104px; align-items: center; gap: 16px; }
+    .gbar .lbl { font-size: 19px; color: var(--text); line-height: 1.2; }
+    .gbar .lbl span { display: block; font-size: 14px; color: var(--text-light); }
+    .gbar .bars { display: flex; flex-direction: column; gap: 3px; position: relative; }
+    .gbar .bars::before { content: ''; position: absolute; left: 0; top: -3px; bottom: -3px; width: 1.5px; background: rgba(17,17,17,0.25); }
+    .bar-row { display: flex; align-items: center; gap: 8px; height: 22px; }
+    .bar-row .fill { height: 100%; border-radius: 0 4px 4px 0; min-width: 2px; }
+    .bar-row.r .fill { background: var(--rule); }
+    .bar-row.l .fill { background: var(--primary); }
+    .bar-row .v { font-family: 'Space Grotesk', sans-serif; font-size: 16px; color: var(--text); font-weight: 600; }
+    .gbar .agree { font-family: 'Space Grotesk', sans-serif; font-size: 19px; color: var(--text); text-align: right; }
+    .gbar .agree span { display: block; font-size: 13px; color: var(--text-light); letter-spacing: 0.04em; }
+    .axis { display: grid; grid-template-columns: 250px 1fr 104px; gap: 16px; margin-top: 4px; }
+    .axis .ticks { display: flex; justify-content: space-between; font-size: 14px; color: var(--text-light); font-family: 'Space Grotesk', sans-serif; }
+
+    .kpi-col { display: flex; flex-direction: column; gap: 18px; }
+    .kpi { padding: 20px 24px; border-radius: 14px; background: var(--card-bg); border: 1px solid var(--border); }
+    .kpi .v { font-family: 'Space Grotesk', sans-serif; font-size: 50px; font-weight: 700; color: var(--primary); line-height: 1; }
+    .kpi .v small { font-size: 22px; color: var(--text-muted); font-weight: 500; margin-left: 8px; }
+    .kpi .l { font-size: 20px; color: var(--text); margin-top: 8px; line-height: 1.35; }
+    .kpi .c { font-size: 16px; color: var(--text-muted); margin-top: 6px; line-height: 1.4; }
+
+    .conf { width: 100%; border-collapse: collapse; margin-top: 4px; }
+    .conf th, .conf td { font-size: 16px; padding: 7px 8px; text-align: center; border: 1px solid var(--border); }
+    .conf th { font-family: 'Space Grotesk', sans-serif; font-weight: 600; color: var(--text-muted); background: var(--card-bg); }
+    .conf td { font-family: 'Space Grotesk', sans-serif; color: var(--text); }
+    .conf td.diag { background: var(--accent-medium); font-weight: 700; }
+    .conf td.zero { color: var(--text-light); }
+    .conf th.rowh { text-align: left; }
+
+    /* ---------- Detail blocks ---------- */
+    .detail-body { display: grid; grid-template-columns: 1.08fr 1fr; gap: 26px 40px; }
+    .detail-col { display: flex; flex-direction: column; gap: 20px; }
+    .detail-block { padding: 20px 26px; border-radius: 14px; background: var(--card-bg); border: 1px solid var(--border); }
+    .detail-block.warn { background: rgba(217,121,42,0.07); border-color: rgba(217,121,42,0.35); }
+    .detail-block h3 { font-size: 24px; margin-bottom: 10px; color: var(--text); }
+    .detail-block.warn h3 { color: #8a4a12; }
+    .detail-block ul { list-style: none; }
+    .detail-block ul li { position: relative; padding-left: 22px; padding-bottom: 8px; font-size: 19px; line-height: 1.45; }
+    .detail-block ul li:last-child { padding-bottom: 0; }
+    .detail-block ul li::before { content: ''; position: absolute; left: 0; top: 11px; width: 7px; height: 7px; border-radius: 50%; background: var(--primary); }
+    .detail-block.warn ul li::before { background: var(--rule); }
+    .quote { font-family: 'Space Grotesk', sans-serif; font-size: 17px; color: var(--text); background: var(--bg); border-left: 3px solid var(--primary); padding: 6px 12px; margin-top: 6px; border-radius: 0 6px 6px 0; }
+
+    /* ---------- Timeline ---------- */
+    .timeline-track { display: grid; grid-template-columns: repeat(4, 1fr); gap: 30px; margin-top: 20px; }
+    .timeline-step { display: flex; flex-direction: column; position: relative; }
+    .timeline-step:not(:last-child)::after { content: ''; position: absolute; top: 31px; left: 76px; right: -22px; height: 2px; background: var(--border); }
+    .step-circle {
+      width: 64px; height: 64px; border-radius: 50%; background: var(--primary); color: var(--bg);
+      display: flex; align-items: center; justify-content: center;
+      font-family: 'Space Grotesk', sans-serif; font-size: 26px; font-weight: 700; margin-bottom: 20px;
+    }
+    .timeline-step:nth-child(2) .step-circle { opacity: 0.85; }
+    .timeline-step:nth-child(3) .step-circle { opacity: 0.7; }
+    .timeline-step:nth-child(4) .step-circle { opacity: 0.55; }
+    .step-when { font-family: 'Space Grotesk', sans-serif; font-size: 16px; font-weight: 600; letter-spacing: 0.07em; text-transform: uppercase; color: var(--primary); margin-bottom: 6px; }
+    .step-title { font-family: 'Space Grotesk', sans-serif; font-size: 27px; font-weight: 600; color: var(--text); margin-bottom: 12px; line-height: 1.2; }
+    .step-desc { list-style: none; display: flex; flex-direction: column; gap: 8px; }
+    .step-desc li { font-size: 19px; color: var(--text-muted); line-height: 1.42; padding-left: 18px; position: relative; }
+    .step-desc li::before { content: '-'; position: absolute; left: 0; color: var(--text-light); }
+    .feedback-strip { margin-top: auto; padding: 20px 28px; border-radius: 14px; background: var(--accent-light); border-left: 5px solid var(--primary); }
+    .feedback-strip h4 { font-size: 15px; margin-bottom: 8px; }
+    .feedback-strip p { font-size: 19px; color: var(--text); line-height: 1.45; }
+
+    /* ---------- Closing ---------- */
+    .layout-closing { justify-content: center; align-items: center; text-align: center; }
+    .layout-closing h1 { margin-bottom: 22px; }
+    .layout-closing .closing-sub { font-size: 28px; color: var(--text-muted); max-width: 1100px; margin-bottom: 44px; line-height: 1.45; }
+    .layout-closing .cta-btn {
+      display: inline-block; font-family: 'Space Grotesk', sans-serif; font-size: 22px; font-weight: 600;
+      color: var(--bg); background: var(--primary); padding: 18px 44px; border-radius: 100px;
+    }
+    .layout-closing .closing-contact { margin-top: 56px; font-size: 19px; color: var(--text-light); line-height: 1.7; }
+    .closing-decoration { position: absolute; top: 50%; left: 50%; transform: translate(-50%, -50%); width: 900px; height: 900px; border: 1px solid var(--border); border-radius: 50%; opacity: 0.4; pointer-events: none; }
+    .closing-decoration-2 { position: absolute; top: 50%; left: 50%; transform: translate(-50%, -50%); width: 660px; height: 660px; border: 1px solid var(--border); border-radius: 50%; opacity: 0.3; pointer-events: none; }
+
+    /* ---------- Video legibility: larger type and marks ---------- */
+    h2 { font-size: 50px; margin-bottom: 36px; }
+    .pipe-step { padding: 26px 20px 22px; gap: 12px; }
+    .pipe-title { font-size: 25px; }
+    .pipe-desc { font-size: 19.5px; }
+    .pipe-status { font-size: 15px; }
+    .deliverables { margin-top: 44px; gap: 26px; }
+    .deliv { padding: 24px 28px; }
+    .deliv h4 { font-size: 16px; }
+    .deliv p { font-size: 23px; }
+    .deliv p.metric { font-size: 19px; }
+
+    .data-grid { grid-template-columns: 760px 1fr; gap: 60px; }
+    .yb { grid-template-columns: 70px 1fr 90px; }
+    .yb .track { height: 40px; width: 100%; }
+    .year-bars { gap: 12px; }
+    .yb .y, .yb .n { font-size: 22px; }
+    .chart-title { font-size: 24px; }
+    .legend { font-size: 18px; }
+    .mini-stat .mini-val { font-size: 40px; }
+    .mini-stat .mini-label { font-size: 18px; }
+    table.rubric td { font-size: 21px; padding: 15px 14px 15px 0; }
+    table.rubric th { font-size: 16px; }
+    .chip { font-size: 18px; }
+    .footnote { font-size: 18px; }
+
+    table.sota th { font-size: 16px; padding-bottom: 14px; }
+    table.sota td { font-size: 21px; line-height: 1.38; padding: 20px 20px 20px 0; }
+    table.sota td.study b { font-size: 24px; }
+    table.sota td.study span { font-size: 16px; }
+    .method-tag { font-size: 14px; }
+
+    .take-grid { gap: 22px 30px; }
+    .take { padding: 24px 26px; }
+    .take .ev { font-size: 20px; }
+    .take .ev b { font-size: 24px; }
+    .take .dec { font-size: 21px; }
+    .gap-box { font-size: 27px; margin-top: 30px; }
+
+    .metric-card { padding: 32px 34px; gap: 14px; }
+    .metric-card .metric-value { font-size: 62px; }
+    .metric-card .metric-label { font-size: 26px; }
+    .metric-card .metric-desc { font-size: 21px; }
+    .metric-card ul li { font-size: 20.5px; }
+
+    .gbar-chart { gap: 24px; margin-top: 14px; }
+    .gbar { grid-template-columns: 270px 1fr 110px; }
+    .gbar .lbl { font-size: 22px; }
+    .bar-row { height: 30px; }
+    .bar-row .v { font-size: 19px; }
+    .gbar .agree { font-size: 22px; }
+    .axis { grid-template-columns: 270px 1fr 110px; }
+    .axis .ticks { font-size: 16px; }
+    .kpi .v { font-size: 58px; }
+    .kpi .l { font-size: 22px; }
+    .kpi .c { font-size: 18px; }
+    .conf th, .conf td { font-size: 18px; padding: 10px 10px; }
+
+    .detail-block { padding: 24px 30px; }
+    .detail-block h3 { font-size: 27px; margin-bottom: 14px; }
+    .detail-block ul li { font-size: 21.5px; padding-bottom: 11px; }
+    .detail-block ul li::before { top: 13px; }
+    .quote { font-size: 19px; }
+
+    .step-title { font-size: 29px; }
+    .step-when { font-size: 17px; }
+    .step-desc li { font-size: 22px; }
+    .step-desc { gap: 11px; }
+    .feedback-strip p { font-size: 21px; }
+    .feedback-strip h4 { font-size: 16px; }
+
+    .rq p { font-size: 24px; }
+    .rq p.small { font-size: 20px; }
+    .policy-timeline li { font-size: 24px; padding: 20px 0; }
+    .policy-timeline .what span { font-size: 19.5px; }
+    .split-right { gap: 24px; }
+
+    /* ---------- Print / PDF: one slide per 1920x1080 page ---------- */
+    @page { size: 1920px 1080px; margin: 0; }
+    @media print {
+      html, body { width: 1920px; height: auto; overflow: visible; background: var(--bg); }
+      * { -webkit-print-color-adjust: exact; print-color-adjust: exact; }
+      .viewport { position: static; }
+      .deck { position: static; transform: none !important; height: auto; overflow: visible; }
+      .slide {
+        position: relative; opacity: 1; transform: none; transition: none;
+        break-after: page; page-break-after: always;
+      }
+      .slide:last-child { break-after: auto; page-break-after: auto; }
+      .nav-controls, .slide-counter, .progress-bar { display: none; }
+    }
+  </style>
+</head>
+<body>
+<div class="viewport">
+  <div class="deck" id="deck">
+
+    <!-- ===================== 1. COVER ===================== -->
+    <section class="slide layout-cover active">
+      <div class="cover-decoration"></div>
+      <div class="cover-dots">
+        <div class="dot"></div><div class="dot"></div><div class="dot"></div>
+        <div class="dot"></div><div class="dot"></div><div class="dot"></div>
+        <div class="dot"></div><div class="dot"></div><div class="dot"></div>
+      </div>
+      <div class="accent-line"></div>
+      <h1>From guidelines to practice: do NLP papers follow reporting requirements?</h1>
+      <p class="subtitle">An auditable compliance study of EMNLP 2020–2026 Main and Findings papers.<br>Mid-term presentation: state of the art and proof of concept.</p>
+      <p class="meta">
+        Michał Iwaniuk &nbsp;·&nbsp; Bartłomiej Borycki &nbsp;·&nbsp; Miłosz Chodań &nbsp;·&nbsp; Mikołaj Guzik<br>
+        <span class="light">Supervisor: Filip Kucia &nbsp;·&nbsp; NLP course 2026/27, Warsaw University of Technology &nbsp;·&nbsp; Topic 4</span>
+      </p>
+    </section>
+
+    <!-- ===================== 2. PROBLEM ===================== -->
+    <section class="slide layout-split">
+      <div class="slide-header"><h4>Problem &amp; research questions</h4><span class="tag">Motivation</span></div>
+      <div class="slide-content">
+        <h2>Venues keep adding reporting rules. Do the published papers actually follow them?</h2>
+        <div class="split-body">
+          <div class="split-left">
+            <ul class="policy-timeline">
+              <li><span class="yr">2020</span><span class="what">NLP Reproducibility Checklist at submission<span>Self-reported answers, not published with the paper</span></span></li>
+              <li><span class="yr">2021</span><span class="what">Ethics review and ethics/broader-impact discussion<span>Ethics committees at NAACL, ACL and EMNLP</span></span></li>
+              <li><span class="yr">2022</span><span class="what">EMNLP makes a dedicated <b>Limitations</b> section mandatory<span>Later adopted across ACL Rolling Review</span></span></li>
+              <li><span class="yr">2023+</span><span class="what">ACL policy on AI writing assistance; Responsible NLP checklist<span>EMNLP 2025 publishes the checklists with the papers</span></span></li>
+            </ul>
+          </div>
+          <div class="split-right">
+            <div class="rq"><p><b>RQ1</b>How does compliance vary by year and by reporting item?</p></div>
+            <div class="rq"><p><b>RQ2</b>How does adoption change after a requirement is introduced or strengthened?</p><p class="small">H1: adoption of a fixed indicator increases after an explicit mandate.</p></div>
+            <div class="rq"><p><b>RQ3</b>How does reporting in 2023–2026 differ from 2020–2022?</p><p class="small">Exploratory and descriptive. Policy and era effects overlap, so no causal claims.</p></div>
+            <p style="font-size:19px;">Unit of analysis: one <strong>paper × reporting item</strong>. Compliance means an applicable obligation is satisfied by evidence in the paper or its ordinary appendices.</p>
+          </div>
+        </div>
+      </div>
+      <span class="page-num">02</span>
+    </section>
+
+    <!-- ===================== 3. APPROACH / PIPELINE ===================== -->
+    <section class="slide">
+      <div class="slide-header"><h4>Our approach</h4><span class="tag">Method</span></div>
+      <div class="slide-content">
+        <h2>An auditable pipeline from historical policy to per-paper evidence</h2>
+        <div class="pipeline">
+          <div class="pipe-step">
+            <div class="pipe-num">1</div>
+            <div class="pipe-title">Corpus</div>
+            <div class="pipe-desc">ACL Anthology snapshot: all EMNLP Main + Findings papers 2020–2026, one version per ID.</div>
+            <div class="pipe-status st-done">Done</div>
+          </div>
+          <div class="pipe-step">
+            <div class="pipe-num">2</div>
+            <div class="pipe-title">Parsing</div>
+            <div class="pipe-desc">PyMuPDF text with page markers; appended checklists removed; e-mails redacted.</div>
+            <div class="pipe-status st-done">Done</div>
+          </div>
+          <div class="pipe-step">
+            <div class="pipe-num">3</div>
+            <div class="pipe-title">Policy register</div>
+            <div class="pipe-desc">Dated Wayback snapshots of calls, checklists and ACL policies → status of each requirement in each year.</div>
+            <div class="pipe-status st-prog">Draft verified</div>
+          </div>
+          <div class="pipe-step">
+            <div class="pipe-num">4</div>
+            <div class="pipe-title">Rubric</div>
+            <div class="pipe-desc">6 reporting items, 4 evidence states, derived compliance label.</div>
+            <div class="pipe-status st-prog">v1.0.0-poc</div>
+          </div>
+          <div class="pipe-step">
+            <div class="pipe-num">5</div>
+            <div class="pipe-title">Evaluators</div>
+            <div class="pipe-desc">Regex rule baseline and one LLM that must quote verbatim evidence.</div>
+            <div class="pipe-status st-done">Pilot run</div>
+          </div>
+          <div class="pipe-step human">
+            <div class="pipe-num">6</div>
+            <div class="pipe-title">Human reference</div>
+            <div class="pipe-desc">Two independent annotators per paper, adjudication, per-item Cohen's κ.</div>
+            <div class="pipe-status st-prog">Pilot in progress</div>
+          </div>
+          <div class="pipe-step">
+            <div class="pipe-num">7</div>
+            <div class="pipe-title">Estimates</div>
+            <div class="pipe-desc">Yearly compliance with 95% CIs; before/after mandate tests with Holm correction.</div>
+            <div class="pipe-status st-todo">Planned</div>
+          </div>
+        </div>
+        <div class="deliverables">
+          <div class="deliv"><h4>Deliverable 1</h4><p>Versioned policy register and rubric with coding rules</p><p class="metric">Every status traceable to a dated source (URL, timestamp, SHA-256)</p></div>
+          <div class="deliv"><h4>Deliverable 2</h4><p>Adjudicated double-annotated sample (14 + 70 + 140 papers)</p><p class="metric">Primary metrics: per-item κ; LLM vs human macro-F1 (target ≥ 0.80)</p></div>
+          <div class="deliv"><h4>Deliverable 3</h4><p>Annual compliance series per item and track</p><p class="metric">Primary metrics: resolved-case rate p̂ (RQ1), Δp̂ around mandates (RQ2)</p></div>
+        </div>
+      </div>
+      <span class="page-num">03</span>
+    </section>
+
+    <!-- ===================== 4. DATA & RUBRIC ===================== -->
+    <section class="slide">
+      <div class="slide-header"><h4>Data &amp; rubric</h4><span class="tag">Data</span></div>
+      <div class="slide-content">
+        <h2>16,618 eligible papers, measured on six reporting items</h2>
+        <div class="data-grid">
+          <div>
+            <div class="chart-title">Eligible papers per year (ACL Anthology, Nov 2026)</div>
+            <div class="legend"><span><i style="background:var(--primary)"></i>Main</span><span><i style="background:rgba(30,43,250,0.38)"></i>Findings</span></div>
+            <div class="year-bars">
+              <!-- widths: share of the 5,182-paper maximum (2026) -->
+              <div class="yb"><span class="y">2020</span><span class="track"><span class="main" style="width:14.5%"></span><span class="find" style="width:8.6%"></span></span><span class="n">1,198</span></div>
+              <div class="yb"><span class="y">2021</span><span class="track"><span class="main" style="width:16.3%"></span><span class="find" style="width:8.2%"></span></span><span class="n">1,271</span></div>
+              <div class="yb"><span class="y">2022</span><span class="track"><span class="main" style="width:16.0%"></span><span class="find" style="width:10.6%"></span></span><span class="n">1,376</span></div>
+              <div class="yb"><span class="y">2023</span><span class="track"><span class="main" style="width:20.2%"></span><span class="find" style="width:20.4%"></span></span><span class="n">2,106</span></div>
+              <div class="yb"><span class="y">2024</span><span class="track"><span class="main" style="width:24.5%"></span><span class="find" style="width:19.4%"></span></span><span class="n">2,271</span></div>
+              <div class="yb"><span class="y">2025</span><span class="track"><span class="main" style="width:34.9%"></span><span class="find" style="width:27.1%"></span></span><span class="n">3,214</span></div>
+              <div class="yb"><span class="y">2026</span><span class="track"><span class="main" style="width:52.2%"></span><span class="find" style="width:47.8%"></span></span><span class="n">5,182</span></div>
+            </div>
+            <div class="mini-stat-row">
+              <div class="mini-stat"><div class="mini-val">9,254</div><div class="mini-label">Main papers</div></div>
+              <div class="mini-stat"><div class="mini-val">7,364</div><div class="mini-label">Findings papers</div></div>
+              <div class="mini-stat"><div class="mini-val">32</div><div class="mini-label">dated policy documents, 34 requirement types</div></div>
+            </div>
+          </div>
+          <div>
+            <table class="rubric">
+              <thead><tr><th>Item</th><th>Counts as evidence</th><th>Policy basis</th></tr></thead>
+              <tbody>
+                <tr><td><span class="code">I1</span>Limitations section</td><td>Dedicated "Limitations" heading before the references</td><td>Mandatory from EMNLP 2022</td></tr>
+                <tr><td><span class="code">I2</span>Specific limitation</td><td>Concrete assumption or failure and its consequence, not boilerplate</td><td>Mandatory from EMNLP 2022</td></tr>
+                <tr><td><span class="code">I3</span>Ethical risks</td><td>A concrete ethical issue and its implications</td><td>Conditional on sensitive data or tasks</td></tr>
+                <tr><td><span class="code">I4</span>Compute budget</td><td>Total compute (e.g. GPU-hours), not just a GPU name</td><td>Checklist practice (C1)</td></tr>
+                <tr><td><span class="code">I5</span>Asset licensing</td><td>Named licence or terms of reused data, models, code</td><td>Checklist practice (B2)</td></tr>
+                <tr><td><span class="code">I6</span>AI assistance</td><td>Tool used and scope of help</td><td>Descriptive only</td></tr>
+              </tbody>
+            </table>
+            <div class="states">
+              <span class="chip">not applicable</span><span class="chip">not reported</span><span class="chip">reported, inadequate</span><span class="chip on">adequately reported</span>
+              <span class="arrow">→</span>
+              <span class="chip">Compliant / Non-compliant / N/A / Uncertain</span>
+            </div>
+          </div>
+        </div>
+        <p class="footnote">Presence (adoption) is tracked for every item and year. A paper can be <b>Non-compliant</b> only if a verified obligation applied to it in that year. Annotation sample: 14 pilot (2 per year), 70 development, 140 held-out test papers, two annotators each.</p>
+      </div>
+      <span class="page-num">04</span>
+    </section>
+
+    <!-- ===================== 5. SOTA A ===================== -->
+    <section class="slide">
+      <div class="slide-header"><h4>State of the art · 1 / 3</h4><span class="tag">Reproducibility &amp; experimental reporting</span></div>
+      <div class="slide-content">
+        <h2>Reproducibility audits: documentation is incomplete, and checklists help only partly</h2>
+        <table class="sota">
+          <colgroup><col style="width:15%"><col style="width:22%"><col style="width:27%"><col style="width:36%"></colgroup>
+          <thead><tr><th>Study</th><th>Data</th><th>How they analysed it</th><th>Key findings</th></tr></thead>
+          <tbody>
+            <tr>
+              <td class="study"><b>Gundersen &amp; Kjensmo</b><span>AAAI 2018</span></td>
+              <td>400 papers from IJCAI 2013/16 and AAAI 2014/16 (325 empirical)</td>
+              <td><span class="method-tag m-man">manual</span>Variables grouped into Method, Data and Experiment factors; 6 reproducibility metrics</td>
+              <td class="find">No paper documents all variables; only <span class="k">24–26%</span> of required variables are reported. Small significant gain 2013/14 → 2016 for experiment documentation only.</td>
+            </tr>
+            <tr>
+              <td class="study"><b>Dodge et al.</b><span>EMNLP 2019</span></td>
+              <td>50 random EMNLP 2018 papers with experiments</td>
+              <td><span class="method-tag m-man">manual</span>Proposes an experimental-results checklist and expected validation performance vs. budget</td>
+              <td class="find">No paper reports all items: splits <span class="k">92%</span>, best hyperparameters 74%, code 30%, compute infrastructure 18%, search bounds <span class="k">8%</span>. Basis of the NLP Reproducibility Checklist.</td>
+            </tr>
+            <tr>
+              <td class="study"><b>Belz et al.</b><span>EACL 2021</span></td>
+              <td>Systematic review: 35 ACL Anthology + 25 other papers; 34 original/reproduction pairs</td>
+              <td><span class="method-tag m-man">manual</span>Compared 513 original vs. reproduced scores under the same conditions</td>
+              <td class="find">Only <span class="k">14.03%</span> (77/513) of scores were reproduced exactly; 59.2% of the others came out worse.</td>
+            </tr>
+            <tr>
+              <td class="study"><b>Arvan et al.</b><span>EMNLP 2022</span></td>
+              <td>ACL, EMNLP, NAACL, LREC, COLING 2016–2022; 8 random EMNLP 2021 papers</td>
+              <td><span class="method-tag m-auto">automatic</span><span class="method-tag m-man">manual</span>Scraped code links from the Anthology; re-ran released code</td>
+              <td class="find">Code sharing rises fastest at venues that promote reproducibility (EMNLP 2021: 723 of 1,300+ papers). Only <span class="k">2 of 8</span> papers ran without issues.</td>
+            </tr>
+            <tr>
+              <td class="study"><b>Magnusson et al.</b><span>Findings ACL 2023</span></td>
+              <td>10,405 checklist responses: EMNLP 2020/21, NAACL 2021, ACL 2021</td>
+              <td><span class="method-tag m-auto">statistical</span>Self-reported answers vs. acceptance and reviewer reproducibility scores</td>
+              <td class="find">Reporting rose on 8 of 10 items vs. Dodge's 2018 sample, then stagnated. <span class="k">46%</span> claim open code (+8% reproducibility score). Answers are self-reported and likely overestimate.</td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+      <span class="page-num">05</span>
+    </section>
+
+    <!-- ===================== 6. SOTA B ===================== -->
+    <section class="slide">
+      <div class="slide-header"><h4>State of the art · 2 / 3</h4><span class="tag">Ethics, limitations &amp; checklists</span></div>
+      <div class="slide-content">
+        <h2>Content audits: a section is often present but says little</h2>
+        <table class="sota">
+          <colgroup><col style="width:15%"><col style="width:21%"><col style="width:28%"><col style="width:36%"></colgroup>
+          <thead><tr><th>Study</th><th>Data</th><th>How they analysed it</th><th>Key findings</th></tr></thead>
+          <tbody>
+            <tr>
+              <td class="study"><b>Benotti &amp; Blackburn</b><span>EMNLP 2022</span></td>
+              <td>All 572 ACL 2021 long papers; 90 with an ethics section</td>
+              <td><span class="method-tag m-auto">heading search</span><span class="method-tag m-man">2 annotators</span>Coded benefits, harms, vulnerable groups</td>
+              <td class="find">Ethics section in <span class="k">15.7%</span> of papers (ACL 2022: 23.3%). Benefits 74%, harms 52%, vulnerable groups 23%; <span class="k">20%</span> are disclaimers only. Ethics-reviewed papers discuss harms more often (69% vs. 43%).</td>
+            </tr>
+            <tr>
+              <td class="study"><b>Karamolegkou et al.</b><span>NAACL 2025</span></td>
+              <td>EthiCon: 1,580 ethics statements from 8,048 ACL Anthology 2022–23 papers</td>
+              <td><span class="method-tag m-auto">regex</span><span class="method-tag m-man">2 annotators + arbiter</span><span class="method-tag m-llm">4 open LLMs</span>5-category scheme</td>
+              <td class="find">Human κ = <span class="k">0.77</span>. ACL 2023: <span class="k">67%</span> contain disclaimers, 40% name concrete concerns; over a third say there are no issues. LLMs reach BERTScore-F1 0.81–0.83 but over-generate and miss negation.</td>
+            </tr>
+            <tr class="key">
+              <td class="study"><b>Thaepprasit et al.</b><span>Findings EMNLP 2026 · closest to us</span></td>
+              <td>16,067 Limitations sections, ACL + EMNLP 2020–2025</td>
+              <td><span class="method-tag m-auto">Docling + regex</span><span class="method-tag m-llm">Gemini, human-in-loop</span>Iterative hybrid coding; 150 human-coded papers for evaluation</td>
+              <td class="find">Section adoption <span class="k">&lt;10%</span> before the mandate → <span class="k">97.8%</span> at EMNLP 2022 → 100% at EMNLP 2025. Of 136 flagged papers: 41 parser failures, 50 limitations elsewhere, 45 truly missing. LLM coder F1 0.801, α 0.647 (humans 0.644).</td>
+            </tr>
+            <tr>
+              <td class="study"><b>Jinnath &amp; Zhao</b><span>arXiv 2026 (preprint)</span></td>
+              <td>Public EMNLP 2025 checklists: 3,214 papers, 73,922 responses</td>
+              <td><span class="method-tag m-auto">Marker parsing</span><span class="method-tag m-llm">GPT extraction</span>Justification length, parent–child logic</td>
+              <td class="find"><span class="k">44.9%</span> of "No" justifications are brief or empty; over half of authors dismiss potential risks; contradictory answers are common. Reproducibility items are answered "Yes" far more often than ethics items.</td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+      <span class="page-num">06</span>
+    </section>
+
+    <!-- ===================== 7. SOTA C ===================== -->
+    <section class="slide">
+      <div class="slide-header"><h4>State of the art · 3 / 3</h4><span class="tag">Methods &amp; resources we build on</span></div>
+      <div class="slide-content">
+        <h2>Standards, LLM-assisted coding and parsing: what we reuse</h2>
+        <table class="sota">
+          <colgroup><col style="width:15%"><col style="width:30%"><col style="width:30%"><col style="width:25%"></colgroup>
+          <thead><tr><th>Study</th><th>What they did</th><th>Key findings</th><th>How we use it</th></tr></thead>
+          <tbody>
+            <tr>
+              <td class="study"><b>Rogers et al.</b><span>Findings EMNLP 2021</span></td>
+              <td><span class="method-tag m-man">position paper</span>Legal and ethical principles of data use: copyright and terms of use, privacy, transparency, reproducibility, do no harm</td>
+              <td class="find">Proposes a Responsible Data Use Checklist (licence compatibility, data statements, personal data, ethics board). No empirical audit.</td>
+              <td>Origin of the data and licensing questions in the ARR checklist; defines our <b>I5 asset licensing</b> item.</td>
+            </tr>
+            <tr>
+              <td class="study"><b>Xiao et al.</b><span>IUI 2023 Companion</span></td>
+              <td><span class="method-tag m-llm">GPT-3</span>Deductive coding with an expert codebook; 668 children's questions, 2 coding dimensions</td>
+              <td class="find">κ = <span class="k">0.61</span> and <span class="k">0.38</span> with experts (experts with each other: 0.88 / 0.90). Codebook-style prompts beat example-style; the biggest gain comes from adding one example.</td>
+              <td>Our LLM prompt is codebook-centred: rubric definitions plus positive and negative examples.</td>
+            </tr>
+            <tr>
+              <td class="study"><b>Rohatgi et al.</b><span>EMNLP 2023</span></td>
+              <td><span class="method-tag m-auto">GROBID</span>ACL OCL corpus: 73,285 Anthology papers (to Sept 2022) with structured full text and 210K figures</td>
+              <td class="find">A manual check of 21 documents shows missing section names and merged paragraphs. Used by Thaepprasit et al. and EthiCon.</td>
+              <td>Cross-check for our parsing on 2020–2022 papers; parse failures are reported separately.</td>
+            </tr>
+          </tbody>
+        </table>
+        <p class="footnote">All 12 papers were read in full from the ACL Anthology / arXiv PDFs; figures are as reported by the authors. The full SOTA table (23 studies) is in <b>docs/proposal/sota-comparison.md</b>.</p>
+      </div>
+      <span class="page-num">07</span>
+    </section>
+
+    <!-- ===================== 8. SOTA → DESIGN ===================== -->
+    <section class="slide">
+      <div class="slide-header"><h4>From state of the art to our design</h4><span class="tag">Gap</span></div>
+      <div class="slide-content">
+        <h2>What the literature tells us, and what we do with it</h2>
+        <div class="take-grid">
+          <div class="take">
+            <div class="ev"><b>Presence ≠ content</b>Disclaimers: 20% of ethics sections (Benotti), 67% of ethics statements (EthiCon), 44.9% of "No" justifications (Jinnath)</div>
+            <div class="to">→</div>
+            <div class="dec">Separate <b>structural</b> items (heading) from <b>substantive</b> items (specific content)</div>
+          </div>
+          <div class="take">
+            <div class="ev"><b>Self-reports overestimate</b>Checklist answers are not checked against the paper (Magnusson)</div>
+            <div class="to">→</div>
+            <div class="dec">We audit the <b>paper text</b> and quote evidence; checklist pages are excluded</div>
+          </div>
+          <div class="take">
+            <div class="ev"><b>Mandates change structure fast</b>Limitations sections: &lt;10% → ~98–100% (Thaepprasit)</div>
+            <div class="to">→</div>
+            <div class="dec">Test H1 on <b>fixed indicators</b> before and after each dated mandate</div>
+          </div>
+          <div class="take">
+            <div class="ev"><b>LLM coding works, if validated</b>Codebook + examples: F1 0.80, α on par with humans (Xiao, Thaepprasit)</div>
+            <div class="to">→</div>
+            <div class="dec">One frozen LLM, checked against <b>double human annotation</b> on a held-out sample</div>
+          </div>
+          <div class="take">
+            <div class="ev"><b>Parsing fails silently</b>41 of 136 "missing" sections were parser errors (Thaepprasit)</div>
+            <div class="to">→</div>
+            <div class="dec">Parse failures and unclear applicability become <b>Uncertain</b>, never Non-compliant</div>
+          </div>
+          <div class="take">
+            <div class="ev"><b>Obligations change every year</b>Checklists, ethics policy and AI policy all appear at different times</div>
+            <div class="to">→</div>
+            <div class="dec">A <b>dated policy register</b>: compliance is judged against the rules of that year</div>
+          </div>
+        </div>
+        <div class="gap-box">Gap: prior work audits <b>one item</b> (limitations, ethics, code) or <b>self-reports</b>. We audit <b>several items</b> in the paper text against the obligations <b>valid in each year</b>, with applicability and human validation.</div>
+      </div>
+      <span class="page-num">08</span>
+    </section>
+
+    <!-- ===================== 9. POC SETUP ===================== -->
+    <section class="slide">
+      <div class="slide-header"><h4>Proof of concept · setup</h4><span class="tag">PoC</span></div>
+      <div class="slide-content">
+        <h2>Pilot: 14 papers, two evaluators, the same rubric</h2>
+        <div class="metrics-row">
+          <div class="metric-card">
+            <div class="metric-value">14 × 6</div>
+            <div class="metric-label">Pilot sample = 84 paper–item pairs</div>
+            <div class="metric-desc">One Main and one Findings paper per year, 2020–2026, drawn at random from the eligible manifest.</div>
+            <ul>
+              <li>Seed 42, inclusion probabilities stored per paper</li>
+              <li>Frozen sample file; PDFs re-downloadable from the Anthology</li>
+              <li>Same papers are now being double-annotated by humans</li>
+            </ul>
+          </div>
+          <div class="metric-card rule">
+            <div class="metric-value">Rules</div>
+            <div class="metric-label">Baseline: <code>rule_baseline_v1</code></div>
+            <div class="metric-desc">Deterministic regular expressions over the parsed text, no cost.</div>
+            <ul>
+              <li>Headings: "Limitations", "Ethics Statement", "Broader Impact"</li>
+              <li>Compute: GPU-hours, or hardware names only (= inadequate)</li>
+              <li>Licence names (CC-BY, MIT, Apache 2.0…), AI-tool mentions</li>
+            </ul>
+          </div>
+          <div class="metric-card">
+            <div class="metric-value">LLM</div>
+            <div class="metric-label">Run 1: <code>gemini-2.5-flash</code></div>
+            <div class="metric-desc">Full paper text (≤ 120k characters, with page markers) and the whole rubric in one prompt.</div>
+            <ul>
+              <li>Temperature 0, JSON output for all 6 items</li>
+              <li>Per item: applicability, evidence status, verbatim quote, location, justification</li>
+              <li>Every quote is checked against the extracted text</li>
+            </ul>
+          </div>
+        </div>
+        <p class="footnote">Each run is archived in <b>runs/2026-11-15_pilot_14_*</b> with its config (model, temperature, prompt SHA-256, rubric 1.0.0-poc). Both evaluators derive compliance with the same shared function, using the mandate years recorded in the rubric.</p>
+      </div>
+      <span class="page-num">09</span>
+    </section>
+
+    <!-- ===================== 10. POC RESULTS ===================== -->
+    <section class="slide">
+      <div class="slide-header"><h4>Proof of concept · results</h4><span class="tag">Baseline vs. Gemini run 1</span></div>
+      <div class="slide-content">
+        <h2>The LLM finds evidence that the regex baseline misses</h2>
+        <div class="res-grid">
+          <div>
+            <div class="chart-title">Papers rated "adequately reported", out of 14</div>
+            <div class="legend" style="margin-bottom:8px"><span><i style="background:var(--rule)"></i>Rule baseline</span><span><i style="background:var(--primary)"></i>Gemini 2.5 Flash</span><span style="margin-left:auto; font-size:15px; color:var(--text-light)">right: same evidence status</span></div>
+            <!-- bar width = value / 14 * 100% of the bar area -->
+            <div class="gbar-chart">
+              <div class="gbar"><div class="lbl">I1 Limitations section</div><div class="bars"><div class="bar-row r"><div class="fill" style="width:71.4%"></div><span class="v">10</span></div><div class="bar-row l"><div class="fill" style="width:71.4%"></div><span class="v">10</span></div></div><div class="agree">12/14<span>AGREE</span></div></div>
+              <div class="gbar"><div class="lbl">I2 Specific limitation</div><div class="bars"><div class="bar-row r"><div class="fill" style="width:71.4%"></div><span class="v">10</span></div><div class="bar-row l"><div class="fill" style="width:92.9%"></div><span class="v">13</span></div></div><div class="agree">11/14<span>AGREE</span></div></div>
+              <div class="gbar"><div class="lbl">I3 Ethical risks</div><div class="bars"><div class="bar-row r"><div class="fill" style="width:42.9%"></div><span class="v">6</span></div><div class="bar-row l"><div class="fill" style="width:78.6%"></div><span class="v">11</span></div></div><div class="agree">8/14<span>AGREE</span></div></div>
+              <div class="gbar"><div class="lbl">I4 Compute budget</div><div class="bars"><div class="bar-row r"><div class="fill" style="width:0%"></div><span class="v">0</span></div><div class="bar-row l"><div class="fill" style="width:21.4%"></div><span class="v">3</span></div></div><div class="agree">7/14<span>AGREE</span></div></div>
+              <div class="gbar"><div class="lbl">I5 Asset licensing</div><div class="bars"><div class="bar-row r"><div class="fill" style="width:7.1%"></div><span class="v">1</span></div><div class="bar-row l"><div class="fill" style="width:28.6%"></div><span class="v">4</span></div></div><div class="agree">5/14<span>AGREE</span></div></div>
+              <div class="gbar"><div class="lbl">I6 AI assistance</div><div class="bars"><div class="bar-row r"><div class="fill" style="width:0%"></div><span class="v">0</span></div><div class="bar-row l"><div class="fill" style="width:7.1%"></div><span class="v">1</span></div></div><div class="agree">13/14<span>AGREE</span></div></div>
+            </div>
+            <div class="axis"><span></span><div class="ticks"><span>0</span><span>7</span><span>14</span></div><span></span></div>
+          </div>
+          <div class="kpi-col">
+            <div class="kpi"><div class="v">66.7%<small>56 / 84</small></div><div class="l">Same evidence status (rules vs. LLM)</div><div class="c">Derived compliance agrees on 94.0% (79/84), because I4–I6 carry no mandate yet.</div></div>
+            <div class="kpi"><div class="v">98.8%<small>83 / 84</small></div><div class="l">LLM quotes found verbatim in the paper text</div></div>
+            <div>
+              <div class="chart-title" style="font-size:18px">All 28 disagreements go one way</div>
+              <table class="conf">
+                <tr><th class="rowh">Rule ↓ / LLM →</th><th>N/A</th><th>not rep.</th><th>inadequate</th><th>adequate</th></tr>
+                <tr><th class="rowh">not reported</th><td>3</td><td class="diag">22</td><td>10</td><td>13</td></tr>
+                <tr><th class="rowh">inadequate</th><td class="zero">0</td><td class="zero">0</td><td class="diag">7</td><td>2</td></tr>
+                <tr><th class="rowh">adequate</th><td class="zero">0</td><td class="zero">0</td><td class="zero">0</td><td class="diag">27</td></tr>
+              </table>
+            </div>
+          </div>
+        </div>
+        <p class="footnote">This is agreement between two automatic evaluators, not accuracy. Human reference labels for the pilot are still being collected.</p>
+      </div>
+      <span class="page-num">10</span>
+    </section>
+
+    <!-- ===================== 11. POC INSIGHTS & LIMITATIONS ===================== -->
+    <section class="slide">
+      <div class="slide-header"><h4>Proof of concept · what we learned</h4><span class="tag">Insights &amp; limitations</span></div>
+      <div class="slide-content">
+        <h2>The pipeline works end to end; the open question is validity</h2>
+        <div class="detail-body">
+          <div class="detail-col">
+            <div class="detail-block">
+              <h3>Observations on the pilot (n = 14, descriptive)</h3>
+              <ul>
+                <li>The mandate shows even here: a dedicated Limitations section in <strong>0 of 4</strong> papers from 2020–21 and <strong>10 of 10</strong> from 2022–26.</li>
+                <li>Rules miss evidence without a heading. The LLM found a compute budget in a 2021 Findings paper:
+                  <div class="quote">"…a machine with 4xV100 32G GPUs… Total training time…"</div></li>
+                <li>The LLM uses applicability: a 2021 position paper gets N/A for compute and licensing, where rules say "not reported".</li>
+                <li>Licensing: <strong>9 of 14</strong> papers mention reused assets without naming a licence. AI assistance is disclosed in <strong>1 of 14</strong>.</li>
+              </ul>
+            </div>
+            <div class="detail-block">
+              <h3>Cost and runtime (Gemini run 1)</h3>
+              <ul>
+                <li>~22k prompt tokens and ~16.5 s per paper; whole pilot ≈ <strong>$0.08</strong></li>
+                <li>Projected full corpus (16,618 papers): ≈ <strong>$95</strong>, or ≈ $47 with the batch API</li>
+              </ul>
+            </div>
+          </div>
+          <div class="detail-col">
+            <div class="detail-block warn">
+              <h3>Limitations of the PoC</h3>
+              <ul>
+                <li><strong>No human reference yet:</strong> agreement between evaluators is not accuracy. We cannot yet say which evaluator is right.</li>
+                <li><strong>n = 14:</strong> no statistical claims; the pilot checks the pipeline and the workload.</li>
+                <li><strong>Rubric 1.0.0-poc is not frozen.</strong> The I1 rule ("embedded in Conclusion = inadequate") still has to be checked against each year's policy wording.</li>
+                <li><strong>I4–I6 have no verified mandate</strong>, so every paper gets compliance N/A; only presence is tracked for them.</li>
+                <li><strong>One model, one run, no repeats.</strong> The parser version was not stored in these archived runs; new runs record it.</li>
+              </ul>
+            </div>
+          </div>
+        </div>
+      </div>
+      <span class="page-num">11</span>
+    </section>
+
+    <!-- ===================== 12. NEXT STEPS ===================== -->
+    <section class="slide">
+      <div class="slide-header"><h4>Next steps</h4><span class="tag">Plan</span></div>
+      <div class="slide-content">
+        <h2>From pilot to a validated, longitudinal estimate</h2>
+        <div class="timeline-track">
+          <div class="timeline-step">
+            <div class="step-circle">1</div>
+            <div class="step-when">Now → Phase 2 (2.12)</div>
+            <div class="step-title">Pilot validation</div>
+            <ul class="step-desc"><li>Finish double annotation of the 14 pilot papers</li><li>Per-item κ; rules and LLM vs. humans</li><li>Rubric v1.1 with clearer coding rules</li></ul>
+          </div>
+          <div class="timeline-step">
+            <div class="step-circle">2</div>
+            <div class="step-when">Development set</div>
+            <div class="step-title">Tune, then freeze</div>
+            <ul class="step-desc"><li>70 development papers (10 per year)</li><li>Prompt and rubric tuned only here</li><li>Freeze model, prompt, rubric and parser</li></ul>
+          </div>
+          <div class="timeline-step">
+            <div class="step-circle">3</div>
+            <div class="step-when">Held-out test set</div>
+            <div class="step-title">Validate the evaluator</div>
+            <ul class="step-desc"><li>140 test papers (20 per year), blind labels</li><li>Per-item P / R / F1, macro-F1, confusion</li><li>Abstention and applicability errors</li></ul>
+          </div>
+          <div class="timeline-step">
+            <div class="step-circle">4</div>
+            <div class="step-when">Final phase (13.01)</div>
+            <div class="step-title">Full corpus &amp; trends</div>
+            <ul class="step-desc"><li>Run on all 16,618 papers</li><li>Yearly rates with 95% CIs, Main vs. Findings</li><li>Before/after mandate differences, Holm-adjusted</li></ul>
+          </div>
+        </div>
+        <div class="feedback-strip">
+          <h4>Also in Phase 2 (from the proposal feedback)</h4>
+          <p>Extended SOTA table · dataset cards with READY / TO COLLECT status and sizes · pipeline figure and weekly plan with owners · named annotators · agreed division of work with the NAACL and ACL teams on Topic 4.</p>
+        </div>
+      </div>
+      <span class="page-num">12</span>
+    </section>
+
+    <!-- ===================== 13. CLOSING ===================== -->
+    <section class="slide layout-closing">
+      <div class="closing-decoration"></div>
+      <div class="closing-decoration-2"></div>
+      <div class="accent-line" style="margin: 0 auto 30px;"></div>
+      <h1>Thank you</h1>
+      <p class="closing-sub">Rules on paper vs. reporting in practice: a dated policy register, a 6-item rubric, and an LLM evaluator that we validate against human annotation.</p>
+      <span class="cta-btn">Questions?</span>
+      <p class="closing-contact">Michał Iwaniuk · Bartłomiej Borycki · Miłosz Chodań · Mikołaj Guzik<br>Supervisor: Filip Kucia · Warsaw University of Technology</p>
+    </section>
+
+  </div>
+</div>
+
+  <div class="slide-counter"><span id="current">1</span> / <span id="total">13</span></div>
+  <div class="progress-bar" id="progress"></div>
+  <div class="nav-controls">
+    <button class="nav-btn" id="prevBtn" onclick="changeSlide(-1)" aria-label="Previous slide">
+      <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><polyline points="15 18 9 12 15 6"></polyline></svg>
+    </button>
+    <button class="nav-btn" id="nextBtn" onclick="changeSlide(1)" aria-label="Next slide">
+      <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><polyline points="9 18 15 12 9 6"></polyline></svg>
+    </button>
+  </div>
+
+  <script>
+    const deck = document.getElementById('deck');
+    const slides = document.querySelectorAll('.slide');
+    const currentEl = document.getElementById('current');
+    const totalEl = document.getElementById('total');
+    const progressEl = document.getElementById('progress');
+    const prevBtn = document.getElementById('prevBtn');
+    const nextBtn = document.getElementById('nextBtn');
+    let current = 0;
+    const total = slides.length;
+    totalEl.textContent = total;
+
+    // Scale the fixed 1920x1080 stage to fit the window (letterboxed, centred).
+    function fitDeck() {
+      const s = Math.min(window.innerWidth / 1920, window.innerHeight / 1080);
+      const x = (window.innerWidth - 1920 * s) / 2;
+      const y = (window.innerHeight - 1080 * s) / 2;
+      deck.style.transform = `translate(${x}px, ${y}px) scale(${s})`;
+    }
+    window.addEventListener('resize', fitDeck);
+    fitDeck();
+
+    function updateSlide() {
+      slides.forEach((slide, i) => {
+        slide.classList.remove('active', 'prev');
+        if (i === current) slide.classList.add('active');
+        else if (i < current) slide.classList.add('prev');
+      });
+      currentEl.textContent = current + 1;
+      progressEl.style.width = ((current + 1) / total * 100) + '%';
+      prevBtn.disabled = current === 0;
+      nextBtn.disabled = current === total - 1;
+      try { history.replaceState(null, '', '#' + (current + 1)); } catch (e) {}
+    }
+
+    function changeSlide(dir) {
+      const next = current + dir;
+      if (next >= 0 && next < total) { current = next; updateSlide(); }
+    }
+
+    document.addEventListener('keydown', (e) => {
+      if (e.key === 'ArrowRight' || e.key === ' ' || e.key === 'PageDown') { e.preventDefault(); changeSlide(1); }
+      else if (e.key === 'ArrowLeft' || e.key === 'PageUp') { e.preventDefault(); changeSlide(-1); }
+      else if (e.key === 'Home') { e.preventDefault(); current = 0; updateSlide(); }
+      else if (e.key === 'End') { e.preventDefault(); current = total - 1; updateSlide(); }
+    });
+
+    let touchStartX = 0;
+    document.addEventListener('touchstart', (e) => { touchStartX = e.changedTouches[0].screenX; }, { passive: true });
+    document.addEventListener('touchend', (e) => {
+      const diff = touchStartX - e.changedTouches[0].screenX;
+      if (Math.abs(diff) > 50) changeSlide(diff > 0 ? 1 : -1);
+    }, { passive: true });
+
+    const start = parseInt((location.hash || '').slice(1), 10);
+    if (start >= 1 && start <= total) current = start - 1;
+    updateSlide();
+  </script>
+</body>
+</html>
