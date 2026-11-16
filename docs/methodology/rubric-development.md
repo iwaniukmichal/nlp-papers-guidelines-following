@@ -168,6 +168,13 @@ we never infer a status from neighbouring years.
 | criteria reviewers are asked to assess, with no author obligation ("Reviewers will be asked to assess …") | `reviewer_criterion` |
 | "encouraged", "we ask", "should", "optional", with no sanction | `recommended` |
 
+**Stage (submission vs camera-ready).** All requirements are treated as applying to the published
+(camera-ready) version, because that is what we evaluate: submission requirements carry over to the
+final paper, and content dropped after acceptance counts as non-compliance. No separate stage column
+is kept. Camera-ready instructions are archived only for 2020–2021 and add no reporting requirements
+beyond page allowances; the Responsible NLP checklist appended to camera-ready PDFs from 2025 is
+excluded from the evidence by design.
+
 Further coding rules (fixed after the verification of 2026-11-15):
 
 - **Guidance text counts.** Explanatory bullets under a checklist question are part of that
