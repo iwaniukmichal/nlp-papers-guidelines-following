@@ -11,20 +11,27 @@ LIM_HEADING = re.compile(
 )
 LIM_MENTION = re.compile(r"\blimitation(?:s)?\b[^.\n]{0,200}", re.I)
 ETH_HEADING = re.compile(
-    r"(?:^|\n)\s*(?:\d+\.?\s*)?(Ethics\s+Statement|Ethical\s+Considerations|Broader\s+Impact)\s*\n(.{20,400})",
+    r"(?:^|\n)\s*(?:\d+\.?\s*)?(Ethics\s+Statement|Ethical\s+Considerations|Broader\s+Impacts?|Potential\s+Risks?(?:\s+and\s+Ethical\s+Considerations)?)\s*\n(.{20,400})",
     re.I | re.S,
 )
 ETH_BOILERPLATE = re.compile(r"no\s+ethical\s+(?:concerns|issues|risks)", re.I)
 COMP_FULL = re.compile(
-    r"(\b\d+(?:\.\d+)?\s*(?:GPU[\s-]*hours?|CPU[\s-]*hours?|hours?\s+on\s+\d*\s*(?:NVIDIA|A100|V100|RTX|TPU|GPU))[^.\n]{0,120})",
+    r"(\b\d+(?:\.\d+)?\s*(?:GPU[\s-]*hours?|CPU[\s-]*hours?|(?:hours?|days?|minutes?)\s+on\s+\d*\s*[x×]?\s*(?:NVIDIA|A100|V100|H100|RTX|TPU|GPU))[^.\n]{0,120})",
     re.I,
 )
-COMP_HW_ONLY = re.compile(r"\b(NVIDIA\s+(?:A100|V100|RTX|T4|P100|H100)|GeForce|TPU\s*v\d)\b[^.\n]{0,100}", re.I)
+COMP_HW_ONLY = re.compile(r"\b(NVIDIA\s+(?:A100|V100|RTX|T4|P100|H100)|GeForce|\d+\s*[x×]\s*(?:V100|A100|H100)|TPU\s*v\d)\b[^.\n]{0,100}", re.I)
+COMP_TIME_NEAR_HW = re.compile(
+    r"\b(?:training\s+time|trained\s+.*\s+for)\s+(?:is\s+)?(?:about|approximately|~)?\s*\d+(?:\.\d+)?\s*(?:hours?|days?|minutes?)\b",
+    re.I,
+)
 LICENSE = re.compile(
-    r"\b(CC[\s-]BY(?:[\s-](?:SA|NC|ND))*[\s-]*\d\.\d|MIT\s+License|Apache[\s-]*2\.0|GPL[\s-]*v?[23]|BSD\s+License)\b[^.\n]{0,100}",
+    r"\b(CC[\s-]*BY(?:[\s-]*(?:SA|NC|ND))*[\s-]*\d(?:\.\d)?|Creative\s+Commons|MIT\s+Licen[cs]e|Apache[\s-]*(?:Licen[cs]e|2\.0)|GPL[\s-]*v?[23]|BSD\s+Licen[cs]e|End\s+User\s+Licen[cs]e\s+Agreement|EULA|data[\s-]use\s+agreement|Open\s+Access\s+Data\s+Use\s+Terms|Community\s+Licen[cs]e|public\s+domain)\b[^.\n]{0,100}",
     re.I,
 )
-ARTIFACT_URL = re.compile(r"https?://(?:github\.com|huggingface\.co)/[^\s)\]]+", re.I)
+ARTIFACT_URL = re.compile(
+    r"https?://(?:www\.)?(?:github\.com|gitlab\.com|bitbucket\.org|zenodo\.org|osf\.io|huggingface\.co|parl\.ai)/[^\s)\]>\"']+",
+    re.I,
+)
 AI_ASSIST = re.compile(
     r"((?:ChatGPT|Copilot|Grammarly|Claude|LLM|AI\s+assistant)[^.\n]{0,120}(?:writing|editing|grammar|polishing|coding|proofreading)[^.\n]{0,80})",
     re.I,
@@ -72,6 +79,7 @@ def evaluate_paper(paper: dict, parsed: dict, rubric: dict) -> list[dict]:
     eth_boilerplate = bool(eth_match and ETH_BOILERPLATE.search(eth_match.group(2)))
     comp_full = COMP_FULL.search(text)
     comp_hw_only = COMP_HW_ONLY.search(text)
+    comp_time = COMP_TIME_NEAR_HW.search(text)
     lic_match = LICENSE.search(text)
     url_only = ARTIFACT_URL.search(text)
     ai_match = AI_ASSIST.search(text)
@@ -116,6 +124,10 @@ def evaluate_paper(paper: dict, parsed: dict, rubric: dict) -> list[dict]:
                 ev_status = "adequately_reported"
                 loc = find_page_for_offset(text, comp_full.start())
                 quote = comp_full.group(1).strip()
+            elif comp_hw_only and comp_time:
+                ev_status = "adequately_reported"
+                loc = find_page_for_offset(text, comp_hw_only.start())
+                quote = f"{comp_hw_only.group(0).strip()} ... {comp_time.group(0).strip()}"
             elif comp_hw_only:
                 ev_status = "explicitly_reported_inadequate"
                 loc = find_page_for_offset(text, comp_hw_only.start())
@@ -140,5 +152,12 @@ def evaluate_paper(paper: dict, parsed: dict, rubric: dict) -> list[dict]:
 
         compliance = derive_compliance(pol_applies, prac_applies, ev_status)
         results.append(_record(paper, iid, pol_applies, prac_applies, ev_status, compliance, quote, loc))
+
+    for ind in rubric.get("automatic_indicators", []):
+        if ind["indicator_id"] == "A1_code_link":
+            ev_status = "adequately_reported" if url_only else "not_reported"
+            loc = find_page_for_offset(text, url_only.start()) if url_only else ""
+            quote = url_only.group(0).strip() if url_only else ""
+            results.append(_record(paper, "A1_code_link", False, True, ev_status, "Not applicable", quote, loc))
 
     return results

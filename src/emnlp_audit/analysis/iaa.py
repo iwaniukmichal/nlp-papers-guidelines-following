@@ -24,8 +24,21 @@ def raw_agreement(labels_a: list[str], labels_b: list[str]) -> float:
 
 
 def load_double_annotations(sheet_path: Path) -> dict[tuple[str, str], list[tuple[str, str]]]:
-    """Return {(anthology_id, item_id): [(annotator, evidence_status), ...]} for filled rows."""
-    rows = read_csv(sheet_path)
+    """Return {(anthology_id, item_id): [(annotator, evidence_status), ...]} for filled rows.
+
+    Reads from individual files in `<sheet_path.parent>/by_annotator/*.csv` if any have filled labels,
+    otherwise reads from `sheet_path`.
+    """
+    by_ann_dir = Path(sheet_path).parent / "by_annotator"
+    rows = []
+    if by_ann_dir.exists():
+        for p in sorted(by_ann_dir.glob("annotation_sheet_*.csv")):
+            rows.extend(read_csv(p))
+    if not rows or not any(
+        r.get([k for k in rows[0].keys() if k.startswith("evidence_status_human")][0], "").strip()
+        for r in rows
+    ):
+        rows = read_csv(sheet_path) if Path(sheet_path).exists() else []
     if not rows:
         return {}
     status_col = [k for k in rows[0].keys() if k.startswith("evidence_status_human")][0]

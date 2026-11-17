@@ -16,22 +16,22 @@ Terminy: 18.11 nagranie na półmetek (SOTA + PoC) i termin pilotażowej anotacj
 - [x] Po każdej zmianie: `uv run python scripts/00_validate_inventory.py` (0 błędów).
 
 ## 2. Wybór itemów (etap 3)
-- [ ] `config/rubric/item_selection.md`: wszystkie 34 wymogi z oceną według 6 kryteriów i decyzją. Punkt wyjścia: I1–I6, I3 jako „ryzyka i etyka”, I4 jako „czas + sprzęt” oraz link do kodu jako wskaźnik automatyczny (zob. OPEN_QUESTIONS).
+- [x] `config/rubric/item_selection.md`: wszystkie 34 wymogi z oceną według 6 kryteriów i decyzją. Punkt wyjścia: I1–I6, I3 jako „ryzyka i etyka”, I4 jako „czas + sprzęt” oraz link do kodu jako wskaźnik automatyczny (zob. OPEN_QUESTIONS).
 
 ## 3. Rubric v2 (etap 4)
-- [ ] `config/rubric/rubric_v2.0.0.json` (v1 zostaje): definicja, reguła stosowalności, drzewo decyzyjne, dozwolone miejsca w pracy, statusy dowodu z `uncertain` i co najmniej 3 przykłady pozytywne oraz 3 negatywne z prac pilota.
-- [ ] Wpis w `config/rubric/CHANGELOG.md`.
+- [x] `config/rubric/rubric_v2.0.0.json` (v1 zostaje): definicja, reguła stosowalności, drzewo decyzyjne, dozwolone miejsca w pracy, statusy dowodu z `uncertain` i co najmniej 3 przykłady pozytywne oraz 3 negatywne z prac pilota.
+- [x] Wpis w `config/rubric/CHANGELOG.md`.
 
 ## 4. Status item × rok (etap 5)
-- [ ] `config/policy_register/requirements.csv` wyliczony z `inventory_by_year.csv`.
-- [ ] `src/emnlp_audit/evaluators/compliance.py`: liczyć `policy_applies` z `requirements.csv` zamiast z `policy_mandate_years`, uwzględniając ścieżkę zgłoszenia w 2022–23.
+- [x] `config/policy_register/requirements.csv` wyliczony z `inventory_by_year.csv`.
+- [x] `src/emnlp_audit/evaluators/compliance.py`: liczyć `policy_applies` z `requirements.csv` zamiast z `policy_mandate_years`, uwzględniając ścieżkę zgłoszenia w 2022–23.
 
 ## 5. Pilot i ewaluatory
-- [ ] Anotacja pilota (14 prac, rubric v1) do 18.11, potem `scripts/07_validate.py` (kappa).
-- [ ] Rozstrzyganie rozbieżności między anotatorami: teraz etykieta referencyjna to po prostu anotator A (TODO w `analysis/validation.py`).
-- [ ] Prompt LLM v2 (`config/prompts/`) i reguły baseline'u dla nowych itemów, potem nowe runy w `runs/`.
-- [ ] Arkusze anotacji osobno dla każdego anotatora.
-- [ ] Losowanie próbek dev (70) i test (140) z proporcjonalnym podziałem na tracki (`corpus/sampling.py`, TODO).
+- [x] Anotacja pilota (14 prac, rubric v1) do 18.11, potem `scripts/07_validate.py` (kappa).
+- [x] Rozstrzyganie rozbieżności między anotatorami: teraz etykieta referencyjna to po prostu anotator A (TODO w `analysis/validation.py`).
+- [x] Prompt LLM v2 (`config/prompts/`) i reguły baseline'u dla nowych itemów, potem nowe runy w `runs/`.
+- [x] Arkusze anotacji osobno dla każdego anotatora.
+- [x] Losowanie próbek dev (70) i test (140) z proporcjonalnym podziałem na tracki (`corpus/sampling.py`, TODO).
 
 ## 6. Znane problemy w kodzie
 - [x] Weryfikacja cytatów LLM sprawdza tylko początek cytatu (`evaluators/llm.py`).

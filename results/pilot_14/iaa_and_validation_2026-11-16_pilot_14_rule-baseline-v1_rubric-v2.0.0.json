@@ -1,0 +1,170 @@
+{
+  "I1_limitations_section": {
+    "n_double_annotated": 14,
+    "n_reference_resolved": 14,
+    "n_disagreements_pending_adjudication": 0,
+    "human_raw_agreement": 1.0,
+    "human_cohens_kappa": 1.0,
+    "llm_vs_human_macro_f1": 0.5556,
+    "llm_per_class": {
+      "adequately_reported": {
+        "precision": 1.0,
+        "recall": 1.0,
+        "f1": 1.0,
+        "support": 10
+      },
+      "explicitly_reported_inadequate": {
+        "precision": 0.0,
+        "recall": 0.0,
+        "f1": 0.0,
+        "support": 2
+      },
+      "not_reported": {
+        "precision": 0.5,
+        "recall": 1.0,
+        "f1": 0.6667,
+        "support": 2
+      }
+    }
+  },
+  "I2_specific_limitation": {
+    "n_double_annotated": 14,
+    "n_reference_resolved": 14,
+    "n_disagreements_pending_adjudication": 0,
+    "human_raw_agreement": 0.9286,
+    "human_cohens_kappa": 0.6316,
+    "llm_vs_human_macro_f1": 0.6348,
+    "llm_per_class": {
+      "adequately_reported": {
+        "precision": 1.0,
+        "recall": 0.7692,
+        "f1": 0.8696,
+        "support": 13
+      },
+      "not_reported": {
+        "precision": 0.25,
+        "recall": 1.0,
+        "f1": 0.4,
+        "support": 1
+      }
+    }
+  },
+  "I3_ethical_risks": {
+    "n_double_annotated": 14,
+    "n_reference_resolved": 14,
+    "n_disagreements_pending_adjudication": 0,
+    "human_raw_agreement": 0.9286,
+    "human_cohens_kappa": 0.8028,
+    "llm_vs_human_macro_f1": 0.3426,
+    "llm_per_class": {
+      "adequately_reported": {
+        "precision": 1.0,
+        "recall": 0.6364,
+        "f1": 0.7778,
+        "support": 11
+      },
+      "not_applicable": {
+        "precision": 0.0,
+        "recall": 0.0,
+        "f1": 0.0,
+        "support": 2
+      },
+      "not_reported": {
+        "precision": 0.1429,
+        "recall": 1.0,
+        "f1": 0.25,
+        "support": 1
+      }
+    }
+  },
+  "I4_computational_budget": {
+    "n_double_annotated": 14,
+    "n_reference_resolved": 14,
+    "n_disagreements_pending_adjudication": 0,
+    "human_raw_agreement": 0.8571,
+    "human_cohens_kappa": 0.791,
+    "llm_vs_human_macro_f1": 0.3286,
+    "llm_per_class": {
+      "adequately_reported": {
+        "precision": 0.0,
+        "recall": 0.0,
+        "f1": 0.0,
+        "support": 3
+      },
+      "explicitly_reported_inadequate": {
+        "precision": 0.6,
+        "recall": 0.6,
+        "f1": 0.6,
+        "support": 5
+      },
+      "not_applicable": {
+        "precision": 0.0,
+        "recall": 0.0,
+        "f1": 0.0,
+        "support": 1
+      },
+      "not_reported": {
+        "precision": 0.5556,
+        "recall": 1.0,
+        "f1": 0.7143,
+        "support": 5
+      }
+    }
+  },
+  "I5_asset_licensing": {
+    "n_double_annotated": 14,
+    "n_reference_resolved": 14,
+    "n_disagreements_pending_adjudication": 0,
+    "human_raw_agreement": 0.9286,
+    "human_cohens_kappa": 0.8641,
+    "llm_vs_human_macro_f1": 0.5253,
+    "llm_per_class": {
+      "adequately_reported": {
+        "precision": 0.8333,
+        "recall": 1.0,
+        "f1": 0.9091,
+        "support": 5
+      },
+      "explicitly_reported_inadequate": {
+        "precision": 1.0,
+        "recall": 0.5,
+        "f1": 0.6667,
+        "support": 8
+      },
+      "not_applicable": {
+        "precision": 0.0,
+        "recall": 0.0,
+        "f1": 0.0,
+        "support": 1
+      },
+      "not_reported": {
+        "precision": 0.0,
+        "recall": 0.0,
+        "f1": 0.0,
+        "support": 0
+      }
+    }
+  },
+  "I6_ai_assistance": {
+    "n_double_annotated": 14,
+    "n_reference_resolved": 14,
+    "n_disagreements_pending_adjudication": 0,
+    "human_raw_agreement": 1.0,
+    "human_cohens_kappa": 1.0,
+    "llm_vs_human_macro_f1": 0.4815,
+    "llm_per_class": {
+      "adequately_reported": {
+        "precision": 0.0,
+        "recall": 0.0,
+        "f1": 0.0,
+        "support": 1
+      },
+      "not_reported": {
+        "precision": 0.9286,
+        "recall": 1.0,
+        "f1": 0.963,
+        "support": 13
+      }
+    }
+  }
+}

@@ -1,8 +1,11 @@
-"""Validation of an automatic evaluator against human labels (per-item P/R/F1, macro-F1)."""
+"""Validation of an automatic evaluator against human labels (per-item P/R/F1, macro-F1)
+with explicit adjudication of annotator disagreements."""
 
 from collections import defaultdict
+from pathlib import Path
 
 from emnlp_audit.analysis.iaa import cohens_kappa, raw_agreement
+from emnlp_audit.files import read_csv, write_csv
 
 
 def macro_f1(y_true: list[str], y_pred: list[str]) -> dict:
@@ -31,25 +34,96 @@ def macro_f1(y_true: list[str], y_pred: list[str]) -> dict:
     }
 
 
-def iaa_and_validation_report(grouped_human: dict, evaluator_records: list[dict]) -> dict:
-    """
-    Per item: human-human raw agreement and Cohen's kappa, plus evaluator-vs-human macro-F1.
+def load_adjudicated_labels(adjudication_path: Path | None) -> dict[tuple[str, str], str]:
+    """Load resolved reference labels {(anthology_id, item_id): adjudicated_status}."""
+    if not adjudication_path or not Path(adjudication_path).exists():
+        return {}
+    out = {}
+    for r in read_csv(adjudication_path):
+        val = (r.get("adjudicated_status") or "").strip()
+        if val:
+            out[(r["anthology_id"], r["item_id"])] = val
+    return out
 
-    TODO: the reference label currently falls back to annotator A when annotators disagree;
-    replace with adjudicated labels once adjudication is done (proposal: adjudication supplies reference labels).
+
+def sync_adjudication_sheet(grouped_human: dict, adjudication_path: Path) -> int:
+    """Create or update `adjudication.csv` with any disagreements between annotators A and B."""
+    existing = {}
+    if Path(adjudication_path).exists():
+        for r in read_csv(adjudication_path):
+            existing[(r["anthology_id"], r["item_id"])] = r
+
+    rows = []
+    unresolved = 0
+    for (aid, iid), ann_list in sorted(grouped_human.items()):
+        if len(ann_list) >= 2:
+            (ann_a, a_val), (ann_b, b_val) = ann_list[0], ann_list[1]
+            if a_val != b_val:
+                prev = existing.get((aid, iid), {})
+                adj_val = (prev.get("adjudicated_status") or "").strip()
+                if not adj_val:
+                    unresolved += 1
+                rows.append({
+                    "anthology_id": aid,
+                    "item_id": iid,
+                    "annotator_a": ann_a,
+                    "status_a": a_val,
+                    "annotator_b": ann_b,
+                    "status_b": b_val,
+                    "adjudicated_status": adj_val,
+                    "adjudicated_by": prev.get("adjudicated_by", ""),
+                    "notes": prev.get("notes", ""),
+                })
+    if rows:
+        write_csv(
+            adjudication_path,
+            rows,
+            [
+                "anthology_id",
+                "item_id",
+                "annotator_a",
+                "status_a",
+                "annotator_b",
+                "status_b",
+                "adjudicated_status",
+                "adjudicated_by",
+                "notes",
+            ],
+        )
+    return unresolved
+
+
+def iaa_and_validation_report(
+    grouped_human: dict,
+    evaluator_records: list[dict],
+    adjudicated_labels: dict[tuple[str, str], str] | None = None,
+) -> dict:
     """
+    Per item: pre-adjudication human-human raw agreement and Cohen's kappa, plus
+    evaluator-vs-human macro-F1 against reference labels (consensus when A == B, or
+    adjudicated_status when A != B).
+    """
+    adjudicated = adjudicated_labels or {}
     eval_map = {(e["anthology_id"], e["item_id"]): e["evidence_status"] for e in evaluator_records}
 
     by_item_a, by_item_b = defaultdict(list), defaultdict(list)
     by_item_gold, by_item_pred = defaultdict(list), defaultdict(list)
+    by_item_unadjudicated = defaultdict(int)
 
     for (aid, iid), ann_list in grouped_human.items():
         if len(ann_list) >= 2:
             a_val, b_val = ann_list[0][1], ann_list[1][1]
             by_item_a[iid].append(a_val)
             by_item_b[iid].append(b_val)
-            gold = a_val  # placeholder until adjudication (see TODO above)
-            if (aid, iid) in eval_map:
+            if a_val == b_val:
+                gold = a_val
+            elif (aid, iid) in adjudicated:
+                gold = adjudicated[(aid, iid)]
+            else:
+                by_item_unadjudicated[iid] += 1
+                gold = None
+
+            if gold is not None and (aid, iid) in eval_map:
                 by_item_gold[iid].append(gold)
                 by_item_pred[iid].append(eval_map[(aid, iid)])
 
@@ -59,6 +133,8 @@ def iaa_and_validation_report(grouped_human: dict, evaluator_records: list[dict]
         f1_stats = macro_f1(by_item_gold[iid], by_item_pred[iid])
         report[iid] = {
             "n_double_annotated": len(a_list),
+            "n_reference_resolved": len(by_item_gold[iid]),
+            "n_disagreements_pending_adjudication": by_item_unadjudicated[iid],
             "human_raw_agreement": raw_agreement(a_list, b_list),
             "human_cohens_kappa": cohens_kappa(a_list, b_list),
             "llm_vs_human_macro_f1": f1_stats["macro_f1"],

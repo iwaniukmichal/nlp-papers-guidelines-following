@@ -1,0 +1,527 @@
+{
+  "rubric_version": "2.0.0",
+  "description": "Operationalised 6-item deductive coding rubric (v2.0.0) for EMNLP 2020-2026 papers, grounded in the verified historical requirement inventory (config/policy_register/inventory.csv). Separates policy applicability (computed from config/policy_register/requirements.csv), practice applicability (true/false/uncertain), 5-state evidence status (adding explicit 'uncertain' state), decision trees, permitted evidence locations, and >=3 positive and >=3 negative examples per item drawn from pilot_14 papers.",
+  "evidence_status_definitions": {
+    "not_applicable": "The reporting item does not apply to the paper's methodology or content (`practice_applies == false`).",
+    "not_reported": "The reporting item applies to the paper (`practice_applies == true`), and the full text (not truncated) contains no section, statement, or mention of the target information in any permitted location.",
+    "explicitly_reported_inadequate": "The paper explicitly mentions the topic or includes a relevant heading in a permitted location, but fails substantive adequacy requirements (e.g., generic boilerplate disclaimer, limitations buried without a heading or only in an appendix for I1, hardware name without compute duration/budget for I4, dataset citation/URL without licence name for I5).",
+    "adequately_reported": "The paper provides concrete, verifiable evidence in a permitted location satisfying all substantive requirements of the item's decision tree.",
+    "uncertain": "Applicability is undecidable from the paper text (`practice_applies == 'uncertain'`), the PDF parse failed or was truncated at MAX_PAPER_CHARS (120,000 chars) with no positive evidence in the prefix, or an evaluator's quoted span could not be verified in the extracted text."
+  },
+  "derived_compliance_rules": {
+    "Compliant": "policy_applies == true AND practice_applies == true AND evidence_status == 'adequately_reported'",
+    "Non-compliant": "policy_applies == true AND practice_applies == true AND evidence_status IN ['not_reported', 'explicitly_reported_inadequate']",
+    "Not applicable": "policy_applies == false OR practice_applies == false OR evidence_status == 'not_applicable'",
+    "Uncertain": "policy_applies == 'unverified' OR practice_applies == 'uncertain' OR evidence_status == 'uncertain'"
+  },
+  "items": [
+    {
+      "item_id": "I1_limitations_section",
+      "name": "Dedicated Limitations section (Structural)",
+      "area": "limitations",
+      "req_ids": ["LIMITATIONS_SECTION"],
+      "checklist_code": "EMNLP 2022-2023 CFP / ARR 2024-2026 Mandatory Section",
+      "policy_mandate_years": [2022, 2023, 2024, 2025, 2026],
+      "permitted_locations": ["main_text", "before_references"],
+      "practice_applicability_rule": "Applies to ALL eligible research papers (`practice_applies = true` for every Main and Findings paper).",
+      "decision_tree": [
+        "Q1: Does the paper contain an explicit standalone section, subsection, or bolded paragraph heading titled 'Limitations' (or compound heading containing 'Limitations', e.g., 'Limitations and Future Work', 'Limitations and Ethical Considerations')?",
+        "  -> If NO: Does the paper discuss limitations of its own work inline inside another section (e.g., Conclusion/Discussion) or only under an Appendix heading after References?",
+        "       -> If YES (inline or Appendix-only): code `explicitly_reported_inadequate`.",
+        "       -> If NO (no limitations discussion anywhere): code `not_reported`.",
+        "  -> If YES (explicit 'Limitations' heading exists): Is the heading located in the main paper body or immediately after Conclusions / before References (not buried inside a post-References Appendix)?",
+        "       -> If YES (in main body / before References): code `adequately_reported`.",
+        "       -> If NO (placed only after References in an Appendix): code `explicitly_reported_inadequate`."
+      ],
+      "criteria": {
+        "adequately_reported": "Contains a dedicated section, subsection, or clearly marked paragraph heading titled 'Limitations' (or compound heading including 'Limitations') located in the main paper body or before the References section.",
+        "explicitly_reported_inadequate": "Discusses limitations only inline inside another section (e.g., 'Conclusion and Future Work') without a 'Limitations' heading, OR places the 'Limitations' section only in an Appendix after the References.",
+        "not_reported": "Contains neither a 'Limitations' heading nor any identifiable discussion of limitations of the authors' work.",
+        "not_applicable": "Never used (`practice_applies` is always `true`).",
+        "uncertain": "PDF extraction failure or corrupted page order prevents determining whether a 'Limitations' heading precedes References."
+      },
+      "positive_examples": [
+        {
+          "anthology_id": "2022.emnlp-main.282",
+          "quote": "6 Limitations There are two main drawbacks of our model. First, our model employs multiple graph pooling, unpooling, and convolution layers, resulting in high time complexity and high computational resource demand.",
+          "location": "Page 9, Section 6 Limitations (before References)",
+          "status": "adequately_reported",
+          "reason": "Dedicated numbered section titled '6 Limitations' placed after Conclusions and before References."
+        },
+        {
+          "anthology_id": "2024.emnlp-main.210",
+          "quote": "Limitations While evaluating LLMs from the user-centric perspective offers considerable advantages, there are certain limitations in our URS benchmark.",
+          "location": "Page 9, Limitations (before Ethical Considerations and References)",
+          "status": "adequately_reported",
+          "reason": "Unnumbered standalone section titled 'Limitations' placed at the end of the main text before References."
+        },
+        {
+          "anthology_id": "2025.findings-emnlp.1117",
+          "quote": "Limitations and Future Work We note several limitations of our current study.",
+          "location": "Page 10, Limitations and Future Work (before References)",
+          "status": "adequately_reported",
+          "reason": "Compound heading explicitly containing 'Limitations' located before References."
+        }
+      ],
+      "negative_examples": [
+        {
+          "anthology_id": "2020.emnlp-main.656",
+          "quote": "Generality of Gendered Words. The gendered word lists used may not be comprehensive (Zhao et al., 2018a,b; Hoyle et al., 2019).",
+          "location": "Page 14, Appendix A.1 Discussion of Generation Quality",
+          "status": "explicitly_reported_inadequate",
+          "reason": "Discusses a limitation only inside an Appendix subsection ('Discussion of Generation Quality') after References, without a 'Limitations' section before References."
+        },
+        {
+          "anthology_id": "2021.findings-emnlp.380",
+          "quote": "While we anticipate that the task we are proposing can have a significant positive impact in many domains (e.g., accessibility, storytelling, entertainment), we acknowledge that they can be abused (e.g., fake comment generation)",
+          "location": "Page 9, Conclusion and Future Work",
+          "status": "explicitly_reported_inadequate",
+          "reason": "Mentions caveats inside 'Conclusion and Future Work' and 'Broader Impact' without a 'Limitations' heading."
+        },
+        {
+          "anthology_id": "2020.findings-emnlp.58",
+          "quote": "",
+          "location": "Entire paper",
+          "status": "not_reported",
+          "reason": "Contains no 'Limitations' section or heading anywhere in the paper."
+        }
+      ],
+      "boundary_examples": [
+        {
+          "description": "A bolded paragraph header 'Limitations.' at the end of the Conclusion section on the final page before References counts as `adequately_reported`; an unbolded sentence starting with 'One limitation is...' inside a general paragraph counts as `explicitly_reported_inadequate`."
+        }
+      ],
+      "rule_baseline_hints": {
+        "heading_patterns": ["\\b(?:\\d+(?:\\.\\d+)?\\s+)?limitations?(?:\\s+and\\s+[a-z\\s]+)?\\b"],
+        "inline_keywords": ["limitation", "drawback", "shortcoming", "bottleneck", "caveat"]
+      }
+    },
+    {
+      "item_id": "I2_specific_limitation",
+      "name": "Specific limitation & consequence (Substantive)",
+      "area": "limitations",
+      "req_ids": ["LIMITATIONS_DISCUSSION"],
+      "checklist_code": "EMNLP 2022-2023 CFP / ARR 2024-2026 CFP + Checklist A1",
+      "policy_mandate_years": [2022, 2023, 2024, 2025, 2026],
+      "permitted_locations": ["main_text", "before_references", "appendix"],
+      "practice_applicability_rule": "Applies to ALL eligible research papers (`practice_applies = true`). Evaluated independently of I1 (a paper without a dedicated heading can still report a specific limitation inline or in an appendix).",
+      "decision_tree": [
+        "Q1: Does the paper (main text or ordinary appendix) mention any limitation, assumption, scope boundary, or weakness of the authors' own work?",
+        "  -> If NO: code `not_reported`.",
+        "  -> If YES: Does it state at least one concrete methodological assumption, scope restriction (e.g., language/domain/modality/architecture constraint), or empirical failure mode AND explain its consequence or implication (e.g., reduced accuracy, instability, bias, high compute cost, inability to generalise)?",
+        "       -> If YES: code `adequately_reported`.",
+        "       -> If NO (only generic boilerplate disclaimers, pure future-work wishes without explaining why the current method is limited, or disguised strengths): code `explicitly_reported_inadequate`."
+      ],
+      "criteria": {
+        "adequately_reported": "States at least one concrete assumption, scope restriction, or failure mode of the work AND its consequence for validity, performance, scalability, or generalisation.",
+        "explicitly_reported_inadequate": "Contains only generic disclaimers ('Our work has limitations'), pure future-work plans ('We will test more datasets in future work' without stating a boundary/consequence), or disguised strengths.",
+        "not_reported": "No discussion of limitations of the authors' work anywhere in the main text or ordinary appendices.",
+        "not_applicable": "Never used (`practice_applies` is always `true`).",
+        "uncertain": "Paper text is truncated at 120,000 chars with `not_reported` in the prefix, or quote verification fails."
+      },
+      "positive_examples": [
+        {
+          "anthology_id": "2022.emnlp-main.282",
+          "quote": "Second, the bipartite matching loss in Equation 9 is approximated. This may cause the values to enter the saturation zone of the softmax function, which will lead to the vanishing gradient problem. Therefore, the instability and the slow convergence during training are also limitations of our model.",
+          "location": "Page 9, Section 6 Limitations",
+          "status": "adequately_reported",
+          "reason": "Identifies a concrete mathematical approximation (Equation 9) and states its concrete consequence (vanishing gradients, training instability, slow convergence)."
+        },
+        {
+          "anthology_id": "2024.emnlp-main.210",
+          "quote": "Evaluation Method: Our approach aligns with prevailing practices in open-ended question evaluation, where GPT-4 is employed as the base evaluator. This could potentially lead to a bias toward responses resembling GPT’s style, thereby influencing the neutrality of the evaluation.",
+          "location": "Page 9, Limitations",
+          "status": "adequately_reported",
+          "reason": "States a concrete methodological design choice (using GPT-4 as judge) and its specific validity consequence (style bias compromising neutrality)."
+        },
+        {
+          "anthology_id": "2026.emnlp-main.357",
+          "quote": "Claim-locked reporting controls how structured statistical evidence is verbalized; it does not perform statistical validation, discover mechanisms, or guarantee truth beyond the evidence record. Errors in preprocessing, model specification, covariate selection, or evidence extraction propagate into the report if already present upstream.",
+          "location": "Page 9, Limitations",
+          "status": "adequately_reported",
+          "reason": "Explicitly delineates what the method does not guarantee and states the error-propagation consequence."
+        }
+      ],
+      "negative_examples": [
+        {
+          "anthology_id": "2021.emnlp-main.26",
+          "quote": "",
+          "location": "Entire paper",
+          "status": "not_reported",
+          "reason": "Position paper that critiques prior work but never states any methodological assumption, scope restriction, or limitation of its own analysis."
+        },
+        {
+          "anthology_id": "proposal-illustrative-1",
+          "quote": "Our method has limitations that we will address in future work.",
+          "location": "Illustrative boundary case (Proposal Section 4.3)",
+          "status": "explicitly_reported_inadequate",
+          "reason": "Generic boilerplate disclaimer with no concrete assumption, failure mode, or consequence."
+        },
+        {
+          "anthology_id": "proposal-illustrative-2",
+          "quote": "We will test other languages in future work.",
+          "location": "Illustrative boundary case (Proposal Section 4.3, EMNLP 2022 CFP)",
+          "status": "explicitly_reported_inadequate",
+          "reason": "Pure future-work statement without explaining why the method or linguistic assumption is restricted (as explicitly noted in EMNLP 2022 CFP)."
+        }
+      ],
+      "boundary_examples": [
+        {
+          "description": "Stating 'We only evaluated on English' alone is borderline (`explicitly_reported_inadequate` per EMNLP 2022 CFP guidance), whereas stating 'We generated and evaluated data in English, which may overlook persuasion strategies that manifest differently across other languages and collectivist cultures' (`2025.findings-emnlp.1117`) states the consequence and is `adequately_reported`."
+        }
+      ],
+      "rule_baseline_hints": {
+        "consequence_markers": ["may", "might", "can", "could", "unable", "fail", "restrict", "limit", "error", "bias", "cost", "overhead", "propagate"]
+      }
+    },
+    {
+      "item_id": "I3_ethical_risks",
+      "name": "Ethical considerations & potential risks",
+      "area": "responsible_research",
+      "req_ids": ["ETHICS_DISCUSSION", "RISKS"],
+      "checklist_code": "EMNLP/ARR Ethics Policy (2020-2026) + ARR Checklist A2 (2024-2026)",
+      "policy_mandate_years": [2020, 2021, 2022, 2023, 2024, 2025, 2026],
+      "permitted_locations": ["main_text", "before_references", "appendix"],
+      "practice_applicability_rule": "Conditional for compliance (`ETHICS_DISCUSSION`): `practice_applies = true` if the paper (a) collects new human annotations or conducts human-subject/user studies, (b) processes sensitive personal, clinical, demographic, legal, or social-media data, OR (c) builds/evaluates systems for high-risk or dual-use tasks (e.g., persuasion, deception, mental health, biometric/attribute inference, copyright/memorization, safety/jailbreaks). Set `practice_applies = false` for low-risk core NLP/algorithmic tasks on standard non-sensitive benchmarks (e.g., syntactic parsing, general NER/triple extraction on news/Wikipedia) unless the authors explicitly include an Ethics/Risks discussion (in which case adoption is still recorded).",
+      "decision_tree": [
+        "Q1: Does the paper involve human subjects/annotators, sensitive/personal data, or a sensitive/dual-use task (per `practice_applicability_rule`)?",
+        "  -> If NO (`practice_applies = false`): Does the paper nevertheless include an explicit discussion of ethical considerations or potential risks (e.g., answering ARR A2)?",
+        "       -> If NO: code `not_applicable`.",
+        "       -> If YES: evaluate content under Q2 to record voluntary adoption (`derived_compliance` remains `Not applicable` when `practice_applies == false`).",
+        "  -> If YES (`practice_applies = true`):",
+        "Q2: Does the paper contain any discussion of ethical issues, human-subject protections (IRB, consent, annotator pay, anonymisation), societal risks, or potential misuse?",
+        "  -> If NO: code `not_reported`.",
+        "  -> If YES: Does it identify at least one concrete ethical issue, risk/harm, or protection measure and its implication/mitigation (rather than a bare denial like 'This paper has no ethical issues')?",
+        "       -> If YES: code `adequately_reported`.",
+        "       -> If NO (boilerplate denial despite sensitive data/task): code `explicitly_reported_inadequate`."
+      ],
+      "criteria": {
+        "adequately_reported": "Identifies at least one concrete ethical concern, potential risk/misuse, bias, or human-subject protection measure (e.g., IRB approval/exemption, informed consent, fair compensation, PII anonymisation) and discusses its implications or mitigation.",
+        "explicitly_reported_inadequate": "Includes an 'Ethics Statement' heading that only asserts 'There are no ethical issues with this work' or 'All data are public so no ethics review is needed' despite involving human subjects, personal data, or sensitive tasks.",
+        "not_reported": "The work involves human subjects, sensitive data, or sensitive/dual-use tasks (`practice_applies == true`), but contains no discussion of ethical issues or risks.",
+        "not_applicable": "The work uses only standard non-sensitive benchmarks on low-risk tasks with no human subjects (`practice_applies == false`) and contains no ethics/risk discussion.",
+        "uncertain": "Unclear whether a dataset contains sensitive PII/human annotations (`practice_applies == 'uncertain'`), or paper text was truncated before the end of appendices."
+      },
+      "positive_examples": [
+        {
+          "anthology_id": "2023.findings-emnlp.287",
+          "quote": "Ethics Statement Our dataset contains legal wills collected from Ancestry. These legal wills are in public domain in the US, and we did not violate Ancestry’s Terms and Conditions during the data collection process. All the collected wills were manually anonymized prior to annotation process.",
+          "location": "Page 6, Ethics Statement",
+          "status": "adequately_reported",
+          "reason": "Addresses legal/privacy sensitivity of historical wills, terms-of-service compliance, and manual PII anonymisation prior to annotation."
+        },
+        {
+          "anthology_id": "2024.emnlp-main.210",
+          "quote": "Ethical Considerations In the user study, participants were informed that their reported conversations would be publicly released for research purposes. The notification is detailed in Appendix A. At the same time, they voluntarily chose whether to provide anonymized basic information, such as age group and profession.",
+          "location": "Page 10, Ethical Considerations",
+          "status": "adequately_reported",
+          "reason": "Documents informed consent and voluntary anonymised demographic collection for a human user study."
+        },
+        {
+          "anthology_id": "2025.findings-emnlp.1117",
+          "quote": "Human annotation studies in this project were reviewed and approved by Cornell University’s Institutional Review Board (IRB), which granted an exemption under Protocol Number IRB0149357. Annotators for rhetorical strategies were recruited through the Prolific platform, participated with informed consent, and were compensated in line with the platform’s pay guidelines.",
+          "location": "Page 10, Potential Risks and Ethical Considerations",
+          "status": "adequately_reported",
+          "reason": "Discusses both dual-use persuasion risks and concrete human-subject protections (IRB protocol number, Prolific recruitment, consent, fair pay, no PII)."
+        }
+      ],
+      "negative_examples": [
+        {
+          "anthology_id": "2022.emnlp-main.282",
+          "quote": "",
+          "location": "Entire paper",
+          "status": "not_applicable",
+          "reason": "Purely algorithmic graph neural network paper for relational triple extraction on standard NYT/WebNLG benchmarks (`practice_applies = false`)."
+        },
+        {
+          "anthology_id": "2020.findings-emnlp.58",
+          "quote": "",
+          "location": "Entire paper",
+          "status": "not_reported",
+          "reason": "Pre-trains large-scale Chinese language models on massive web-scraped corpora (`practice_applies = true` for web-scale data bias/PII) without any ethics or risk discussion."
+        },
+        {
+          "anthology_id": "2026.findings-emnlp.2419",
+          "quote": "",
+          "location": "Entire paper",
+          "status": "not_reported",
+          "reason": "Develops long-term user memory agents storing personal interaction history (`practice_applies = true` for privacy/safety risks) and lacks an Ethics/Risks discussion in the main text/appendices."
+        }
+      ],
+      "boundary_examples": [
+        {
+          "description": "A paper that only mentions technical 'hallucination' or 'estimation error' as an accuracy metric without discussing societal harm, privacy, or human-subject ethics does not satisfy `I3_ethical_risks`."
+        }
+      ],
+      "rule_baseline_hints": {
+        "heading_patterns": ["\\b(?:ethical\\s+considerations?|ethics\\s+statement|broader\\s+impacts?|potential\\s+risks?)\\b"],
+        "content_keywords": ["institutional review board", "irb", "informed consent", "anonymiz", "crowdworker", "hourly wage", "dual-use", "misuse", "societal impact", "harm"]
+      }
+    },
+    {
+      "item_id": "I4_computational_budget",
+      "name": "Compute time/budget & hardware infrastructure",
+      "area": "reproducibility",
+      "req_ids": ["COMPUTE_INFRASTRUCTURE", "COMPUTE_RUNTIME", "COMPUTE_BUDGET_TOTAL"],
+      "checklist_code": "EMNLP 2020-2023 Reproducibility Criteria + ARR Checklist C1 (2022-2026)",
+      "policy_mandate_years": [],
+      "permitted_locations": ["main_text", "before_references", "appendix", "footnotes"],
+      "practice_applicability_rule": "Conditional: `practice_applies = true` if the paper runs any computational experiments (model pre-training, fine-tuning, prompting/inference benchmarking, or algorithmic runtime evaluation); `practice_applies = false` only for purely theoretical, position, or survey papers with zero computational experiments.",
+      "decision_tree": [
+        "Q1: Does the paper run any computational experiments (training, fine-tuning, or model inference/evaluation)?",
+        "  -> If NO (`practice_applies = false`): code `not_applicable`.",
+        "  -> If YES (`practice_applies = true`):",
+        "Q2: Does the paper mention either computing hardware/infrastructure (e.g., GPU/TPU/CPU model or count, or named commercial API service for inference-only studies) OR compute time/budget/energy?",
+        "  -> If NEITHER is mentioned (only hyperparameters like epochs/batch size/learning rate): code `not_reported`.",
+        "  -> If AT LEAST ONE is mentioned: Does the paper report BOTH (a) computing hardware/infrastructure (e.g., '4x NVIDIA V100 GPUs', '1x A100 80GB', or API model+provider) AND (b) an explicit quantitative measure of compute time, budget, or energy (e.g., wall-clock training/inference time, GPU-hours, CPU-hours, latency per query/report, FLOPs, or kWh/CO2)?",
+        "       -> If BOTH (a) and (b) are present: code `adequately_reported`.",
+        "       -> If ONLY hardware (without time/budget/energy) OR ONLY time/epochs (without hardware): code `explicitly_reported_inadequate`."
+      ],
+      "criteria": {
+        "adequately_reported": "Reports BOTH the computing infrastructure/hardware used (e.g., GPU/TPU/CPU type and count) AND a quantitative measure of compute time, total budget, or energy (e.g., training duration in hours/days, GPU-hours, per-sample/per-report latency in seconds, FLOPs, or kWh/CO2 estimate).",
+        "explicitly_reported_inadequate": "Mentions hardware only without any duration/GPU-hours/energy (e.g., 'trained on an NVIDIA A100 GPU'), OR reports training epochs/steps without hardware or time units.",
+        "not_reported": "Runs computational experiments (`practice_applies == true`) but mentions neither hardware infrastructure nor compute duration/budget.",
+        "not_applicable": "Position, survey, or purely mathematical paper that performs no computational experiments (`practice_applies == false`).",
+        "uncertain": "Paper text is truncated at 120,000 chars and compute details are not found in the prefix, or quote verification fails."
+      },
+      "positive_examples": [
+        {
+          "anthology_id": "2021.findings-emnlp.380",
+          "quote": "We trained MAGIC 30 epochs with batch size 32 on each GPU using a machine with 4xV100 32G GPUs and the learning rate was 5e −5. Total training time is about 7 days.",
+          "location": "Page 8, Implementation of MAGIC",
+          "status": "adequately_reported",
+          "reason": "Specifies both hardware infrastructure (4x V100 32G GPUs) and wall-clock training duration (about 7 days = ~672 GPU-hours)."
+        },
+        {
+          "anthology_id": "2026.findings-emnlp.2419",
+          "quote": "TRUSTMEM is initialized from Qwen3-4B (Yang et al., 2025) and trained only on the Mem-α training pool with Transition-Ranked GRPO for approximately two days on 32 NVIDIA H100 GPUs.",
+          "location": "Page 13, Appendix Implementation Details",
+          "status": "adequately_reported",
+          "reason": "Reports both hardware count/model (32 NVIDIA H100 GPUs) and training time (approximately two days)."
+        },
+        {
+          "anthology_id": "2026.emnlp-main.357",
+          "quote": "Table 2: Per-report resource use on the fMRI evaluation with DeepSeek as the writer. Method Input tok. Output tok. Latency (s) Free-form 20,603 5,432 111.9 ... Claim-locked 12,482 4,209 77.3",
+          "location": "Page 7, Table 2",
+          "status": "adequately_reported",
+          "reason": "For an API/LLM inference pipeline, reports the exact model service, token budget, and wall-clock latency in seconds per report."
+        }
+      ],
+      "negative_examples": [
+        {
+          "anthology_id": "2020.findings-emnlp.58",
+          "quote": "The pre-training was either done on a single Google Cloud TPU5 v3-8 (equals to a single TPU) or TPU Pod v3-32 (equals to 4 TPUs), depending on the magnitude of the model. Specifically, for MacBERT-large, we trained for 2M steps with a batch size of 512",
+          "location": "Page 5, Section 4.1",
+          "status": "explicitly_reported_inadequate",
+          "reason": "Reports hardware (TPU v3-8 / v3-32) and training steps (2M steps), but omits training duration, runtime, or TPU-hours."
+        },
+        {
+          "anthology_id": "2025.emnlp-main.1517",
+          "quote": "The training was conducted on one NVIDIA A100 GPU with 80 GB of VRAM and one NVIDIA H100 GPU with 95 GB of VRAM.",
+          "location": "Page 23, Appendix Supervised Fine-tuning",
+          "status": "explicitly_reported_inadequate",
+          "reason": "Specifies GPU models and VRAM but omits wall-clock training time or GPU-hours."
+        },
+        {
+          "anthology_id": "2020.emnlp-main.656",
+          "quote": "",
+          "location": "Entire paper",
+          "status": "not_reported",
+          "reason": "Trains and evaluates dialogue generation models but reports neither hardware used nor training time/budget."
+        },
+        {
+          "anthology_id": "2021.emnlp-main.26",
+          "quote": "",
+          "location": "Entire paper",
+          "status": "not_applicable",
+          "reason": "Position paper with zero computational experiments (`practice_applies = false`)."
+        }
+      ],
+      "boundary_examples": [
+        {
+          "description": "Reporting only model parameter counts (e.g., 'BERT-base has 110M parameters') or only hyperparameter epochs ('trained for 200 epochs with batch size 1', `2022.emnlp-main.282`) without hardware and time units is `explicitly_reported_inadequate`."
+        }
+      ],
+      "rule_baseline_hints": {
+        "hardware_patterns": ["\\b(?:nvidia|a100|v100|h100|rtx\\s*\\d+|gtx\\s*\\d+|tpu\\s*v?\\d*|gpu|cpu)s?\\b"],
+        "time_budget_patterns": ["\\b(?:\\d+(?:\\.\\d+)?\\s*(?:gpu[\\s-]*hours?|cpu[\\s-]*hours?|hours?|hrs?|days?|minutes?|mins?|seconds?|secs?|flops?|tflops?|kwh|co2))\\b"]
+      }
+    },
+    {
+      "item_id": "I5_asset_licensing",
+      "name": "Artifact licensing & terms of use",
+      "area": "model_data_documentation",
+      "req_ids": ["ARTIFACT_LICENSE"],
+      "checklist_code": "ARR Checklist B2 (2022-2026)",
+      "policy_mandate_years": [],
+      "permitted_locations": ["main_text", "before_references", "appendix", "footnotes", "acknowledgements"],
+      "practice_applicability_rule": "Conditional: `practice_applies = true` if the paper uses, adapts, or releases any scientific artifact (dataset, corpus, pretrained model, software package, or code repository); `practice_applies = false` only if no artifacts are used or created.",
+      "decision_tree": [
+        "Q1: Does the paper use, adapt, or release any dataset, pretrained model, or code/software artifact?",
+        "  -> If NO (`practice_applies = false`): code `not_applicable`.",
+        "  -> If YES (`practice_applies = true`):",
+        "Q2: Does the paper explicitly name a licence or binding terms of use (e.g., 'MIT License', 'Apache-2.0', 'CC BY 4.0', 'CC BY-SA', 'GPL', 'public domain', 'End User License Agreement (EULA)', 'LDC User Agreement', 'HCP Open Access Data Use Terms', 'LLaMA Community License') for at least one used or released primary artifact (dataset, model, or released code), OR explicitly state that the upstream licence is unspecified/unknown after checking?",
+        "  -> If YES: Does it cover the primary released/reused artifacts discussed, or does it name a licence for only one minor reference while leaving its main released/reused datasets completely unaddressed?",
+        "       -> If it names the licence/terms for the paper's released artifact(s) or reused primary datasets/models: code `adequately_reported`.",
+        "       -> If it only says 'publicly available' / gives a bare GitHub URL without naming a licence (or only mentions a licence inside a bibliography title while leaving released/reused datasets unlicensed): code `explicitly_reported_inadequate`.",
+        "  -> If NO (mentions datasets/models/code without any availability link or licence mention): code `not_reported`."
+      ],
+      "criteria": {
+        "adequately_reported": "Explicitly names the licence or terms of use/distribution (e.g., MIT, Apache 2.0, CC BY 4.0, EULA, public domain, data-use agreement) for the paper's released or reused primary artifacts, OR explicitly notes that an upstream asset's licence is unspecified.",
+        "explicitly_reported_inadequate": "Provides a repository URL (e.g., GitHub/HuggingFace) or states that datasets/models are 'open-source', 'publicly available', or 'used for research purposes following their licenses' without naming any specific licence or terms of use.",
+        "not_reported": "Uses datasets/models (`practice_applies == true`) with no mention of licensing, terms of use, or artifact release terms.",
+        "not_applicable": "Paper neither uses nor creates any datasets, models, or code artifacts (`practice_applies == false`).",
+        "uncertain": "Paper text is truncated at 120,000 chars with no licence found in the prefix, or quote verification fails."
+      },
+      "positive_examples": [
+        {
+          "anthology_id": "2021.findings-emnlp.380",
+          "quote": "Users can access code and to download the dataset at our official website: https://nicedataset.github.io/. Use of the code and dataset are governed by an End User License Agreement (EULA) to avoid any potential violation of rights or terms of service.",
+          "location": "Page 2, Footnote 1",
+          "status": "adequately_reported",
+          "reason": "Explicitly specifies the governing terms (End User License Agreement / EULA) for the released code and dataset."
+        },
+        {
+          "anthology_id": "2024.emnlp-main.210",
+          "quote": "Note that this URS dataset uses an Apache License.",
+          "location": "Page 10, Ethical Considerations",
+          "status": "adequately_reported",
+          "reason": "Explicitly names the Apache License for the benchmark dataset introduced by the paper."
+        },
+        {
+          "anthology_id": "2025.emnlp-main.1517",
+          "quote": "PLAYPEN’s implementation reuses important components from clemcore, and all the games used come from clembench (Chalamalasetti et al., 2023). Therefore, we inherit its MIT License for PLAYPEN. We acknowledge that the transcripts used for SFT and DPO training are derived from the clembench-runs 8 repo which has CC-By 4.0 License.",
+          "location": "Pages 15-16, Appendix License for Artifacts",
+          "status": "adequately_reported",
+          "reason": "Names both the MIT License for the released PLAYPEN framework and the CC-BY 4.0 License for the training transcripts."
+        },
+        {
+          "anthology_id": "2026.emnlp-main.357",
+          "quote": "The data are used under a data-use agreement that does not permit redistribution. The public HCP S1200 cohort is used under the HCP Open Access Data Use Terms, and Evidence Inference 2.0 is a public benchmark of published clinical-trial literature.",
+          "location": "Page 9, Ethics Statement",
+          "status": "adequately_reported",
+          "reason": "Explicitly states the data-use agreement and HCP Open Access Data Use Terms governing the reused cohorts."
+        }
+      ],
+      "negative_examples": [
+        {
+          "anthology_id": "2020.emnlp-main.656",
+          "quote": "Models and code are released at https://parl.ai/projects/genderation_bias/.",
+          "location": "Page 2, Section 1 Introduction",
+          "status": "explicitly_reported_inadequate",
+          "reason": "Gives a release URL and cites datasets, but never names the licence or terms of use."
+        },
+        {
+          "anthology_id": "2023.emnlp-main.458",
+          "quote": "Code is at https://github.com/coastalcph/CopyrightLLMs.",
+          "location": "Page 1, Introduction",
+          "status": "explicitly_reported_inadequate",
+          "reason": "Provides a GitHub link for code and evaluates on book corpora, without stating the licence of the released code or reused datasets."
+        },
+        {
+          "anthology_id": "2026.findings-emnlp.2419",
+          "quote": "We use all datasets, models, and systems only for research purposes and follow their publicly released access conditions and licenses where available.",
+          "location": "Page 13, Appendix Experiment Settings",
+          "status": "explicitly_reported_inadequate",
+          "reason": "Generic statement claiming compliance with 'licenses where available' without naming the actual licence of any dataset or model."
+        }
+      ],
+      "boundary_examples": [
+        {
+          "description": "Stating that historical legal documents are 'in public domain in the US' (`2023.findings-emnlp.287`) counts as naming the legal copyright status of the raw source data, but if the paper also releases a new annotated GitHub repository without naming the repository's licence, annotate `adequately_reported` if at least one primary asset's legal status/terms is explicitly stated and note the partial coverage in `notes`."
+        }
+      ],
+      "rule_baseline_hints": {
+        "licence_patterns": ["\\b(?:cc[\\s-]*by(?:[\\s-]*(?:sa|nc|nd))*[\\s-]*\\d(?:\\.\\d)?|creative\\s+commons|mit\\s+licen[cs]e|apache[\\s-]*2(?:\\.0)?|gpl(?:v\\d)?|bsd\\s+licen[cs]e|lgpl|eula|end\\s+user\\s+licen[cs]e|data[\\s-]*use\\s+agreement|open\\s+access\\s+data\\s+use\\s+terms|public\\s+domain)\\b"]
+      }
+    },
+    {
+      "item_id": "I6_ai_assistance",
+      "name": "AI writing/coding assistance disclosure",
+      "area": "ai_tools",
+      "req_ids": ["AI_DISCLOSURE_IN_PAPER", "AI_ASSISTANCE_CHECKLIST"],
+      "checklist_code": "ACL 2023 AI Writing Policy / ARR 2024-2026 CFP + Checklist E1",
+      "policy_mandate_years": [],
+      "permitted_locations": ["main_text", "before_references", "appendix", "footnotes", "acknowledgements"],
+      "practice_applicability_rule": "Descriptive indicator across all papers (`practice_applies = true`). Because undisclosed AI use cannot be distinguished from non-use in published PDFs, `policy_applies` is set to `false` for compliance testing (as specified in the proposal: 'AI-assistance disclosure rates remain descriptive and outside compliance tests'). Never confuse LLMs used as experimental subjects/baselines with AI assistance used by the authors to write the manuscript or write code.",
+      "decision_tree": [
+        "Q1: Does the paper (especially Acknowledgements, Ethics/Limitations, footnotes, or an AI Usage statement) mention the authors' use (or explicit non-use) of AI/LLM tools for writing, editing, polishing, ideation, or coding of the paper itself?",
+        "  -> If NO (no mention, or LLMs are only used as experimental baselines/evaluators/data generators in the study's methodology): code `not_reported`.",
+        "  -> If YES: Does the disclosure specify the scope of assistance (e.g., 'limited language refinement', 'grammar polishing', 'code autocompletion with GitHub Copilot')?",
+        "       -> If YES (states tool and/or explicit scope of writing/coding assistance): code `adequately_reported`.",
+        "       -> If NO (vague statement like 'AI was used in preparing this paper' without scope): code `explicitly_reported_inadequate`."
+      ],
+      "criteria": {
+        "adequately_reported": "Explicitly discloses the use (or explicit non-use) of AI tools for manuscript writing, editing, or coding AND states the scope of assistance (e.g., language refinement, grammar checking, code assistance).",
+        "explicitly_reported_inadequate": "Mentions using AI assistance for preparing the manuscript without specifying the scope of use.",
+        "not_reported": "Contains no mention of AI assistance for writing or coding the manuscript (note: represents absence of in-paper disclosure, not a policy violation).",
+        "not_applicable": "Not used in descriptive tracking (`practice_applies` is `true` across all papers to track longitudinal disclosure rates).",
+        "uncertain": "Ambiguous whether an AI tool mention refers to manuscript preparation or an experimental step, or text was truncated."
+      },
+      "positive_examples": [
+        {
+          "anthology_id": "2026.emnlp-main.357",
+          "quote": "Generative AI models were used as part of the experimental setup, as described in Section 4. Separately, AI tools were used only for limited language refinement of the manuscript. All scientific content, analyses, interpretation, and conclusions were developed and verified by the authors.",
+          "location": "Page 10, Acknowledgments",
+          "status": "adequately_reported",
+          "reason": "Clearly separates experimental LLM use from manuscript writing assistance, and explicitly discloses the scope ('limited language refinement') and author verification in the Acknowledgments section."
+        },
+        {
+          "anthology_id": "synthetic-positive-copilot",
+          "quote": "We used GitHub Copilot to assist with boilerplate data-loading scripts and ChatGPT (GPT-4o) for grammatical polishing of author-drafted paragraphs.",
+          "location": "Acknowledgments (Illustrative example per ARR 2025/2026 CFP)",
+          "status": "adequately_reported",
+          "reason": "Names both the coding/writing tools and the exact scope of assistance."
+        },
+        {
+          "anthology_id": "synthetic-positive-explicit-nonuse",
+          "quote": "No generative AI tools were used in the writing or coding of this manuscript.",
+          "location": "Acknowledgments / Appendix (Illustrative example)",
+          "status": "adequately_reported",
+          "reason": "Explicitly states the scope of AI assistance (none) in the paper text."
+        }
+      ],
+      "negative_examples": [
+        {
+          "anthology_id": "2024.emnlp-main.210",
+          "quote": "",
+          "location": "Entire paper",
+          "status": "not_reported",
+          "reason": "Evaluates 10 LLM services and uses GPT-4 as an experimental evaluator, but contains no disclosure regarding AI writing/coding assistance for the manuscript itself."
+        },
+        {
+          "anthology_id": "2025.emnlp-main.1517",
+          "quote": "",
+          "location": "Entire paper",
+          "status": "not_reported",
+          "reason": "Trains LLMs on dialogue games, with no mention of AI writing or coding assistance in Acknowledgments or text."
+        },
+        {
+          "anthology_id": "2026.findings-emnlp.2419",
+          "quote": "",
+          "location": "Entire paper",
+          "status": "not_reported",
+          "reason": "Uses GPT-4o-mini as an experimental judge, with no disclosure of AI assistance for manuscript writing or coding."
+        }
+      ],
+      "boundary_examples": [
+        {
+          "description": "Using GPT-4 / Claude / DeepSeek to generate synthetic training data or act as an LLM-as-a-judge in Section 4 is part of the scientific experiment, NOT AI writing/coding assistance (`not_reported` unless manuscript/code assistance is also disclosed)."
+        }
+      ],
+      "rule_baseline_hints": {
+        "disclosure_patterns": ["\\b(?:chatgpt|copilot|grammarly|claude|gemini|generative\\s+ai|ai\\s+tools?|writing\\s+assistant|language\\s+refinement|proofreading|polishing\\s+the\\s+manuscript)\\b"]
+      }
+    }
+  ],
+  "automatic_indicators": [
+    {
+      "indicator_id": "A1_code_link",
+      "name": "Source code repository link (Automatic rule indicator)",
+      "area": "reproducibility",
+      "req_ids": ["CODE_AVAILABILITY"],
+      "description": "Deterministic regex indicator detecting whether the paper includes an explicit URL to a source-code repository or project page (e.g., GitHub, GitLab, Bitbucket, Zenodo, OSF, HuggingFace, ParlAI) in the main text, footnotes, or appendices. Tracked automatically without human annotation workload to measure the trajectory of CODE_AVAILABILITY (which weakened from a 2020-2021 checklist item to a recommendation in 2024-2026).",
+      "url_pattern": "https?://(?:www\\.)?(?:github\\.com|gitlab\\.com|bitbucket\\.org|zenodo\\.org|osf\\.io|huggingface\\.co|parl\\.ai)/[^\\s)\\]>\"']+"
+    }
+  ]
+}

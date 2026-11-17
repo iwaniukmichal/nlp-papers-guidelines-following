@@ -1,7 +1,9 @@
 import unittest
 
 from emnlp_audit.analysis.iaa import cohens_kappa
-from emnlp_audit.analysis.validation import macro_f1
+from emnlp_audit.analysis.validation import iaa_and_validation_report, macro_f1
+from emnlp_audit.annotation.sheets import build_annotation_rows
+from emnlp_audit.corpus.sampling import draw_proportional_sample
 from emnlp_audit.evaluators.llm import MAX_PAPER_CHARS, to_records, verify_quote_in_text
 from emnlp_audit.parsing.checklist_strip import join_pages_without_checklist
 from emnlp_audit.parsing.pii import redact_emails
@@ -117,6 +119,43 @@ class MetricsTest(unittest.TestCase):
         result = macro_f1(["a", "a"], ["a", "b"])
         self.assertEqual(result["per_class"]["b"]["support"], 0)
         self.assertAlmostEqual(result["macro_f1"], round(2 * 1.0 * 0.5 / 1.5, 4))
+
+    def test_adjudication_resolves_disagreements(self):
+        grouped = {
+            ("p1", "I1"): [("A", "adequately_reported"), ("B", "adequately_reported")],
+            ("p2", "I1"): [("A", "adequately_reported"), ("B", "not_reported")],
+        }
+        evals = [
+            {"anthology_id": "p1", "item_id": "I1", "evidence_status": "adequately_reported"},
+            {"anthology_id": "p2", "item_id": "I1", "evidence_status": "not_reported"},
+        ]
+        rep_unadj = iaa_and_validation_report(grouped, evals)
+        self.assertEqual(rep_unadj["I1"]["n_disagreements_pending_adjudication"], 1)
+        self.assertEqual(rep_unadj["I1"]["n_reference_resolved"], 1)
+
+        rep_adj = iaa_and_validation_report(grouped, evals, {("p2", "I1"): "not_reported"})
+        self.assertEqual(rep_adj["I1"]["n_disagreements_pending_adjudication"], 0)
+        self.assertEqual(rep_adj["I1"]["n_reference_resolved"], 2)
+        self.assertEqual(rep_adj["I1"]["llm_vs_human_macro_f1"], 1.0)
+
+    def test_proportional_sampling_and_balanced_pairs(self):
+        papers = [
+            {"anthology_id": f"2024.main.{i}", "year": 2024, "track": "Main", "title": "T", "pdf_url": "u"}
+            for i in range(60)
+        ] + [
+            {"anthology_id": f"2024.findings.{i}", "year": 2024, "track": "Findings", "title": "T", "pdf_url": "u"}
+            for i in range(40)
+        ]
+        dev = draw_proportional_sample(papers, [2024], per_year=10, seed=42, split_name="dev_10", exclude_ids=set())
+        self.assertEqual(len(dev), 10)
+        self.assertEqual(sum(1 for p in dev if p["track"] == "Main"), 6)
+        self.assertEqual(sum(1 for p in dev if p["track"] == "Findings"), 4)
+
+        rubric = {"items": [{"item_id": "I1_limitations_section", "name": "Lim", "policy_mandate_years": [2024]}]}
+        rows = build_annotation_rows(dev[:4], rubric, "dev_10", "2026-11-18")
+        # Both pairs receive Main papers rather than one pair getting only Main
+        main_annotators = {r["annotator_name"] for r in rows if r["track"] == "Main"}
+        self.assertEqual(len(main_annotators), 4)
 
 
 if __name__ == "__main__":
